@@ -5,92 +5,92 @@ Vector3::Vector3(float X, float Y, float Z) : Point(X, Y, Z)
 
 }
 
-Vector3 Vector3::operator=(const Vector3& p)
+Vector3& Vector3::Equals(const Vector3& p)
 {
-	Vector3 vect;
-	vect.x = x = p.x;
-	vect.y = y = p.y;
-	vect.z = z = p.z;
+	this->x = p.x;
+	this->y = p.y;
+	this->z = p.z;
 
-	return vect;
+	return *this;
 }
 
-Vector3 Vector3::operator+(const Vector3 &p)
+Vector3& Vector3::Add(const Vector3& p)
 {
-	Vector3 vect;
-	vect.x = x + p.x;
-	vect.y = y + p.y;
-	vect.z = z + p.z;
+	this->x += p.x;
+	this->y += p.y;
+	this->z += p.z;
 
-	return vect;
+	return *this;
 }
 
-Vector3 Vector3::operator+=(const Vector3& p)
+Vector3& Vector3::Subtract(const Vector3& p)
 {
-	Vector3 vect;
-	vect.x = x + p.x;
-	vect.y = y + p.y;
-	vect.z = z + p.z;
+	this->x -= p.x;
+	this->y -= p.y;
+	this->z -= p.z;
 
-	return vect;
+	return *this;
 }
 
-Vector3 Vector3::operator-(const Vector3& p)
+Vector3& Vector3::Multiply(float value)
 {
-	Vector3 vect;
-	vect.x = x - p.x;
-	vect.y = y - p.y;
-	vect.z = z - p.z;
+	this->z *= value;
+	this->x *= value;
+	this->y *= value;
 
-	return vect;
+	return *this;
 }
 
-Vector3 Vector3::operator-=(const Vector3& p)
+Vector3& Vector3::Divide(float value)
 {
-	Vector3 vect;
-	vect.x = x - p.x;
-	vect.y = y - p.y;
-	vect.z = z - p.z;
+	this->x /= value;
+	this->y /= value;
+	this->z /= value;
 
-	return vect;
+	return *this;
 }
 
-Vector3 Vector3::operator*(float multiplier)
+Vector3& Vector3::operator=(const Vector3& p)
 {
-	Vector3 vect;
-	vect.x = x * multiplier;
-	vect.y = y * multiplier;
-	vect.z = z * multiplier;
-
-	return vect;
+	return this->Equals(p);
 }
 
-Vector3 Vector3::operator*=(float multiplier)
+Vector3& Vector3::operator+(const Vector3 &p)
 {
-	Vector3 vect;
-	vect.x = x * multiplier;
-	vect.y = y * multiplier;
-	vect.z = z * multiplier;
-
-	return vect;
+	return this->Add(p);
 }
 
-Vector3 Vector3::operator/(float multiplier)
+Vector3& Vector3::operator+=(const Vector3& p)
 {
-	Vector3 vect;
-	vect.x = x / multiplier;
-	vect.y = y / multiplier;
-	vect.z = z / multiplier;
-
-	return vect;
+	return this->Add(p);
 }
 
-Vector3 Vector3::operator/=(float multiplier)
+Vector3& Vector3::operator-(const Vector3& p)
 {
-	Vector3 vect;
-	vect.x = x / multiplier;
-	vect.y = y / multiplier;
-	vect.z = z / multiplier;
+	return this->Subtract(p);
+}
 
-	return vect;
+Vector3& Vector3::operator-=(const Vector3& p)
+{
+	return this->Subtract(p);
+}
+
+Vector3& Vector3::operator*(float multiplier)
+{
+	return this->Multiply(multiplier);
+}
+
+Vector3& Vector3::operator*=(float multiplier)
+{
+	return this->Multiply(multiplier);
+}
+
+Vector3& Vector3::operator/(float multiplier)
+{
+	return this->Divide(multiplier);
+}
+
+Vector3& Vector3::operator/=(float multiplier)
+{
+	return this->Divide(multiplier);
 }

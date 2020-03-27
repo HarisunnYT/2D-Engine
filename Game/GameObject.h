@@ -3,7 +3,7 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include "Game.h"
+#include "EngineCore.h"
 #include "Vector3.h"
 
 class GameObject

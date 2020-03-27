@@ -6,5 +6,6 @@
 #include "Component.h"
 #include "Transform.h"
 #include "SpriteRenderer.h"
+#include "Rigidbody.h"
 
 #endif

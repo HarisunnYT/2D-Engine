@@ -15,7 +15,7 @@ public:
 	float y;
 	float z;
 
-	Point operator = (Point &p);
+	Point& operator = (Point &p);
 
 };
 

@@ -13,17 +13,35 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Util">
-      <UniqueIdentifier>{e81f8599-753d-4f22-a24b-0e58334e689d}</UniqueIdentifier>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{7aa22874-f3b5-4bd5-afc5-c735d72ec741}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Util">
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{1f14336f-5853-4ae0-9afa-c42420086a97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Components">
+      <UniqueIdentifier>{c97f6ca3-d9b1-4ca0-a84d-556f95777db3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Components">
+      <UniqueIdentifier>{a02df856-e039-40e9-a383-7a269d6bd63b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Util">
       <UniqueIdentifier>{a378eb5c-3b98-476b-9b95-47debee4a1de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components">
-      <UniqueIdentifier>{d9a694ef-3f40-4b97-b11a-1aa146bd8c62}</UniqueIdentifier>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{e625f0f0-93a5-438b-a0a4-ca2d1f256c08}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components">
-      <UniqueIdentifier>{935cfd15-363d-4ea2-a47d-2fccb64ae9c4}</UniqueIdentifier>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{9e8b3b76-0c75-4d94-b208-62d6d7d021f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Util">
+      <UniqueIdentifier>{e81f8599-753d-4f22-a24b-0e58334e689d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Components">
+      <UniqueIdentifier>{5256d022-bc21-436e-8207-3d90f51befeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Components">
+      <UniqueIdentifier>{ca5aa069-c94e-4b8c-b83b-ed060a34534a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,34 +52,46 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\Util</Filter>
+      <Filter>Source Files\Engine\Util</Filter>
     </ClCompile>
     <ClCompile Include="Point.cpp">
-      <Filter>Source Files\Util</Filter>
+      <Filter>Source Files\Engine\Util</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\Util</Filter>
+      <Filter>Source Files\Engine\Util</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ECS.cpp">
-      <Filter>Source Files\Util</Filter>
+      <Filter>Source Files\Engine\Util</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>Source Files\Util</Filter>
+      <Filter>Source Files\Engine\Util</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source Files\Components</Filter>
+      <Filter>Source Files\Engine\Util</Filter>
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
-      <Filter>Source Files\Util</Filter>
+      <Filter>Source Files\Engine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files\Components</Filter>
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Source Files\Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Source Files\Engine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineCore.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,37 +99,49 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Header Files\Util</Filter>
+      <Filter>Header Files\Engine\Util</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files\Util</Filter>
+      <Filter>Header Files\Engine\Util</Filter>
     </ClInclude>
     <ClInclude Include="Point.h">
-      <Filter>Header Files\Util</Filter>
+      <Filter>Header Files\Engine\Util</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ECS.h">
-      <Filter>Header Files\Util</Filter>
+      <Filter>Header Files\Engine\Util</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>Header Files\Util</Filter>
+      <Filter>Header Files\Engine\Util</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Engine\Util</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
-      <Filter>Header Files\Util</Filter>
+      <Filter>Header Files\Engine\Util</Filter>
     </ClInclude>
     <ClInclude Include="Components.h">
-      <Filter>Header Files\Util</Filter>
+      <Filter>Header Files\Engine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Header Files\Engine\Components</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Header Files\Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Header Files\Engine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineCore.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

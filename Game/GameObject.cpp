@@ -19,13 +19,13 @@ void GameObject::Update()
 	sourceRect.x = 0;
 	sourceRect.y = 0;
 
-	destinationRect.x = position->x;
-	destinationRect.y = position->y;
+	destinationRect.x = (int)position->x;
+	destinationRect.y = (int)position->y;
 	destinationRect.w = sourceRect.w * 2;
 	destinationRect.h = sourceRect.h * 2;
 }
 
 void GameObject::Render()
 {
-	SDL_RenderCopy(Game::Renderer, objectTexture, &sourceRect, &destinationRect);
+	SDL_RenderCopy(EngineCore::Renderer, objectTexture, &sourceRect, &destinationRect);
 }

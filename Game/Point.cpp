@@ -21,7 +21,7 @@ ostream &operator <<(ostream &stream, Point &p)
 	return stream;
 }
 
-Point Point::operator=(Point &p)
+Point& Point::operator=(Point &p)
 {
 	x = p.x;
 	y = p.y;
