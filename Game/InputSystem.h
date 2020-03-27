@@ -11,7 +11,9 @@ class InputSystem
 {
 public:
 
-	static bool KeyPressed();
+	static bool KeyHeld(int SDL_CODE);
+	static bool KeyPressed(int SDL_CODE);
+	static bool KeyReleased(int SDL_CODE);
 
 };
 

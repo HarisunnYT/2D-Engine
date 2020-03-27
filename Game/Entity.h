@@ -42,21 +42,28 @@ public:
 
 	template <typename T> bool HasComponent() const
 	{
-		return componentBitSet[GetComponentTypeID<T>];
+		return componentBitSet[GetComponentTypeID<T>()];
 	}
 
 	template <typename T, typename... TArgs> T& AddComponent(TArgs&&... mArgs)
 	{
-		T* c(new T(std::forward<TArgs>(mArgs)...));
-		c->Entity = this;
-		std::unique_ptr<Component> uPtr{ c };
-		components.emplace_back(std::move(uPtr));
+		if (!HasComponent<T>())
+		{
+			T* c(new T(std::forward<TArgs>(mArgs)...));
+			c->Entity = this;
+			std::unique_ptr<Component> uPtr{ c };
+			components.emplace_back(std::move(uPtr));
 
-		componentArray[GetComponentTypeID<T>()] = c;
-		componentBitSet[GetComponentTypeID<T>()] = true;
+			componentArray[GetComponentTypeID<T>()] = c;
+			componentBitSet[GetComponentTypeID<T>()] = true;
 
-		c->Init();
-		return *c;
+			c->Init();
+			return *c;
+		}
+		else
+		{
+			return GetComponent<T>();
+		}
 	}
 
 	template <typename T> T& GetComponent() const

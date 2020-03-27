@@ -9,7 +9,7 @@ SpriteRenderer::SpriteRenderer(const char* path)
 
 void SpriteRenderer::Init()
 {
-	transform = &Entity->GetComponent<Transform>();
+	transform = &Entity->AddComponent<Transform>();
 
 	sourceRect.x = 0;
 	sourceRect.y = 0;

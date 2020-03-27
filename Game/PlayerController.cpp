@@ -1,12 +1,37 @@
 #include "PlayerController.h"
+#include "InputSystem.h"
 
 void PlayerController::Init()
 {
-	transform = &Entity->GetComponent<Transform>();
-	rigidbody = &Entity->GetComponent<Rigidbody>();
+	rigidbody = &Entity->AddComponent<Rigidbody>();
+	transform = &Entity->AddComponent<Transform>();
 }
 
 void PlayerController::Update()
 {
-	transform->Position += rigidbody->Velocity * speed;
+	if (InputSystem::KeyPressed(SDLK_w))
+	{
+		rigidbody->Velocity.y = -1;
+	}
+	if (InputSystem::KeyPressed(SDLK_s))
+	{
+		rigidbody->Velocity.y = 1;
+	}
+	if (InputSystem::KeyPressed(SDLK_a))
+	{
+		rigidbody->Velocity.x = -1;
+	}
+	if (InputSystem::KeyPressed(SDLK_d))
+	{
+		rigidbody->Velocity.x = 1;
+	}
+
+	if (InputSystem::KeyReleased(SDLK_w) || InputSystem::KeyReleased(SDLK_s))
+	{
+		rigidbody->Velocity.y = 0;
+	}
+	if (InputSystem::KeyReleased(SDLK_a) || InputSystem::KeyReleased(SDLK_d))
+	{
+		rigidbody->Velocity.x = 0;
+	}
 }

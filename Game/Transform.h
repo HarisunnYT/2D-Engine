@@ -10,8 +10,8 @@ class Transform : public Component
 {
 public:
 
-	Transform();
-	Transform(Vector3 pos);
+	Transform() = default;
+	Transform(Vector3 &pos);
 	
 	Vector3 Position;
 

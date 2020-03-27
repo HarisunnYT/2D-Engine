@@ -11,14 +11,14 @@ class Rigidbody : public Component
 {
 public:
 
-	Rigidbody();
+	void Init() override;
+	void Update() override;
 
 	Vector3 Velocity;
 
 private:
 
 	Transform* transform;
-
 };
 
 #endif

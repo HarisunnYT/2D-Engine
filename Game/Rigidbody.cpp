@@ -1,6 +1,11 @@
 #include "Rigidbody.h"
 
-Rigidbody::Rigidbody()
+void Rigidbody::Init()
 {
-	transform = &Entity->GetComponent<Transform>();
+	transform = &Entity->AddComponent<Transform>();
+}
+
+void Rigidbody::Update()
+{
+	transform->Position += Velocity;
 }
