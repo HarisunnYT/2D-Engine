@@ -3,9 +3,13 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
-#include "ECS.h"
+#include "Vector3.h"
+
+#include "Components.h"
+
 #include <stdio.h>
 
+class ECS;
 class EngineCore
 {
 public:

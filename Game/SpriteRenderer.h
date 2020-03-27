@@ -3,8 +3,7 @@
 #ifndef SPRITERENDERER_H
 #define SPRITERENDERER_H
 
-#include "Components.h"
-#include "SDL.h"
+#include "EngineCore.h"
 
 class Transform;
 class SpriteRenderer : public Component

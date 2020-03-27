@@ -7,5 +7,6 @@
 #include "Transform.h"
 #include "SpriteRenderer.h"
 #include "Rigidbody.h"
+#include "Collider.h"
 
 #endif
