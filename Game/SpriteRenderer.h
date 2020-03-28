@@ -10,7 +10,7 @@ class SpriteRenderer : public Component
 {
 public:
 
-	SpriteRenderer(const char* path, int width, int height);
+	SpriteRenderer(const char* path, Vector2 size);
 	~SpriteRenderer();
 
 	void Init() override;
@@ -25,6 +25,8 @@ private:
 	Transform*		transform;
 
 	SDL_Texture*	texture;
+	
+	char*			currentPath;
 
 	SDL_Rect		sourceRect;
 	SDL_Rect		destinationRect;

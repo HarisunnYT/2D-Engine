@@ -8,5 +8,6 @@
 #include "SpriteRenderer.h"
 #include "Rigidbody.h"
 #include "Collider.h"
+#include "Tile.h"
 
 #endif

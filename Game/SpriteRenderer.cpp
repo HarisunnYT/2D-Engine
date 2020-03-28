@@ -2,11 +2,10 @@
 #include "TextureManager.h"
 #include "Transform.h"
 
-SpriteRenderer::SpriteRenderer(const char* path, int width, int size)
+SpriteRenderer::SpriteRenderer(const char* p, Vector2 size)
 {
-	SetTexture(path);
-
-	SpriteSize = Vector2((float)width, (float)size);
+	SpriteSize = Vector2((float)size.x, (float)size.y);
+	currentPath = (char*)p;
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -26,15 +25,17 @@ void SpriteRenderer::Init()
 
 	destinationRect.w = (int)(SpriteSize.x * transform->Scale.x);
 	destinationRect.h = (int)(SpriteSize.y * transform->Scale.y);
+
+	SetTexture(currentPath);
 }
 
 void SpriteRenderer::Update()
 {
-	destinationRect.w = (int)(SpriteSize.x * transform->Scale.x);
-	destinationRect.h = (int)(SpriteSize.y * transform->Scale.y);
+	destinationRect.w = static_cast<int>(SpriteSize.x * transform->Scale.x);
+	destinationRect.h = static_cast<int>(SpriteSize.y * transform->Scale.y);
 
-	destinationRect.x = (int)transform->Position.x;
-	destinationRect.y = (int)transform->Position.y;
+	destinationRect.x = static_cast<int>(transform->Position.x);
+	destinationRect.y = static_cast<int>(transform->Position.y);
 }
 
 void SpriteRenderer::Draw()
@@ -45,4 +46,5 @@ void SpriteRenderer::Draw()
 void SpriteRenderer::SetTexture(const char* path)
 {
 	texture = TextureManager::LoadTexture(path);
+	currentPath = (char*)path;
 }

@@ -1,5 +1,7 @@
 #include "Collider.h"
 
+vector<Collider*> Collision::Colliders;
+
 Collider::Collider(std::string tag)
 {
 	Tag = tag;
@@ -13,6 +15,8 @@ void Collider::Init()
 	{
 		spriteRenderer = &Entity->GetComponent<SpriteRenderer>();
 	}
+
+	Collision::Colliders.push_back(this);
 }
 
 void Collider::Update()

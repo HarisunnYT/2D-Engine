@@ -94,3 +94,8 @@ Vector3& Vector3::operator/=(float multiplier)
 {
 	return this->Divide(multiplier);
 }
+
+Vector3& Vector3::Zero()
+{
+	return this->Multiply(0);
+}

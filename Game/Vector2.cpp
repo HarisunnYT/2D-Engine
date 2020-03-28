@@ -91,6 +91,11 @@ Vector2& Vector2::operator/=(float multiplier)
 	return this->Divide(multiplier);
 }
 
+Vector2& Vector2::Zero()
+{
+	return this->Multiply(0);
+}
+
 ostream& operator<<(ostream& stream, Vector2& p)
 {
 	stream << p.x << + " " << p.y;

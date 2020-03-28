@@ -3,14 +3,14 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "Game.h"
+#include "EngineCore.h"
 
-class Map
+class TileMap
 {
 public:
 
-	Map();
-	~Map();
+	TileMap();
+	~TileMap();
 
 	void LoadMap(int arr[20][25]);
 	void DrawMap();

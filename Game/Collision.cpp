@@ -12,3 +12,8 @@ bool Collision::AABB(const SDL_Rect& rectA, const SDL_Rect& rectB)
 
 	return false;
 }
+
+bool Collision::AABB(const Collider& colA, const Collider& colB)
+{
+	return AABB(colA.collider, colB.collider);
+}

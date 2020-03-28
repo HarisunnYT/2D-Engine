@@ -33,6 +33,8 @@ public:
 
 	Vector2& operator /(float multiplier);
 	Vector2& operator /=(float multiplier);
+
+	Vector2& Zero();
 };
 
 ostream& operator <<(ostream& stream, Vector2& p);

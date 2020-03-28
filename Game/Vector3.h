@@ -28,6 +28,8 @@ public:
 
 	Vector3& operator /(float multiplier);
 	Vector3& operator /=(float multiplier);
+
+	Vector3& Zero();
 };
 
 #endif

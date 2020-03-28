@@ -1,4 +1,4 @@
-#include "Map.h"
+#include "TileMap.h"
 #include "TextureManager.h"
 
 
@@ -25,11 +25,11 @@ int lvl[20][25] =
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-Map::Map()
-{
-	dirt = TextureManager::LoadTexture("Assets/Dirt.png");
-	grass = TextureManager::LoadTexture("Assets/Grass.png");
-	water = TextureManager::LoadTexture("Assets/Water.png");
+TileMap::TileMap()
+{	
+	Tile::AddTileTexture("Assets/Dirt.png");
+	Tile::AddTileTexture("Assets/Grass.png");
+	Tile::AddTileTexture("Assets/Water.png");
 
 	LoadMap(lvl);
 	
@@ -44,14 +44,14 @@ Map::Map()
 	destinationRect.h = 32;
 }
 
-Map::~Map()
+TileMap::~TileMap()
 {
 	SDL_DestroyTexture(grass);
 	SDL_DestroyTexture(dirt);
 	SDL_DestroyTexture(water);
 }
 
-void Map::LoadMap(int arr[20][25])
+void TileMap::LoadMap(int arr[20][25])
 {
 	for (int row = 0; row < 20; row++)
 	{
@@ -62,7 +62,7 @@ void Map::LoadMap(int arr[20][25])
 	}
 }
 
-void Map::DrawMap()
+void TileMap::DrawMap()
 {
 	int type = 0;
 
