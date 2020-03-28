@@ -10,13 +10,15 @@ class SpriteRenderer : public Component
 {
 public:
 
-	SpriteRenderer() = default;
-	SpriteRenderer(const char* path);
+	SpriteRenderer(const char* path, int width, int height);
+	~SpriteRenderer();
 
 	void Init() override;
 	void Update() override;
 	void Draw() override;
 	void SetTexture(const char* path);
+
+	Vector2			SpriteSize;
 
 private:
 

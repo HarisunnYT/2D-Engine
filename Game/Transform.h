@@ -9,10 +9,11 @@ class Transform : public Component
 {
 public:
 
-	Transform() = default;
+	Transform();
 	Transform(Vector3 &pos);
 	
 	Vector3 Position;
+	Vector2 Scale;
 
 };
 

@@ -2,9 +2,16 @@
 #include "TextureManager.h"
 #include "Transform.h"
 
-SpriteRenderer::SpriteRenderer(const char* path)
+SpriteRenderer::SpriteRenderer(const char* path, int width, int size)
 {
 	SetTexture(path);
+
+	SpriteSize = Vector2((float)width, (float)size);
+}
+
+SpriteRenderer::~SpriteRenderer()
+{
+	SDL_DestroyTexture(texture);
 }
 
 void SpriteRenderer::Init()
@@ -13,15 +20,19 @@ void SpriteRenderer::Init()
 
 	sourceRect.x = 0;
 	sourceRect.y = 0;
-	sourceRect.w = 64;
-	sourceRect.h = 64;
 
-	destinationRect.w = 64;
-	destinationRect.h = 64;
+	sourceRect.w = (int)SpriteSize.x;
+	sourceRect.h = (int)SpriteSize.y;
+
+	destinationRect.w = (int)(SpriteSize.x * transform->Scale.x);
+	destinationRect.h = (int)(SpriteSize.y * transform->Scale.y);
 }
 
 void SpriteRenderer::Update()
 {
+	destinationRect.w = (int)(SpriteSize.x * transform->Scale.x);
+	destinationRect.h = (int)(SpriteSize.y * transform->Scale.y);
+
 	destinationRect.x = (int)transform->Position.x;
 	destinationRect.y = (int)transform->Position.y;
 }
