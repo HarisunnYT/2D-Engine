@@ -6,6 +6,7 @@
 #include "Components.h"
 #include "Game.h"
 #include "ECS.h"
+#include "Animator.h"
 
 class PlayerController : public Component
 {
@@ -20,6 +21,7 @@ private:
 
 	Transform* transform;
 	Rigidbody* rigidbody;
+	Animator* animator;
 
 };
 
