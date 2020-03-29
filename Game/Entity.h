@@ -34,6 +34,8 @@ class Entity
 {
 public:
 
+	Entity();
+
 	void Update();
 	void Draw();
 	void Destroy();

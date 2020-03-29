@@ -4,7 +4,7 @@
 
 SpriteRenderer::SpriteRenderer(const char* p, Vector2 size)
 {
-	SpriteSize = Vector2((float)size.x, (float)size.y);
+	spriteSize = Vector2((float)size.x, (float)size.y);
 	currentPath = (char*)p;
 }
 
@@ -15,27 +15,27 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::Init()
 {
-	transform = &Entity->AddComponent<Transform>();
+	transform = &Entity->GetComponent<Transform>();
 
 	sourceRect.x = 0;
 	sourceRect.y = 0;
 
-	sourceRect.w = (int)SpriteSize.x;
-	sourceRect.h = (int)SpriteSize.y;
+	sourceRect.w = (int)spriteSize.x;
+	sourceRect.h = (int)spriteSize.y;
 
-	destinationRect.w = (int)(SpriteSize.x * transform->Scale.x);
-	destinationRect.h = (int)(SpriteSize.y * transform->Scale.y);
+	destinationRect.w = (int)(spriteSize.x * transform->scale.x);
+	destinationRect.h = (int)(spriteSize.y * transform->scale.y);
 
 	SetTexture(currentPath);
 }
 
 void SpriteRenderer::Update()
 {
-	destinationRect.w = static_cast<int>(SpriteSize.x * transform->Scale.x);
-	destinationRect.h = static_cast<int>(SpriteSize.y * transform->Scale.y);
+	destinationRect.w = static_cast<int>(spriteSize.x * transform->scale.x);
+	destinationRect.h = static_cast<int>(spriteSize.y * transform->scale.y);
 
-	destinationRect.x = static_cast<int>(transform->Position.x);
-	destinationRect.y = static_cast<int>(transform->Position.y);
+	destinationRect.x = static_cast<int>(transform->position.x);
+	destinationRect.y = static_cast<int>(transform->position.y);
 }
 
 void SpriteRenderer::Draw()

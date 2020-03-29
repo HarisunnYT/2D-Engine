@@ -15,7 +15,9 @@ void Tile::Init()
 {
 	path = GetPath(tileID);
 
-	transform = &Entity->AddComponent<Transform>(Vector3(static_cast<float>(tileRect.x), static_cast<float>(tileRect.y), 0));
+	transform = &Entity->GetComponent<Transform>();
+	transform->position = Vector3(static_cast<float>(tileRect.x), static_cast<float>(tileRect.y), 0);
+
 	spriteRenderer = &Entity->AddComponent<SpriteRenderer>(path, Vector2(64, 64));
 }
 

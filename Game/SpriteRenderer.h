@@ -18,7 +18,7 @@ public:
 	void Draw() override;
 	void SetTexture(const char* path);
 
-	Vector2			SpriteSize;
+	Vector2			spriteSize;
 
 private:
 

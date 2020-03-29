@@ -12,8 +12,8 @@ public:
 	Transform();
 	Transform(Vector3 pos);
 	
-	Vector3 Position;
-	Vector2 Scale;
+	Vector3 position;
+	Vector2 scale;
 
 };
 

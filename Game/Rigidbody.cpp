@@ -2,10 +2,10 @@
 
 void Rigidbody::Init()
 {
-	transform = &Entity->AddComponent<Transform>();
+	transform = &Entity->GetComponent<Transform>();
 }
 
 void Rigidbody::Update()
 {
-	transform->Position += Velocity;
+	transform->position += Velocity;
 }

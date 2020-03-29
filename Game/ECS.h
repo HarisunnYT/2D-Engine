@@ -13,7 +13,7 @@
 #include <array>
 
 class Entity;
-
+class Transform;
 class ECS
 {
 public:
@@ -23,6 +23,8 @@ public:
 	void Refresh();
 
 	Entity& AddEntity();
+
+	static std::vector<Transform*> transforms;
 
 private:
 

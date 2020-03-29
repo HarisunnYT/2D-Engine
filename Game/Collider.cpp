@@ -1,6 +1,6 @@
 #include "Collider.h"
 
-vector<Collider*> Collision::Colliders;
+vector<Collider*> Collision::colliders;
 
 Collider::Collider(std::string tag)
 {
@@ -9,25 +9,25 @@ Collider::Collider(std::string tag)
 
 void Collider::Init()
 {
-	transform = &Entity->AddComponent<Transform>();
+	transform = &Entity->GetComponent<Transform>();
 
 	if (Entity->HasComponent<SpriteRenderer>())
 	{
 		spriteRenderer = &Entity->GetComponent<SpriteRenderer>();
 	}
 
-	Collision::Colliders.push_back(this);
+	Collision::colliders.push_back(this);
 }
 
 void Collider::Update()
 {
-	collider.x = (int)transform->Position.x;
-	collider.y = (int)transform->Position.y;
+	collider.x = (int)transform->position.x;
+	collider.y = (int)transform->position.y;
 
 	if (spriteRenderer != nullptr)
 	{
-		collider.w = (int)(spriteRenderer->SpriteSize.x * transform->Scale.x);
-		collider.h = (int)(spriteRenderer->SpriteSize.y * transform->Scale.y);
+		collider.w = (int)(spriteRenderer->spriteSize.x * transform->scale.x);
+		collider.h = (int)(spriteRenderer->spriteSize.y * transform->scale.y);
 	}
 	else
 	{

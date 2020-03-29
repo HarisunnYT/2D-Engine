@@ -12,19 +12,11 @@ public:
 	TileMap();
 	~TileMap();
 
-	void LoadMap(int arr[20][25]);
-	void DrawMap();
+	void LoadMap(std::string path, Vector2 size);
+
+	void AddTile(int id, Vector3 position);
 
 private:
-
-	SDL_Rect		sourceRect;
-	SDL_Rect		destinationRect;
-
-	SDL_Texture*	dirt;
-	SDL_Texture*	grass;
-	SDL_Texture*	water;
-
-	int				map[20][25];
 };
 
 #endif
