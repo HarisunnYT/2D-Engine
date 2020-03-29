@@ -105,6 +105,9 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>Source Files\Engine\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextureManager.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>Header Files\Engine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Header Files\Engine\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

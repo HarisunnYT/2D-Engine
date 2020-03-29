@@ -5,6 +5,7 @@
 #include "ECS.h"
 #include "Components.h"
 #include "GameComponents.h"
+#include "Animator.h"
 
 #include <iostream>
 
@@ -18,12 +19,13 @@ Game::Game()
 	Tile::AddTileTexture("assets/Water.png");
 
 	tileMap = new TileMap();
-	tileMap->LoadMap("assets/pyxelmap_16x16.map", Vector2(16, 16));
+	//tileMap->LoadMap("assets/pyxelmap_16x16.map", Vector2(16, 16));
 
 	player = &EngineCore::Ecs->AddEntity();
-	player->AddComponent<SpriteRenderer>("Assets/Player.png", Vector2(16, 64));
+	player->AddComponent<Animator>("Assets/PlayerIdle.png", Vector2(200, 318), 3, 250);
 	player->AddComponent<Collider>("player");
 	player->AddComponent<PlayerController>();
+	player->GetComponent<Transform>().scale = Vector2(0.2f, 0.2f);
 }
 
 Game::~Game()

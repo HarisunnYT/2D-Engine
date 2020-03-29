@@ -20,7 +20,7 @@ public:
 
 	Vector2			spriteSize;
 
-private:
+protected:
 
 	Transform*		transform;
 
