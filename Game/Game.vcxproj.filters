@@ -155,9 +155,6 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents.h">
-      <Filter>Header Files\Game\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>Header Files\Engine\Components</Filter>
     </ClInclude>
@@ -175,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="Animator.h">
       <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondaryComponents.h">
+      <Filter>Header Files\Game\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

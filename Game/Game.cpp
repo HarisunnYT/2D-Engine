@@ -4,8 +4,7 @@
 #include "TileMap.h"
 #include "ECS.h"
 #include "Components.h"
-#include "GameComponents.h"
-#include "Animator.h"
+#include "SecondaryComponents.h"
 
 #include <iostream>
 

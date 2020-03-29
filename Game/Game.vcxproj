@@ -168,7 +168,7 @@
     <ClInclude Include="EngineCore.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameComponents.h" />
+    <ClInclude Include="SecondaryComponents.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="TileMap.h" />
