@@ -13,168 +13,150 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Engine">
-      <UniqueIdentifier>{7aa22874-f3b5-4bd5-afc5-c735d72ec741}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Game">
-      <UniqueIdentifier>{1f14336f-5853-4ae0-9afa-c42420086a97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine\Components">
-      <UniqueIdentifier>{c97f6ca3-d9b1-4ca0-a84d-556f95777db3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Game\Components">
-      <UniqueIdentifier>{a02df856-e039-40e9-a383-7a269d6bd63b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine\Util">
-      <UniqueIdentifier>{a378eb5c-3b98-476b-9b95-47debee4a1de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine">
-      <UniqueIdentifier>{e625f0f0-93a5-438b-a0a4-ca2d1f256c08}</UniqueIdentifier>
+      <UniqueIdentifier>{3182ba8a-ea09-4dc3-b2ac-b8d452076ff2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game">
-      <UniqueIdentifier>{9e8b3b76-0c75-4d94-b208-62d6d7d021f0}</UniqueIdentifier>
+      <UniqueIdentifier>{e235a1c3-924b-4151-9954-e1a959fd20ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine\Util">
-      <UniqueIdentifier>{e81f8599-753d-4f22-a24b-0e58334e689d}</UniqueIdentifier>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{08f060f0-a732-488e-b16f-ad2e2ab6a804}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine\Components">
-      <UniqueIdentifier>{5256d022-bc21-436e-8207-3d90f51befeb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\Components">
-      <UniqueIdentifier>{ca5aa069-c94e-4b8c-b83b-ed060a34534a}</UniqueIdentifier>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{3d9bb4f5-8d60-4860-a6b1-e0555addae6a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\Animator.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\Collider.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\Collision.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="ECS.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\Component.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\ECS.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\EngineCore.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Vector3.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\Entity.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Rigidbody.cpp">
-      <Filter>Source Files\Engine\Components</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\Game.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files\Engine\Components</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\GameObject.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source Files\Engine\Components</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\InputSystem.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>Source Files\Game\Components</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\Point.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="InputSystem.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
+    <ClCompile Include="Engine Source Code\Source Files\Rigidbody.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="EngineCore.cpp">
+    <ClCompile Include="Engine Source Code\Source Files\SpriteRenderer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\TextureManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Tile.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\TileMap.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Transform.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Vector2.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Vector3.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files\Engine</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="Game Source Code\Source Files\PlayerController.cpp">
       <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Source Files\Engine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Source Files\Engine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>Source Files\Engine\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Source Files\Engine\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Components.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Rigidbody.h">
-      <Filter>Header Files\Engine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Header Files\Engine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Header Files\Engine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>Header Files\Game\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="InputSystem.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineCore.h">
+    <ClInclude Include="Engine Source Code\Header Files\Animator.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="Engine Source Code\Header Files\Collider.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Collision.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Component.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Components.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\ECS.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\EngineCore.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Entity.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Game.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\GameObject.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\InputSystem.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Point.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Rigidbody.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\SecondaryComponents.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\SpriteRenderer.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\TextureManager.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Tile.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\TileMap.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Transform.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Vector2.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Vector3.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Source Code\Header Files\PlayerController.h">
       <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Header Files\Engine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Header Files\Engine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMap.h">
-      <Filter>Header Files\Engine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>Header Files\Engine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SecondaryComponents.h">
-      <Filter>Header Files\Game\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
