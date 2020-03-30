@@ -4,6 +4,7 @@
 #define TILE_H
 
 #include "EngineCore.h"
+#include "TextureManager.h"
 
 #include <vector>
 
@@ -12,24 +13,16 @@ class Tile : public Component
 public:
 
 	Tile() = default;
-	Tile(Vector3 position, Vector2 size, int id);
+	Tile(const char* path, Vector3 position, Vector2 size, Vector2 source, float scale);
+	~Tile();
 
-	void Init() override;
-
-	static void AddTileTexture(const char* path);
-
-	static vector<char*> tileTypes;
+	void Draw() override;
 
 private:
 
-	Transform*			transform;
-	SpriteRenderer*		spriteRenderer;
-
-	SDL_Rect			tileRect;
-	char*				path;
-	int					tileID;
-
-	char* GetPath(int id);
+	SDL_Texture*	texture;
+	SDL_Rect		sourceRect;
+	SDL_Rect		destinationRect;
 };
 
 #endif

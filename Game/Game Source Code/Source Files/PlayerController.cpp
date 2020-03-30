@@ -16,6 +16,7 @@ void PlayerController::Init()
 	animator->PlayAnimation(0);
 
 	transform->scale = Vector2(2.0f, 2.0f);
+	transform->position.z = 1;
 }
 
 void PlayerController::Update()

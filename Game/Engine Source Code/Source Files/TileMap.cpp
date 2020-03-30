@@ -11,18 +11,25 @@ TileMap::~TileMap()
 {
 }
 
-void TileMap::LoadMap(std::string path, Vector2 size)
+void TileMap::LoadMap(std::string mapPath, const char* spriteSheetPath, Vector2 tileSize, Vector2 mapSize, float scale)
 {
-	char tile;
+	char c;
 	std::fstream mapFile;
-	mapFile.open(path);
+	mapFile.open(mapPath);
 
-	for (int y = 0; y < size.y; y++)
+	int sourceX, sourceY;
+
+	for (int y = 0; y < mapSize.y; y++)
 	{
-		for (int x = 0; x < size.x; x++)
+		for (int x = 0; x < mapSize.x; x++)
 		{
-			mapFile.get(tile);
-			AddTile(atoi(&tile), Vector3(x * size.x, y * size.y, 0));
+			mapFile.get(c);
+			sourceY = atoi(&c) * tileSize.y;
+
+			mapFile.get(c);
+			sourceX = atoi(&c) * tileSize.x;
+
+			AddTile(spriteSheetPath, Vector3(x * tileSize.x * scale, y * tileSize.y * scale, 0), tileSize, Vector2(sourceX, sourceY), scale);
 			mapFile.ignore();
 		}
 	}
@@ -30,9 +37,9 @@ void TileMap::LoadMap(std::string path, Vector2 size)
 	mapFile.close();
 }
 
-void TileMap::AddTile(int id, Vector3 position)
+void TileMap::AddTile(const char* spriteSheetPath, Vector3 position, Vector2 size, Vector2 source, float scale)
 {
 	auto& tile(EngineCore::Ecs->AddEntity());
 
-	tile.AddComponent<Tile>(position, Vector2(32, 32), id);
+	tile.AddComponent<Tile>(spriteSheetPath, position, size, source, scale);
 }

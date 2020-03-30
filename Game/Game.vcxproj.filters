@@ -25,14 +25,14 @@
     <Filter Include="Header Files\Game">
       <UniqueIdentifier>{3d9bb4f5-8d60-4860-a6b1-e0555addae6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Components">
+      <UniqueIdentifier>{a8819c36-9186-4b91-814f-1ce67f7438de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Components">
+      <UniqueIdentifier>{c8245e50-6d34-4768-9f3c-bc559d2930d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine Source Code\Source Files\Animator.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Source Code\Source Files\Collider.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Source Code\Source Files\Collision.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
@@ -51,31 +51,16 @@
     <ClCompile Include="Engine Source Code\Source Files\Game.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Source Code\Source Files\GameObject.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Source Code\Source Files\InputSystem.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Engine Source Code\Source Files\Point.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Source Code\Source Files\Rigidbody.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Source Code\Source Files\SpriteRenderer.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Source Code\Source Files\TextureManager.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Source Code\Source Files\Tile.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Source Code\Source Files\TileMap.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Source Code\Source Files\Transform.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Engine Source Code\Source Files\Vector2.cpp">
@@ -90,14 +75,26 @@
     <ClCompile Include="Game Source Code\Source Files\PlayerController.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Animator.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Collider.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Rigidbody.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\SpriteRenderer.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Tile.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Transform.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine Source Code\Header Files\Animator.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Source Code\Header Files\Collider.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Source Code\Header Files\Collision.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -119,34 +116,19 @@
     <ClInclude Include="Engine Source Code\Header Files\Game.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Source Code\Header Files\GameObject.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Source Code\Header Files\InputSystem.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine Source Code\Header Files\Point.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Source Code\Header Files\Rigidbody.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Source Code\Header Files\SecondaryComponents.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Source Code\Header Files\SpriteRenderer.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine Source Code\Header Files\TextureManager.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Source Code\Header Files\Tile.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Source Code\Header Files\TileMap.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Source Code\Header Files\Transform.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine Source Code\Header Files\Vector2.h">
@@ -157,6 +139,24 @@
     </ClInclude>
     <ClInclude Include="Game Source Code\Header Files\PlayerController.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Animator.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Collider.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Rigidbody.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\SpriteRenderer.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Tile.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\Transform.h">
+      <Filter>Header Files\Engine\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

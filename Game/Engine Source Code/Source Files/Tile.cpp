@@ -1,39 +1,26 @@
 #include "Tile.h"
 
-vector<char*> Tile::tileTypes;
-
-Tile::Tile(Vector3 position, Vector2 size, int id)
+Tile::Tile(const char* p, Vector3 position, Vector2 size, Vector2 source, float scale)
 {
-	tileRect.x = static_cast<int>(position.x);
-	tileRect.y = static_cast<int>(position.y);
-	tileRect.w = static_cast<int>(size.x);
-	tileRect.h = static_cast<int>(size.y);
-	tileID = id;
+	texture = TextureManager::LoadTexture(p);
+
+	sourceRect.x = static_cast<int>(source.x);
+	sourceRect.y = static_cast<int>(source.y);
+	sourceRect.w = static_cast<int>(size.x);
+	sourceRect.h = static_cast<int>(size.y);
+
+	destinationRect.x = static_cast<int>(position.x);
+	destinationRect.y = static_cast<int>(position.y);
+	destinationRect.w = static_cast<int>(size.x * scale);
+	destinationRect.h = static_cast<int>(size.y * scale);
 }
 
-void Tile::Init()
+Tile::~Tile()
 {
-	path = GetPath(tileID);
-
-	transform = &Entity->GetComponent<Transform>();
-	transform->position = Vector3(static_cast<float>(tileRect.x), static_cast<float>(tileRect.y), 0);
-
-	spriteRenderer = &Entity->AddComponent<SpriteRenderer>(path, Vector2(64, 64));
+	SDL_DestroyTexture(texture);
 }
 
-void Tile::AddTileTexture(const char* path)
+void Tile::Draw()
 {
-	Tile::tileTypes.push_back((char*)path);
-}
-
-char* Tile::GetPath(int id)
-{
-	if ((int)tileTypes.size() > id)
-	{
-		return tileTypes[id];
-	}
-	else
-	{
-		throw std::invalid_argument("path does not exist");
-	}
+	TextureManager::Draw(texture, sourceRect, destinationRect);
 }
