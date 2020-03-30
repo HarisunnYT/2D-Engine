@@ -31,11 +31,11 @@ void SpriteRenderer::Init()
 
 void SpriteRenderer::Update()
 {
+	destinationRect.x = static_cast<int>(transform->position.x - EngineCore::Camera.x);
+	destinationRect.y = static_cast<int>(transform->position.y - EngineCore::Camera.y);
+
 	destinationRect.w = static_cast<int>(spriteSize.x * transform->scale.x);
 	destinationRect.h = static_cast<int>(spriteSize.y * transform->scale.y);
-
-	destinationRect.x = static_cast<int>(transform->position.x);
-	destinationRect.y = static_cast<int>(transform->position.y);
 }
 
 void SpriteRenderer::Draw()

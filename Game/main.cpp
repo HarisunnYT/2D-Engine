@@ -8,7 +8,7 @@ const int frameDelay = 1000 / FPS;
 int main(int agrc, char* argv[])
 {
 	engineCore = new EngineCore();
-	engineCore->Init("EngineCore", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+	engineCore->Init("EngineCore", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, false);
 
 	Uint32 frameStart;
 	int frameTime;

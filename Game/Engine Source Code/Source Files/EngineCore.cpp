@@ -2,13 +2,18 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "Components.h"
+#include "InputSystem.h"
 
 #include <iostream>
 
 SDL_Renderer* EngineCore::Renderer = nullptr;
 SDL_Event EngineCore::Event;
-
 ECS* EngineCore::Ecs = nullptr;
+SDL_Rect EngineCore::Camera = { 0, 0, 800, 640 };
+
+bool EngineCore::isRunning = false;
+Vector2 EngineCore::screenSize = Vector2(800, 600);
+
 
 Game* game = nullptr;
 
@@ -20,7 +25,7 @@ EngineCore::~EngineCore()
 {
 }
 
-void EngineCore::Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+void EngineCore::Init(const char* title, int xpos, int ypos, bool fullscreen)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
@@ -30,7 +35,7 @@ void EngineCore::Init(const char* title, int xpos, int ypos, int width, int heig
 			flags = SDL_WINDOW_FULLSCREEN;
 		}
 
-		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+		window = SDL_CreateWindow(title, xpos, ypos, screenSize.x, screenSize.y, flags);
 		Renderer = SDL_CreateRenderer(window, -1, 0);
 
 		SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);
@@ -65,6 +70,11 @@ void EngineCore::Update()
 	Ecs->Update();
 
 	game->Update();
+
+	if (InputSystem::KeyReleased(SDLK_ESCAPE))
+	{
+		EngineCore::isRunning = false;
+	}
 }
 
 void EngineCore::Render()

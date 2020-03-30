@@ -16,29 +16,29 @@ void PlayerController::Init()
 	animator->PlayAnimation(0);
 
 	transform->scale = Vector2(2.0f, 2.0f);
-	transform->position.z = 1;
+	transform->position = Vector3(EngineCore::screenSize.x / 2, EngineCore::screenSize.y / 2, 1);
 }
 
 void PlayerController::Update()
 {
 	if (InputSystem::KeyPressed(SDLK_w))
 	{
-		rigidbody->Velocity.y = -1;
+		rigidbody->Velocity.y = -1 * speed;
 		animator->PlayAnimation("WalkUp");
 	}
 	if (InputSystem::KeyPressed(SDLK_s))
 	{
-		rigidbody->Velocity.y = 1;
+		rigidbody->Velocity.y = 1 * speed;
 		animator->PlayAnimation("WalkDown");
 	}
 	if (InputSystem::KeyPressed(SDLK_a))
 	{
-		rigidbody->Velocity.x = -1;
+		rigidbody->Velocity.x = -1 * speed;
 		animator->PlayAnimation("WalkLeft");
 	}
 	if (InputSystem::KeyPressed(SDLK_d))
 	{
-		rigidbody->Velocity.x = 1;
+		rigidbody->Velocity.x = 1 * speed;
 		animator->PlayAnimation("WalkRight");
 	}
 

@@ -19,7 +19,7 @@ public:
 	EngineCore();
 	~EngineCore();
 
-	void Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
+	void Init(const char* title, int xpos, int ypos, bool fullscreen);
 
 	void HandleEvents();
 	void Update();
@@ -28,13 +28,16 @@ public:
 
 	bool Running();
 
-	static SDL_Renderer* Renderer;
-	static SDL_Event Event;
-	static ECS* Ecs;
+	static SDL_Renderer*	Renderer;
+	static SDL_Event		Event;
+	static ECS*				Ecs;
+	static SDL_Rect			Camera;
+
+	static bool				isRunning;
+	static Vector2			screenSize;
 
 private:
 
-	bool isRunning;
 	SDL_Window* window;
 };
 
