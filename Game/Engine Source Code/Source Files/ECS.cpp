@@ -15,7 +15,7 @@ struct compare_z_depth
 {
 	inline bool operator() (Transform *a, Transform *b)
 	{
-		return a->position.z < b->position.z;
+		return a->GetPosition().z < b->GetPosition().z;
 	}
 };
 
@@ -36,6 +36,25 @@ void ECS::Refresh()
 		return !mEntity->IsActive();
 	}),
 	std::end(entities));
+}
+
+void ECS::Physics()
+{
+	for (auto& e : entities)
+	{
+		e->Physics();
+	}
+}
+
+void ECS::DebugDraw()
+{
+	if (EngineCore::isDebug)
+	{
+		for (auto& transform : transforms)
+		{
+			transform->Entity->DebugDraw();
+		}
+	}
 }
 
 Entity& ECS::AddEntity()

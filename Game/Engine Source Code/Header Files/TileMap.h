@@ -15,6 +15,8 @@ public:
 	void LoadMap(std::string mapPath, const char* spriteSheetPath, Vector2 tileSize, Vector2 mapSize, float scale);
 	void AddTile(const char* spriteSheetPath, Vector3 position, Vector2 size, Vector2 source, float scale);
 
+	Vector2 mapSize;
+
 private:
 
 };

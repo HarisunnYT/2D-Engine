@@ -158,5 +158,8 @@
     <ClInclude Include="Engine Source Code\Header Files\Transform.h">
       <Filter>Header Files\Engine\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

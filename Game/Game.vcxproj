@@ -180,6 +180,7 @@
     <ClInclude Include="Engine Source Code\Header Files\Vector2.h" />
     <ClInclude Include="Engine Source Code\Header Files\Vector3.h" />
     <ClInclude Include="Game Source Code\Header Files\PlayerController.h" />
+    <ClInclude Include="Physics.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

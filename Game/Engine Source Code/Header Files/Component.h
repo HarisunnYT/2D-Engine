@@ -16,6 +16,8 @@ public:
 	virtual void Init() {}
 	virtual void Update() {}
 	virtual void Draw() {}
+	virtual void Physics() {}
+	virtual void DebugDraw() {}
 
 };
 

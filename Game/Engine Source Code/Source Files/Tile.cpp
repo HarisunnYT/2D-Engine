@@ -1,10 +1,12 @@
 #include "Tile.h"
 
-Tile::Tile(const char* p, Vector3 pos, Vector2 size, Vector2 source, float s)
+Tile::Tile(const char* p, Vector3 pos, Vector2 mSize, Vector2 source, float s)
 {
+	startingPosition = pos;
+	size = mSize;
+	startingScale = Vector2(s, s);
+
 	texture = TextureManager::LoadTexture(p);
-	position = pos;
-	scale = s;
 
 	sourceRect.x = static_cast<int>(source.x);
 	sourceRect.y = static_cast<int>(source.y);
@@ -22,10 +24,23 @@ Tile::~Tile()
 	SDL_DestroyTexture(texture);
 }
 
+void Tile::Init()
+{
+	transform = &Entity->GetComponent<Transform>();
+	transform->SetPosition(&startingPosition);
+	transform->scale = startingScale;
+
+	collider = &Entity->AddComponent<Collider>("tile");
+	collider->SetSize(Vector2(sourceRect.w, sourceRect.h));
+}
+
 void Tile::Update()
 {
-	destinationRect.x = position.x - EngineCore::Camera.x * scale;
-	destinationRect.y = position.y - EngineCore::Camera.y * scale;
+	destinationRect.x = transform->GetPosition().x - EngineCore::Camera.x * transform->scale.x;
+	destinationRect.y = transform->GetPosition().y - EngineCore::Camera.y * transform->scale.y;
+
+	destinationRect.w = static_cast<int>(size.x * transform->scale.x);
+	destinationRect.h = static_cast<int>(size.y * transform->scale.y);
 }
 
 void Tile::Draw()

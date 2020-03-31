@@ -29,17 +29,14 @@ void SpriteRenderer::Init()
 	SetTexture(currentPath);
 }
 
-void SpriteRenderer::Update()
+void SpriteRenderer::Draw()
 {
-	destinationRect.x = static_cast<int>(transform->position.x - EngineCore::Camera.x);
-	destinationRect.y = static_cast<int>(transform->position.y - EngineCore::Camera.y);
+	destinationRect.x = static_cast<int>(transform->GetPosition().x);
+	destinationRect.y = static_cast<int>(transform->GetPosition().y);
 
 	destinationRect.w = static_cast<int>(spriteSize.x * transform->scale.x);
 	destinationRect.h = static_cast<int>(spriteSize.y * transform->scale.y);
-}
 
-void SpriteRenderer::Draw()
-{
 	TextureManager::Draw(texture, sourceRect, destinationRect);
 }
 

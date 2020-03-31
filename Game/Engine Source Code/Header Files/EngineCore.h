@@ -6,6 +6,7 @@
 #include "Vector3.h"
 #include "Vector2.h"
 #include "Collision.h"
+//#include "Physics.h"
 
 #include "Components.h"
 
@@ -34,6 +35,8 @@ public:
 	static SDL_Rect			Camera;
 
 	static bool				isRunning;
+	static bool				isDebug;
+
 	static Vector2			screenSize;
 
 private:

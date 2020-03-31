@@ -21,6 +21,8 @@ public:
 	void Update();
 	void Draw();
 	void Refresh();
+	void Physics();
+	void DebugDraw();
 
 	Entity& AddEntity();
 

@@ -14,6 +14,7 @@ public:
 
 	void Update();
 	void Render();
+	void Physics();
 };
 
 #endif

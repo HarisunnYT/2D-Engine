@@ -10,14 +10,21 @@ class Rigidbody : public Component
 {
 public:
 
-	void Init() override;
-	void Update() override;
+	Rigidbody() = default;
+	Rigidbody(bool useGravity);
 
-	Vector3 Velocity;
+	void Init() override;
+	void Physics() override;
+
+	void SetVelocity(Vector2 velocity);
+	Vector2 GetVelocity();
 
 private:
 
-	Transform* transform;
+	Transform*		transform;
+	Vector2			velocity;
+
+	bool			useGravity = true;
 };
 
 #endif

@@ -9,11 +9,11 @@
 SDL_Renderer* EngineCore::Renderer = nullptr;
 SDL_Event EngineCore::Event;
 ECS* EngineCore::Ecs = nullptr;
-SDL_Rect EngineCore::Camera = { 0, 0, 800, 640 };
+SDL_Rect EngineCore::Camera = { 0, 0, EngineCore::screenSize.x, EngineCore::screenSize.y };
 
 bool EngineCore::isRunning = false;
+bool EngineCore::isDebug = false;
 Vector2 EngineCore::screenSize = Vector2(800, 600);
-
 
 Game* game = nullptr;
 
@@ -70,6 +70,8 @@ void EngineCore::Update()
 	Ecs->Update();
 
 	game->Update();
+	game->Physics();
+	Ecs->Physics();
 
 	if (InputSystem::KeyReleased(SDLK_ESCAPE))
 	{
@@ -83,6 +85,7 @@ void EngineCore::Render()
 
 	game->Render();
 	Ecs->Draw();
+	Ecs->DebugDraw();
 
 	SDL_RenderPresent(Renderer);
 }

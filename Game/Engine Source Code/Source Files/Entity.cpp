@@ -27,6 +27,22 @@ void Entity::Destroy()
 	active = false;
 }
 
+void Entity::Physics()
+{
+	for (auto& c : components)
+	{
+		c->Physics();
+	}
+}
+
+void Entity::DebugDraw()
+{
+	for (auto& c : components)
+	{
+		c->DebugDraw();
+	}
+}
+
 bool Entity::IsActive() const
 {
 	return active;

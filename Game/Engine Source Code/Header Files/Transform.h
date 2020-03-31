@@ -11,9 +11,15 @@ public:
 
 	Transform();
 	Transform(Vector3 pos);
+
+	Vector3 GetPosition();
+	void SetPosition(Vector3 *pos);
+
+	Vector2 scale;
+
+private:
 	
 	Vector3 position;
-	Vector2 scale;
 
 };
 

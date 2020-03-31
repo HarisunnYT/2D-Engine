@@ -22,6 +22,7 @@ private:
 	Transform* transform;
 	Rigidbody* rigidbody;
 	Animator* animator;
+	Collider* collider;
 
 };
 

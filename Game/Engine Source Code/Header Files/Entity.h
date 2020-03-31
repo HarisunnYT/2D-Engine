@@ -39,6 +39,8 @@ public:
 	void Update();
 	void Draw();
 	void Destroy();
+	void Physics();
+	void DebugDraw();
 
 	bool IsActive() const;
 

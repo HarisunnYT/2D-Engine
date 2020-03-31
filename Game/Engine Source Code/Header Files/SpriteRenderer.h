@@ -14,7 +14,6 @@ public:
 	~SpriteRenderer();
 
 	void Init() override;
-	void Update() override;
 	void Draw() override;
 	void SetTexture(const char* path);
 

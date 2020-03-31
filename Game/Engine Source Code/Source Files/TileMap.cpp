@@ -11,7 +11,7 @@ TileMap::~TileMap()
 {
 }
 
-void TileMap::LoadMap(std::string mapPath, const char* spriteSheetPath, Vector2 tileSize, Vector2 mapSize, float scale)
+void TileMap::LoadMap(std::string mapPath, const char* spriteSheetPath, Vector2 tileSize, Vector2 mpSize, float scale)
 {
 	char c;
 	std::fstream mapFile;
@@ -19,9 +19,9 @@ void TileMap::LoadMap(std::string mapPath, const char* spriteSheetPath, Vector2 
 
 	int sourceX, sourceY;
 
-	for (int y = 0; y < mapSize.y; y++)
+	for (int y = 0; y < mpSize.y; y++)
 	{
-		for (int x = 0; x < mapSize.x; x++)
+		for (int x = 0; x < mpSize.x; x++)
 		{
 			mapFile.get(c);
 			sourceY = static_cast<int>(atoi(&c) * tileSize.y);
@@ -35,6 +35,8 @@ void TileMap::LoadMap(std::string mapPath, const char* spriteSheetPath, Vector2 
 	}
 
 	mapFile.close();
+
+	mapSize = mpSize * scale;
 }
 
 void TileMap::AddTile(const char* spriteSheetPath, Vector3 position, Vector2 size, Vector2 source, float scale)
