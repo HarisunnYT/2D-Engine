@@ -17,7 +17,7 @@ public:
 
 private:
 
-	float speed = 1.0f;
+	float speed = 2.0f;
 
 	Transform* transform;
 	Rigidbody* rigidbody;

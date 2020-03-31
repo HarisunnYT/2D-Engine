@@ -24,33 +24,25 @@ void PlayerController::Init()
 void PlayerController::Update()
 {
 	Vector2 velocity = rigidbody->GetVelocity();
-	if (InputSystem::KeyPressed(SDLK_w))
+	if (InputSystem::KeyHeld(SDLK_a))
 	{
-		rigidbody->SetVelocity(Vector2(velocity.x, -1 * speed));
-		animator->PlayAnimation("WalkUp");
-	}
-	if (InputSystem::KeyPressed(SDLK_s))
-	{
-		rigidbody->SetVelocity(Vector2(velocity.x, 1 * speed));
-		animator->PlayAnimation("WalkDown");
-	}
-	if (InputSystem::KeyPressed(SDLK_a))
-	{
-		rigidbody->SetVelocity(Vector2(-1 * speed, velocity.y));
+		velocity.x = -1 * speed;
 		animator->PlayAnimation("WalkLeft");
 	}
-	if (InputSystem::KeyPressed(SDLK_d))
+	else if (InputSystem::KeyHeld(SDLK_d))
 	{
-		rigidbody->SetVelocity(Vector2(1 * speed, velocity.y));
+		velocity.x = 1 * speed;
 		animator->PlayAnimation("WalkRight");
 	}
+	else
+	{
+		velocity.x = 0;
+	}
 
-	if (InputSystem::KeyReleased(SDLK_w) || InputSystem::KeyReleased(SDLK_s))
+	if (InputSystem::KeyPressed(SDLK_SPACE))
 	{
-		rigidbody->SetVelocity(Vector2(velocity.x, 0));
+		velocity.y = 10;
 	}
-	if (InputSystem::KeyReleased(SDLK_a) || InputSystem::KeyReleased(SDLK_d))
-	{
-		rigidbody->SetVelocity(Vector2(0, velocity.y));
-	}
+
+	rigidbody->SetVelocity(velocity);
 }

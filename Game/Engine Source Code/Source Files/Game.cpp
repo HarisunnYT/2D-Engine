@@ -12,11 +12,9 @@ TileMap* tileMap = nullptr;
 Entity* player = nullptr;
 Entity* ground = nullptr;
 
-Vector3 previousPlayerPosition;
-
 Game::Game()
 {
-	EngineCore::isDebug = true;
+	EngineCore::isDebug = false;
 
 	player = &EngineCore::Ecs->AddEntity();
 	player->AddComponent<PlayerController>();
@@ -46,7 +44,7 @@ void Game::Render()
 
 void Game::Physics()
 {
-	previousPlayerPosition = player->GetComponent<Transform>().GetPosition();
+	Vector2 velocity = player->GetComponent<Rigidbody>().GetVelocity();
 	SDL_Rect playerCol = player->GetComponent<Collider>().GetCollider();
 
 	for (auto& c : EngineCore::Ecs->transforms)
@@ -56,7 +54,11 @@ void Game::Physics()
 		{
 			if (Collision::AABB(col->GetCollider(), playerCol))
 			{
-				player->GetComponent<Rigidbody>().SetVelocity(Vector2(0, 0));
+				if (velocity.y < 0)
+				{
+					velocity.y = 0;
+				}
+				player->GetComponent<Rigidbody>().SetVelocity(velocity);
 			}
 		}
 	}

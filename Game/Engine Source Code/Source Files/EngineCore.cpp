@@ -66,11 +66,14 @@ void EngineCore::HandleEvents()
 
 void EngineCore::Update()
 {
+	InputSystem::Update();
+
 	Ecs->Refresh();
 	Ecs->Update();
 
 	game->Update();
 	game->Physics();
+
 	Ecs->Physics();
 
 	if (InputSystem::KeyReleased(SDLK_ESCAPE))

@@ -93,6 +93,9 @@
     <ClCompile Include="Engine Source Code\Source Files\Transform.cpp">
       <Filter>Source Files\Engine\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\Physics.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Source Code\Header Files\Collision.h">
@@ -158,7 +161,7 @@
     <ClInclude Include="Engine Source Code\Header Files\Transform.h">
       <Filter>Header Files\Engine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Physics.h">
+    <ClInclude Include="Engine Source Code\Header Files\Physics.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

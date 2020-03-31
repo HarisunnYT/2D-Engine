@@ -14,14 +14,17 @@ public:
 	Rigidbody(bool useGravity);
 
 	void Init() override;
+	void Update() override;
 	void Physics() override;
 
 	void SetVelocity(Vector2 velocity);
 	Vector2 GetVelocity();
 
+	float mass = 1;
+
 private:
 
-	Transform*		transform;
+	Transform*		transform = nullptr;
 	Vector2			velocity;
 
 	bool			useGravity = true;

@@ -13,6 +13,4 @@ public:
 
 };
 
-Vector2 Physics::gravity = Vector2(0, -9.81f);
-
 #endif

@@ -11,8 +11,15 @@ class InputSystem
 {
 public:
 
+	static bool KeyHeld(int SDL_CODE);
 	static bool KeyPressed(int SDL_CODE);
 	static bool KeyReleased(int SDL_CODE);
+
+	static void Update();
+
+private:
+
+	static vector<int> keysHeld;
 
 };
 
