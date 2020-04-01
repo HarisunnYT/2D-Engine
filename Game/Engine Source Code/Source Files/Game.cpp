@@ -16,7 +16,7 @@ Game::Game()
 {
 	EngineCore::isDebug = false;
 
-	player = &EngineCore::Ecs->AddEntity();
+	player = &EngineCore::Ecs->AddEntity("Assets/player.txt");
 	player->AddComponent<PlayerController>();
 
 	tileMap = new TileMap();
@@ -34,6 +34,12 @@ Game::~Game()
 
 void Game::Update()
 {
+	//TODO remove
+	if (InputSystem::KeyPressed(SDLK_SPACE))
+	{
+		player->SaveToDisk("Assets/Prefabs/player");
+	}
+
 	//EngineCore::Camera.x = static_cast<int>(player->GetComponent<Transform>().GetPosition().x - (EngineCore::screenSize.x / 2));
 	//EngineCore::Camera.y = static_cast<int>(player->GetComponent<Transform>().GetPosition().y - (EngineCore::screenSize.y / 2));
 }
@@ -49,7 +55,7 @@ void Game::Physics()
 
 	for (auto& c : EngineCore::Ecs->transforms)
 	{
-		Collider* col = &c->Entity->GetComponent<Collider>();
+		Collider* col = &c->entity->GetComponent<Collider>();
 		if (col != nullptr && col->Tag == "ground")
 		{
 			if (Collision::AABB(col->GetCollider(), playerCol))

@@ -26,11 +26,11 @@ Tile::~Tile()
 
 void Tile::Init()
 {
-	transform = &Entity->GetComponent<Transform>();
+	transform = &entity->GetComponent<Transform>();
 	transform->SetPosition(&startingPosition);
 	transform->scale = startingScale;
 
-	collider = &Entity->AddComponent<Collider>("tile");
+	collider = &entity->AddComponent<Collider>("tile");
 	collider->SetSize(Vector2(sourceRect.w, sourceRect.h));
 }
 

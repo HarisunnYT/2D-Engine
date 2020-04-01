@@ -15,7 +15,7 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::Init()
 {
-	transform = &Entity->GetComponent<Transform>();
+	transform = &entity->GetComponent<Transform>();
 
 	sourceRect.x = 0;
 	sourceRect.y = 0;

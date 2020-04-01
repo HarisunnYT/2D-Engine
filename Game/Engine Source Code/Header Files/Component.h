@@ -5,11 +5,13 @@
 
 #include "Entity.h"
 
+#include <string>
+
 class Entity;
 class Component
 {
 public:
-	Entity* Entity;
+	Entity* entity;
 
 	virtual ~Component() {}
 
@@ -18,6 +20,8 @@ public:
 	virtual void Draw() {}
 	virtual void Physics() {}
 	virtual void DebugDraw() {}
+
+	virtual std::string Parse() { return ""; }
 
 };
 

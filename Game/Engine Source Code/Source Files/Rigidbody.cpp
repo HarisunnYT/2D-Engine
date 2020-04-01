@@ -7,7 +7,7 @@ Rigidbody::Rigidbody(bool gravity)
 
 void Rigidbody::Init()
 {
-	transform = &Entity->GetComponent<Transform>();
+	transform = &entity->GetComponent<Transform>();
 }
 
 void Rigidbody::Update()

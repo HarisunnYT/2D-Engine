@@ -3,10 +3,10 @@
 
 void PlayerController::Init()
 {
-	rigidbody = &Entity->AddComponent<Rigidbody>();
-	transform = &Entity->AddComponent<Transform>();
+	rigidbody = &entity->AddComponent<Rigidbody>();
+	transform = &entity->AddComponent<Transform>();
 
-	animator = &Entity->AddComponent<Animator>("Assets/player_sprite_sheet.png", Vector2(64, 69));
+	animator = &entity->AddComponent<Animator>("Assets/player_sprite_sheet.png", Vector2(64, 69));
 	animator->AddNewAnimation("WalkUp", 0, 8, 150);
 	animator->AddNewAnimation("WalkLeft", 1, 8, 150);
 	animator->AddNewAnimation("WalkDown", 2, 8, 150);
@@ -16,7 +16,7 @@ void PlayerController::Init()
 	transform->scale = Vector2(2.0f, 2.0f);
 	transform->SetPosition(&Vector3(EngineCore::screenSize.x / 2, EngineCore::screenSize.y / 2, 1));
 
-	collider = &Entity->AddComponent<Collider>("player");
+	collider = &entity->AddComponent<Collider>("player");
 	collider->SetSize(Vector2(30, 50));
 	collider->SetOffset(Vector2(30, 20));
 }

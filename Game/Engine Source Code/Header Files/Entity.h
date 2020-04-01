@@ -9,6 +9,11 @@
 #include <array>
 #include "ECS.h"
 
+#include <cereal/types/unordered_map.hpp>
+#include <cereal/types/memory.hpp>
+#include <cereal/archives/json.hpp>
+#include <cereal/types/vector.hpp>
+
 class Component;
 
 using ComponentID = std::size_t;
@@ -44,6 +49,8 @@ public:
 
 	bool IsActive() const;
 
+	void SaveToDisk(const char* path);
+
 	template <typename T> bool HasComponent() const
 	{
 		return componentBitSet[GetComponentTypeID<T>()];
@@ -54,7 +61,7 @@ public:
 		if (!HasComponent<T>())
 		{
 			T* c(new T(std::forward<TArgs>(mArgs)...));
-			c->Entity = this;
+			c->entity = this;
 			std::unique_ptr<Component> uPtr{ c };
 			components.emplace_back(std::move(uPtr));
 

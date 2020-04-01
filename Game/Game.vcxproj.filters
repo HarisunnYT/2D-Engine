@@ -36,9 +36,6 @@
     <ClCompile Include="Engine Source Code\Source Files\Collision.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Source Code\Source Files\Component.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Source Code\Source Files\ECS.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>

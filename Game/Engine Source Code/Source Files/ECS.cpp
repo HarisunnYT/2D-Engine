@@ -1,5 +1,9 @@
 #include "ECS.h"
 #include "Entity.h"
+#include "Animator.h"
+
+#include <fstream>
+#include <iostream>
 
 std::vector<Transform*> ECS::transforms;
 
@@ -25,7 +29,7 @@ void ECS::Draw()
 	sort(transforms.begin(), transforms.end(), compare_z_depth());
 	for (auto& transform : transforms)
 	{
-		transform->Entity->Draw();
+		transform->entity->Draw();
 	}
 }
 
@@ -52,7 +56,7 @@ void ECS::DebugDraw()
 	{
 		for (auto& transform : transforms)
 		{
-			transform->Entity->DebugDraw();
+			transform->entity->DebugDraw();
 		}
 	}
 }
@@ -64,4 +68,78 @@ Entity& ECS::AddEntity()
 	entities.emplace_back(std::move(uPtr));
 
 	return *e;
+}
+
+Entity& ECS::AddEntity(const char* path)
+{
+	Entity* e = &AddEntity();
+
+	std::ifstream source(path);
+
+	source >> noskipws;
+
+	char c;
+	std::string function;
+
+	while (source >> c)
+	{
+		if (c == '\n')
+		{
+			std::cout << function << std::endl;
+
+			//TryParseComponent(function, e);
+
+			function.clear();
+		}
+
+		function.push_back(c);
+	}
+
+	return *e;
+}
+
+void ECS::TryParseComponent(Transform* transform)
+{
+	//Vector3 pos = Vector3(5, 7, 2);
+	//Vector2 scale = Vector2(6.9f, 4.5f);
+	//std::stringstream ss;
+	//{
+	//	cereal::BinaryOutputArchive oarchive(ss);
+	//	oarchive(pos.ToString(), scale.ToString());
+	//}
+
+	//std::string rPos;
+	//std::string rScale;
+	//std::stringstream inStream(ss.str());
+	//{
+	//	cereal::BinaryInputArchive iarchive(inStream);
+	//	iarchive(rPos, rScale);
+	//}
+
+	//Vector2 s = Vector2::FromString(rScale);
+	//std::cout << s << std::endl;
+
+	//cereal::BinaryInputArchive iarchive(ss);
+
+	//Vector3 pos;
+
+	//iarchive(pos.x, pos.y, pos.z);
+
+	//std::cout << r << std::endl;
+
+	//std::cout << pos.x << " " << pos.y << std::endl;
+
+	//if (function.find("transform") != string::npos)
+	//	Transform::TryParse(function, entity);
+	//if (function.find("spriterenderer") != string::npos)
+	//	//SpriteRenderer::TryParse(function, entity);
+	//if (function.find("animator") != string::npos)
+	//	//Animator::TryParse(function, entity);
+	//if (function.find("collider") != string::npos)
+	//	//Collider::TryParse(function, entity);
+	//	if (function.find("rigidbody") != string::npos)
+	//	{
+
+	//}
+		//Rigidbody::TryParse(function, entity);
 }

@@ -25,8 +25,11 @@ public:
 	void DebugDraw();
 
 	Entity& AddEntity();
+	Entity& AddEntity(const char* path);
 
 	static std::vector<Transform*> transforms;
+
+	void TryParseComponent(Transform *transform);
 
 private:
 

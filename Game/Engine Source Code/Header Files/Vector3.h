@@ -3,6 +3,9 @@
 
 #include "Point.h"
 
+#include <iostream>
+#include <string>
+
 class Vector3 : public Point
 {
 public:
@@ -30,6 +33,9 @@ public:
 	Vector3& operator /=(float multiplier);
 
 	Vector3& Zero();
+
+	std::string ToString();
+	static Vector3 FromString(std::string str);
 };
 
 #endif

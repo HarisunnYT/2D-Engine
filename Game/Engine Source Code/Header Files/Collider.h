@@ -5,8 +5,6 @@
 
 #include "EngineCore.h"
 
-#include <string>
-
 class Transform;
 class SpriteRenderer;
 

@@ -17,10 +17,17 @@ public:
 
 	Vector2 scale;
 
+	std::string Parse() override;
+	
+	template<class Archive>
+	void Serialize(Archive& archive)
+	{
+		archive(position.ToString(), scale.ToString());
+	}
+
 private:
 	
 	Vector3 position;
-
 };
 
 #endif

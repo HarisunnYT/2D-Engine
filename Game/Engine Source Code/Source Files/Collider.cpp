@@ -12,10 +12,10 @@ Collider::Collider(std::string tag)
 
 void Collider::Init()
 {
-	transform = &Entity->GetComponent<Transform>();
-	if (Entity->HasComponent<SpriteRenderer>())
+	transform = &entity->GetComponent<Transform>();
+	if (entity->HasComponent<SpriteRenderer>())
 	{
-		spriteRenderer = &Entity->GetComponent<SpriteRenderer>();
+		spriteRenderer = &entity->GetComponent<SpriteRenderer>();
 	}
 
 	if (spriteRenderer != nullptr)

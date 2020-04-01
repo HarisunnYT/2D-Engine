@@ -7,7 +7,6 @@
 #include "Vector2.h"
 #include "Collision.h"
 #include "Physics.h"
-
 #include "Components.h"
 
 #include <stdio.h>

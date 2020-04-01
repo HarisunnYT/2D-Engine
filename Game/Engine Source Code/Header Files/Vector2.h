@@ -4,6 +4,7 @@
 #include "Point.h"
 
 #include <iostream>
+#include <string>
 
 class Vector2
 {
@@ -35,6 +36,9 @@ public:
 	Vector2& operator /=(float multiplier);
 
 	Vector2& Zero();
+
+	std::string ToString();
+	static Vector2 FromString(std::string str);
 };
 
 ostream& operator <<(ostream& stream, Vector2& p);

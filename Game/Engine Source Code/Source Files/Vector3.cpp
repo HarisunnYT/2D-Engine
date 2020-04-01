@@ -1,4 +1,5 @@
 #include "Vector3.h"
+#include <vector>
 
 Vector3::Vector3(float X, float Y, float Z) : Point(X, Y, Z)
 {
@@ -98,4 +99,44 @@ Vector3& Vector3::operator/=(float multiplier)
 Vector3& Vector3::Zero()
 {
 	return this->Multiply(0);
+}
+
+std::string Vector3::ToString()
+{
+	std::string strX = std::to_string(x);
+	std::string strY = std::to_string(y);
+	std::string strZ = std::to_string(z);
+
+	std::string str = '(' + strX + ',' + strY + ',' + strZ + ')';
+	return str;
+}
+
+Vector3 Vector3::FromString(std::string str)
+{
+	Vector3 vec;
+
+	vector<std::string> values;
+	std::string currentVal;
+
+	for (char& c : str)
+	{
+		if (c != '(')
+		{
+			if (c == ',' || c == ')')
+			{
+				values.push_back(currentVal);
+				currentVal.clear();
+			}
+			else
+			{
+				currentVal.push_back(c);
+			}
+		}
+	}
+
+	vec.x = std::stof(values[0]);
+	vec.y = std::stof(values[1]);
+	vec.z = std::stof(values[2]);
+
+	return vec;
 }
