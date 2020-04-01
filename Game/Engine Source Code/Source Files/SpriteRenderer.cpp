@@ -7,7 +7,7 @@ std::string SpriteRenderer::componentName = "spriterenderer";
 SpriteRenderer::SpriteRenderer(const char* p, Vector2 size)
 {
 	spriteSize = Vector2((float)size.x, (float)size.y);
-	currentPath = (char*)p;
+	currentPath = p;
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -28,7 +28,7 @@ void SpriteRenderer::Init()
 	destinationRect.w = (int)(spriteSize.x * transform->scale.x);
 	destinationRect.h = (int)(spriteSize.y * transform->scale.y);
 
-	SetTexture(currentPath);
+	SetTexture(currentPath.c_str());
 }
 
 void SpriteRenderer::Draw()
@@ -45,7 +45,7 @@ void SpriteRenderer::Draw()
 void SpriteRenderer::SetTexture(const char* path)
 {
 	texture = TextureManager::LoadTexture(path);
-	currentPath = (char*)path;
+	currentPath = path;
 }
 
 std::string SpriteRenderer::Parse()
@@ -53,7 +53,7 @@ std::string SpriteRenderer::Parse()
 	std::stringstream ss;
 	{
 		cereal::JSONOutputArchive oarchive(ss);
-		oarchive(SpriteRenderer::componentName, unique_ptr<char>(currentPath), spriteSize.ToString());
+		oarchive(SpriteRenderer::componentName, currentPath, spriteSize.ToString());
 	}
 
 	return ss.str();

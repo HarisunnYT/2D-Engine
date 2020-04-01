@@ -1,5 +1,7 @@
 #include "Animator.h"
 
+std::string Animator::componentName = "animator";
+
 Animator::Animator(const char* path, Vector2 size) : SpriteRenderer(path, size)
 {
 }
@@ -40,4 +42,38 @@ void Animator::PlayAnimation(int index)
 			PlayAnimation(anim.first);
 		}
 	}
+}
+
+std::string Animator::Parse()
+{
+	//std::stringstream ss;
+	//{
+	//	cereal::JSONOutputArchive oarchive(ss);
+	//	oarchive(Animator::componentName, animations);
+	//}
+
+	//return ss.str();
+	return "";
+}
+
+bool Animator::TryParse(std::string value, Entity* entity)
+{
+	/*std::string name;
+	std::string inPath;
+	std::string inSize;
+
+	std::stringstream ss(value);
+	{
+		cereal::JSONInputArchive oarchive(ss);
+		oarchive(name, inPath, inSize);
+	}
+
+	if (name == Animator::componentName)
+	{
+		entity->AddComponent<SpriteRenderer>(inPath.c_str(), Vector2::FromString(inSize));
+
+		return true;
+	}*/
+
+	return false;
 }

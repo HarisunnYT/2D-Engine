@@ -12,8 +12,20 @@ class PlayerController : public Component
 {
 public:
 
+	PlayerController(float speed = 1);
+
 	void Init() override;
 	void Update() override;
+
+	std::string Parse() override;
+	static bool TryParse(std::string value, Entity* entity);
+	static std::string componentName;
+
+	template<class Archive>
+	void Serialize(Archive& archive)
+	{
+		archive(componentName, speed);
+	}
 
 private:
 

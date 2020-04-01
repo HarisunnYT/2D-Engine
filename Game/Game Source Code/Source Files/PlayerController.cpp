@@ -1,24 +1,19 @@
 #include "PlayerController.h"
 #include "InputSystem.h"
 
+std::string PlayerController::componentName = "playercontroller";
+
+PlayerController::PlayerController(float s)
+{
+	speed = s;
+}
+
 void PlayerController::Init()
 {
 	rigidbody = &entity->AddComponent<Rigidbody>();
-	transform = &entity->AddComponent<Transform>();
-
-	animator = &entity->AddComponent<Animator>("Assets/player_sprite_sheet.png", Vector2(64, 69));
-	animator->AddNewAnimation("WalkUp", 0, 8, 150);
-	animator->AddNewAnimation("WalkLeft", 1, 8, 150);
-	animator->AddNewAnimation("WalkDown", 2, 8, 150);
-	animator->AddNewAnimation("WalkRight", 3, 8, 150);
-	animator->PlayAnimation(0);
-
-	transform->scale = Vector2(2.0f, 2.0f);
-	transform->SetPosition(&Vector3(EngineCore::screenSize.x / 2, EngineCore::screenSize.y / 2, 1));
-
-	collider = &entity->AddComponent<Collider>("player");
-	collider->SetSize(Vector2(30, 50));
-	collider->SetOffset(Vector2(30, 20));
+	transform = &entity->GetComponent<Transform>();
+	animator = &entity->GetComponent<Animator>();
+	collider = &entity->GetComponent<Collider>();
 }
 
 void PlayerController::Update()
@@ -45,4 +40,35 @@ void PlayerController::Update()
 	}
 
 	rigidbody->SetVelocity(velocity);
+}
+
+std::string PlayerController::Parse()
+{
+	std::stringstream ss;
+	{
+		cereal::JSONOutputArchive oarchive(ss);
+		oarchive(PlayerController::componentName, speed);
+	}
+
+	return ss.str();
+}
+
+bool PlayerController::TryParse(std::string value, Entity* entity)
+{
+	std::string name;
+	float speed;
+
+	std::stringstream ss(value);
+	{
+		cereal::JSONInputArchive oarchive(ss);
+		oarchive(name, speed);
+	}
+
+	if (name == PlayerController::componentName)
+	{
+		entity->AddComponent<PlayerController>(speed);
+		return true;
+	}
+
+	return false;
 }

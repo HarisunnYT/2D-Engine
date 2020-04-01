@@ -22,6 +22,16 @@ public:
 
 	float mass = 1;
 
+	std::string Parse() override;
+	static bool TryParse(std::string value, Entity* entity);
+	static std::string componentName;
+
+	template<class Archive>
+	void Serialize(Archive& archive)
+	{
+		archive(componentName, mass, useGravity);
+	}
+
 private:
 
 	Transform*		transform = nullptr;

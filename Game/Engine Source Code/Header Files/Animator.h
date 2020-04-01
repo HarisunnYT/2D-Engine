@@ -38,6 +38,16 @@ public:
 	int animIndex = 0;
 	std::map<const char*, Animation> animations;
 
+	std::string Parse() override;
+	static bool TryParse(std::string value, Entity* entity);
+	static std::string componentName;
+
+	template<class Archive>
+	void Serialize(Archive& archive)
+	{
+		archive(componentName, animations);
+	}
+
 private:
 
 	int frames = 1;

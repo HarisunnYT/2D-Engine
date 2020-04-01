@@ -26,7 +26,7 @@ public:
 	template<class Archive>
 	void Serialize(Archive& archive)
 	{
-		archive(componentName, unique_ptr<char>(currentPath), size.ToString());
+		archive(componentName, currentPath, size.ToString());
 	}
 
 protected:
@@ -35,7 +35,7 @@ protected:
 
 	SDL_Texture*	texture;
 	
-	char*			currentPath;
+	std::string		currentPath;
 
 	SDL_Rect		sourceRect;
 	SDL_Rect		destinationRect;
