@@ -61,7 +61,6 @@ void Entity::SaveToDisk(const char* path)
 		{
 			data.append(result);
 			data.append("\n");
-			data.append("\n");
 		}
 	}
 

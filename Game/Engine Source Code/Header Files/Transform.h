@@ -18,16 +18,18 @@ public:
 	Vector2 scale;
 
 	std::string Parse() override;
+	static bool TryParse(std::string value, Entity* entity);
+	static std::string componentName;
 	
 	template<class Archive>
 	void Serialize(Archive& archive)
 	{
-		archive(position.ToString(), scale.ToString());
+		archive(componentName, position.ToString(), scale.ToString());
 	}
 
 private:
 	
-	Vector3 position;
+	Vector3			position;
 };
 
 #endif

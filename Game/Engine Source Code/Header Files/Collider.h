@@ -23,19 +23,29 @@ public:
 
 	const SDL_Rect GetCollider();
 
+	std::string Parse() override;
+	static bool TryParse(std::string value, Entity* entity);
+	static std::string componentName;
+
+	template<class Archive>
+	void Serialize(Archive& archive)
+	{
+		archive(componentName, offset.ToString(), size.ToString());
+	}
+
 	std::string Tag;
 
 private:
 
 	void UpdateCollider();
 
-	Transform* transform = nullptr;
-	SpriteRenderer* spriteRenderer = nullptr;
+	Transform*			transform = nullptr;
+	SpriteRenderer*		spriteRenderer = nullptr;
 
-	Vector2 offset;
-	Vector2 size;
+	Vector2				offset;
+	Vector2				size;
 
-	SDL_Rect collider;
+	SDL_Rect			collider;
 };
 
 #endif

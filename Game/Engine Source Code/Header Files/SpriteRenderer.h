@@ -19,6 +19,16 @@ public:
 
 	Vector2			spriteSize;
 
+	std::string Parse() override;
+	static bool TryParse(std::string value, Entity* entity);
+	static std::string componentName;
+
+	template<class Archive>
+	void Serialize(Archive& archive)
+	{
+		archive(componentName, unique_ptr<char>(currentPath), size.ToString());
+	}
+
 protected:
 
 	Transform*		transform;

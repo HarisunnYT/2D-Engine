@@ -29,8 +29,6 @@ public:
 
 	static std::vector<Transform*> transforms;
 
-	void TryParseComponent(Transform *transform);
-
 private:
 
 	std::vector<std::unique_ptr<Entity>> entities;

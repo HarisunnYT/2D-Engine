@@ -1,5 +1,7 @@
 #include "Collider.h"
 
+std::string Collider::componentName = "collider";
+
 vector<Collider*> Collision::colliders;
 
 Collider::Collider(std::string tag)
@@ -57,6 +59,42 @@ const SDL_Rect Collider::GetCollider()
 	UpdateCollider();
 
 	return collider;
+}
+
+std::string Collider::Parse()
+{
+	std::stringstream ss;
+	{
+		cereal::JSONOutputArchive oarchive(ss);
+		oarchive(Collider::componentName, Tag, offset.ToString(), size.ToString());
+	}
+
+	return ss.str();
+}
+
+bool Collider::TryParse(std::string value, Entity* entity)
+{
+	std::string name;
+	std::string tag;
+	std::string inOffset;
+	std::string inSize;
+
+	std::stringstream ss(value);
+	{
+		cereal::JSONInputArchive oarchive(ss);
+		oarchive(name, tag, inOffset, inSize);
+	}
+
+	if (name == Collider::componentName)
+	{
+		entity->AddComponent<Collider>(tag);
+		entity->GetComponent<Collider>().SetSize(Vector2::FromString(inSize));
+		entity->GetComponent<Collider>().SetOffset(Vector2::FromString(inOffset));
+
+		return true;
+	}
+
+	return false;
 }
 
 void Collider::UpdateCollider()

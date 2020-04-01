@@ -72,34 +72,45 @@ Entity& ECS::AddEntity()
 
 Entity& ECS::AddEntity(const char* path)
 {
-	Entity* e = &AddEntity();
+	std::ifstream file(path);
+	std::string content((std::istreambuf_iterator<char>(file)), (std::istreambuf_iterator<char>()));
 
-	std::ifstream source(path);
+	vector<std::string> values;
 
-	source >> noskipws;
+	std::string currentVal;
+	char previousCharacter = ' ';
 
-	char c;
-	std::string function;
-
-	while (source >> c)
+	for (auto& c : content)
 	{
-		if (c == '\n')
+		if (c == '\n' && previousCharacter == '}')
 		{
-			std::cout << function << std::endl;
-
-			//TryParseComponent(function, e);
-
-			function.clear();
+			values.push_back(currentVal);
+			currentVal.clear();
+		}
+		else
+		{
+			currentVal.push_back(c);
 		}
 
-		function.push_back(c);
+		previousCharacter = c;
 	}
 
-	return *e;
+	if (values.size() > 0)
+	{
+		Entity* entity = &EngineCore::Ecs->AddEntity();
+		for (auto& str : values)
+		{
+			if (Transform::TryParse(str, entity));
+			else if (Collider::TryParse(str, entity));
+			else if (SpriteRenderer::TryParse(str, entity));
+		}
+
+		return *entity;
+	}
 }
 
-void ECS::TryParseComponent(Transform* transform)
-{
+//void ECS::TryParseComponent(Transform* transform)
+//{
 	//Vector3 pos = Vector3(5, 7, 2);
 	//Vector2 scale = Vector2(6.9f, 4.5f);
 	//std::stringstream ss;
@@ -142,4 +153,4 @@ void ECS::TryParseComponent(Transform* transform)
 
 	//}
 		//Rigidbody::TryParse(function, entity);
-}
+//}

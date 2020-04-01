@@ -2,6 +2,8 @@
 #include "TextureManager.h"
 #include "Transform.h"
 
+std::string SpriteRenderer::componentName = "spriterenderer";
+
 SpriteRenderer::SpriteRenderer(const char* p, Vector2 size)
 {
 	spriteSize = Vector2((float)size.x, (float)size.y);
@@ -44,4 +46,37 @@ void SpriteRenderer::SetTexture(const char* path)
 {
 	texture = TextureManager::LoadTexture(path);
 	currentPath = (char*)path;
+}
+
+std::string SpriteRenderer::Parse()
+{
+	std::stringstream ss;
+	{
+		cereal::JSONOutputArchive oarchive(ss);
+		oarchive(SpriteRenderer::componentName, unique_ptr<char>(currentPath), spriteSize.ToString());
+	}
+
+	return ss.str();
+}
+
+bool SpriteRenderer::TryParse(std::string value, Entity* entity)
+{
+	std::string name;
+	std::string inPath;
+	std::string inSize;
+
+	std::stringstream ss(value);
+	{
+		cereal::JSONInputArchive oarchive(ss);
+		oarchive(name, inPath, inSize);
+	}
+
+	if (name == SpriteRenderer::componentName)
+	{
+		entity->AddComponent<SpriteRenderer>(inPath.c_str(), Vector2::FromString(inSize));
+
+		return true;
+	}
+
+	return false;
 }

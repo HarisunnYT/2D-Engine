@@ -16,16 +16,18 @@ Game::Game()
 {
 	EngineCore::isDebug = false;
 
-	player = &EngineCore::Ecs->AddEntity("Assets/player.txt");
+	player = &EngineCore::Ecs->AddEntity();
 	player->AddComponent<PlayerController>();
 
 	tileMap = new TileMap();
 	tileMap->LoadMap("Assets/map.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(16, 16), 3.5f);
 
-	ground = &EngineCore::Ecs->AddEntity();
-	ground->AddComponent<Collider>("ground");
-	ground->GetComponent<Collider>().SetSize(Vector2(1000, 100));
-	ground->GetComponent<Transform>().SetPosition(&Vector3(0, 505, 0));
+	ground = &EngineCore::Ecs->AddEntity("Assets/Prefabs/ground");
+	//ground->AddComponent<Collider>("ground");
+	//ground->GetComponent<Collider>().SetSize(Vector2(1000, 100));
+	//ground->GetComponent<Transform>().SetPosition(&Vector3(0, 505, 0));
+
+	//EngineCore::Ecs->LoadPrefab("Assets/Prefabs/player");
 }
 
 Game::~Game()
@@ -37,7 +39,7 @@ void Game::Update()
 	//TODO remove
 	if (InputSystem::KeyPressed(SDLK_SPACE))
 	{
-		player->SaveToDisk("Assets/Prefabs/player");
+		ground->SaveToDisk("Assets/Prefabs/ground");
 	}
 
 	//EngineCore::Camera.x = static_cast<int>(player->GetComponent<Transform>().GetPosition().x - (EngineCore::screenSize.x / 2));
