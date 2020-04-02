@@ -5,5 +5,6 @@
 
 #include "PlayerController.h"
 #include "Animator.h"
+#include "Camera.h"
 
 #endif

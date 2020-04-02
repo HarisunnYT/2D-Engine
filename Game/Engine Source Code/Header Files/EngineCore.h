@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 
+class Camera;
 class ECS;
 class EngineCore
 {
@@ -31,7 +32,7 @@ public:
 	static SDL_Renderer*	Renderer;
 	static SDL_Event		Event;
 	static ECS*				Ecs;
-	static SDL_Rect			Camera;
+	static Camera*			camera;
 
 	static bool				isRunning;
 	static bool				isDebug;

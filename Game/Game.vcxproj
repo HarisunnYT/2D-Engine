@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine Source Code\Source Files\Animator.cpp" />
+    <ClCompile Include="Engine Source Code\Source Files\Camera.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\Collider.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\Collision.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\ECS.cpp" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Source Code\Header Files\Animator.h" />
+    <ClInclude Include="Engine Source Code\Header Files\Camera.h" />
     <ClInclude Include="Engine Source Code\Header Files\Collider.h" />
     <ClInclude Include="Engine Source Code\Header Files\Collision.h" />
     <ClInclude Include="Engine Source Code\Header Files\Component.h" />

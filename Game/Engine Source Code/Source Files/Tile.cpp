@@ -1,4 +1,5 @@
 #include "Tile.h"
+#include "Camera.h"
 
 std::string Tile::componentName = "tile";
 
@@ -38,8 +39,8 @@ void Tile::Init()
 
 void Tile::Update()
 {
-	destinationRect.x = static_cast<int>(transform->GetPosition().x - EngineCore::Camera.x * transform->scale.x);
-	destinationRect.y = static_cast<int>(transform->GetPosition().y - EngineCore::Camera.y * transform->scale.y);
+	destinationRect.x = static_cast<int>(transform->GetPosition().x - EngineCore::camera->offset.x * transform->scale.x);
+	destinationRect.y = static_cast<int>(transform->GetPosition().y - EngineCore::camera->offset.y * transform->scale.y);
 
 	destinationRect.w = static_cast<int>(size.x * transform->scale.x);
 	destinationRect.h = static_cast<int>(size.y * transform->scale.y);
@@ -76,7 +77,7 @@ bool Tile::TryParse(std::string value, Entity* entity)
 
 	if (name == Tile::componentName)
 	{
-		entity->AddComponent<Tile>(inPath.c_str(), Vector3(0, 0, 0), Vector2::FromString(inSize), Vector2::FromString(inSource), 1);
+		entity->AddComponent<Tile>(inPath.c_str(), Vector3(0, 0, 0), Vector2::FromString(inSize), Vector2::FromString(inSource), 1.0f);
 
 		return true;
 	}

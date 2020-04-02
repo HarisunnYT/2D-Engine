@@ -3,13 +3,14 @@
 #include "TextureManager.h"
 #include "Components.h"
 #include "InputSystem.h"
+#include "Camera.h"
 
 #include <iostream>
 
 SDL_Renderer* EngineCore::Renderer = nullptr;
 SDL_Event EngineCore::Event;
 ECS* EngineCore::Ecs = nullptr;
-SDL_Rect EngineCore::Camera = { 0, 0, (int)EngineCore::screenSize.x, (int)EngineCore::screenSize.y };
+Camera* EngineCore::camera = nullptr;
 
 bool EngineCore::isRunning = false;
 bool EngineCore::isDebug = false;
@@ -47,8 +48,11 @@ void EngineCore::Init(const char* title, int xpos, int ypos, bool fullscreen)
 		isRunning = false;
 	}
 
+	camera = new Camera();
 	Ecs = new ECS();
 	game = new Game();
+
+	Ecs->AddEntity((Entity*)camera);
 }
 
 void EngineCore::HandleEvents()

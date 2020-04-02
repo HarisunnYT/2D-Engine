@@ -41,11 +41,11 @@ public:
 
 	Entity();
 
-	void Update();
-	void Draw();
-	void Destroy();
-	void Physics();
-	void DebugDraw();
+	virtual void Update();
+	virtual void Draw();
+	virtual void Destroy();
+	virtual void Physics();
+	virtual void DebugDraw();
 
 	bool IsActive() const;
 

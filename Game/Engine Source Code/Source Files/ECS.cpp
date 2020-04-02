@@ -66,10 +66,15 @@ void ECS::DebugDraw()
 Entity& ECS::AddEntity()
 {
 	Entity* e = new Entity();
-	std::unique_ptr<Entity> uPtr{ e };
+	return AddEntity(e);
+}
+
+Entity& ECS::AddEntity(Entity* entity)
+{
+	std::unique_ptr<Entity> uPtr{ entity };
 	entities.emplace_back(std::move(uPtr));
 
-	return *e;
+	return *entity;
 }
 
 Entity& ECS::AddEntity(const char* path)

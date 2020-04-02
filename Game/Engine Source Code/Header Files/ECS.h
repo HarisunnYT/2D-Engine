@@ -25,6 +25,7 @@ public:
 	void DebugDraw();
 
 	Entity& AddEntity();
+	Entity& AddEntity(Entity* entity);
 	Entity& AddEntity(const char* path);
 
 	static std::vector<Transform*> transforms;

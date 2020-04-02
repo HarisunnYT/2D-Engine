@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include "Camera.h"
 
 std::string Transform::componentName = "transform";
 
@@ -19,7 +20,7 @@ Vector3 Transform::GetPosition()
 
 void Transform::SetPosition(Vector3 *pos)
 {
-	position = Vector3(pos->x - EngineCore::Camera.x, pos->y - EngineCore::Camera.y, pos->z);
+	position = Vector3(pos->x - EngineCore::camera->offset.x, pos->y - EngineCore::camera->offset.y, pos->z);
 }
 
 std::string Transform::Parse()
