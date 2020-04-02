@@ -10,23 +10,16 @@
 
 TileMap* tileMap = nullptr;
 Entity* player = nullptr;
-Entity* ground = nullptr;
-Entity* grassTile = nullptr;
 
 Game::Game()
 {
-	EngineCore::isDebug = true;
+	EngineCore::isDebug = false;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
 	player->GetComponent<Animator>().PlayAnimation(1);
 
 	tileMap = new TileMap();
 	tileMap->LoadMap("Assets/map.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(16, 16), 3.5f);
-
-	//grassTile = &EngineCore::Ecs->AddEntity();
-	//grassTile->AddComponent<Tile>("Assets/terrain_ss.png", Vector3(0, 0, 0), Vector2(16, 16), Vector2(3 * 16, 0 * 16), 3.5f);
-
-	//ground = &EngineCore::Ecs->AddEntity("Assets/Prefabs/ground");
 }
 
 Game::~Game()
@@ -35,9 +28,15 @@ Game::~Game()
 
 void Game::Update()
 {
-	if (InputSystem::KeyPressed(SDLK_SPACE))
+	if (InputSystem::MousePressed())
 	{
-		//grassTile->SaveToDisk("Assets/Prefabs/Tiles/");
+		for (auto& c : EngineCore::Ecs->transforms)
+		{
+			if (c->entity->HasComponent<Collider>() && SDL_PointInRect(const_cast<SDL_Point*>(&InputSystem::MousePosition), const_cast<SDL_Rect*>(&c->entity->GetComponent<Collider>().collider)))
+			{
+				c->scale *= 0;
+			}
+		}
 	}
 }
 
