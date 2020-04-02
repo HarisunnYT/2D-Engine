@@ -1,0 +1,26 @@
+{
+    "value0": "transform",
+    "value1": "(281.000000,389.270966,1.000000)",
+    "value2": "(2.000000,2.000000)"
+}
+{
+    "value0": "rigidbody",
+    "value1": 1.0,
+    "value2": true
+}
+{
+    "value0": "animator",
+    "value1": "Assets/player_sprite_sheet.png",
+    "value2": "(64.000000,69.000000)",
+    "value3": "4-WalkUp,0,8,150:WalkLeft,1,8,150:WalkDown,2,8,150:WalkRight,3,8,150:"
+}
+{
+    "value0": "collider",
+    "value1": "player",
+    "value2": "(30.000000,20.000000)",
+    "value3": "(30.000000,50.000000)"
+}
+{
+    "value0": "playercontroller",
+    "value1": 1.0
+}

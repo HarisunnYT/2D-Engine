@@ -5,20 +5,59 @@
 
 #include "SpriteRenderer.h"
 
-#include <map>
+#include <vector>
 
 struct Animation
 {
+	std::string name;
+
 	int index;
 	int frames;
 	int speed;
 
 	Animation() = default;
-	Animation(int i, int f, int s)
+	Animation(std::string n, int i, int f, int s)
 	{
+		name = n;
 		index = i;
 		frames = f;
 		speed = s;
+	}
+
+	std::string ToString()
+	{
+		std::string str = std::string(name) + ',' + std::to_string(index) + ',' + std::to_string(frames) + ',' + std::to_string(speed);
+		return str;
+	}
+
+	static Animation FromString(std::string value)
+	{
+		Animation animation;
+
+		vector<std::string> values;
+		std::string currentVal;
+
+		for (char& c : value)
+		{
+			if (c == ',')
+			{
+				values.push_back(currentVal);
+				currentVal.clear();
+			}
+			else
+			{
+				currentVal.push_back(c);
+			}
+		}
+
+		values.push_back(currentVal);
+
+		animation.name = values[0];
+		animation.index = std::stoi(values[1]);
+		animation.frames = std::stoi(values[2]);
+		animation.speed = std::stoi(values[3]);
+
+		return animation;
 	}
 };
 
@@ -31,12 +70,14 @@ public:
 	void Init() override;
 	void Update() override;
 
-	void AddNewAnimation(const char* animName, int index, int frames, int speed);
+	void AddNewAnimation(std::string animName, int index, int frames, int speed);
+	void AddNewAnimation(Animation& animation);
+
 	void PlayAnimation(const char* animName);
 	void PlayAnimation(int index);
 
 	int animIndex = 0;
-	std::map<const char*, Animation> animations;
+	std::vector<Animation> animations;
 
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);
@@ -45,13 +86,17 @@ public:
 	template<class Archive>
 	void Serialize(Archive& archive)
 	{
-		archive(componentName, animations);
+		archive(componentName, currentPath, size.ToString(), animsString);
 	}
 
 private:
 
 	int frames = 1;
 	int speed = 100; //delay between frames in milliseconds
+
+	std::string animsString;
+
+	int GetAnimIndex(const char* animName);
 };
 
 #endif
