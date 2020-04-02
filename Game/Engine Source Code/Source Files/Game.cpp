@@ -17,7 +17,7 @@ Game::Game()
 	EngineCore::isDebug = false;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
-	player->GetComponent<Animator>().PlayAnimation(0);
+	player->GetComponent<Animator>().PlayAnimation(1);
 
 	tileMap = new TileMap();
 	tileMap->LoadMap("Assets/map.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(16, 16), 3.5f);
@@ -31,14 +31,7 @@ Game::~Game()
 
 void Game::Update()
 {
-	//TODO remove
-	if (InputSystem::KeyPressed(SDLK_SPACE))
-	{
-		player->SaveToDisk("Assets/Prefabs/player");
-	}
-
-	//EngineCore::Camera.x = static_cast<int>(player->GetComponent<Transform>().GetPosition().x - (EngineCore::screenSize.x / 2));
-	//EngineCore::Camera.y = static_cast<int>(player->GetComponent<Transform>().GetPosition().y - (EngineCore::screenSize.y / 2));
+	//std::cout << InputSystem::MousePosition().ToString() << std::endl;
 }
 
 void Game::Render()

@@ -27,6 +27,25 @@ bool InputSystem::KeyReleased(int SDL_CODE)
 	return false;
 }
 
+bool InputSystem::MousePressed()
+{
+	return SDL_PollEvent(&EngineCore::Event) == SDL_MOUSEBUTTONDOWN;
+}
+
+bool InputSystem::MouseReleased()
+{
+	return SDL_PollEvent(&EngineCore::Event) == SDL_MOUSEBUTTONUP;
+}
+
+Vector2 InputSystem::MousePosition()
+{
+	int x;
+	int y;
+	SDL_GetMouseState(&x, &y);
+
+	return Vector2(x, y);
+}
+
 void InputSystem::Update()
 {
 	int key = EngineCore::Event.key.keysym.sym;

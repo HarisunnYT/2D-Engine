@@ -15,6 +15,11 @@ public:
 	static bool KeyPressed(int SDL_CODE);
 	static bool KeyReleased(int SDL_CODE);
 
+	static bool MousePressed();
+	static bool MouseReleased();
+
+	static Vector2 MousePosition();
+
 	static void Update();
 
 private:
