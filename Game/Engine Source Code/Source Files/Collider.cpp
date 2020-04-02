@@ -22,8 +22,8 @@ void Collider::Init()
 
 	if (spriteRenderer != nullptr)
 	{
-		size.x = (int)(spriteRenderer->spriteSize.x);
-		size.y = (int)(spriteRenderer->spriteSize.y);
+		size.x = spriteRenderer->spriteSize.x;
+		size.y = spriteRenderer->spriteSize.y;
 	}
 
 	UpdateCollider();
@@ -99,9 +99,9 @@ bool Collider::TryParse(std::string value, Entity* entity)
 
 void Collider::UpdateCollider()
 {
-	collider.w = size.x * transform->scale.x;
-	collider.h = size.y * transform->scale.y;
+	collider.w = static_cast<int>(size.x * transform->scale.x);
+	collider.h = static_cast<int>(size.y * transform->scale.y);
 
-	collider.x = (int)transform->GetPosition().x + offset.x;
-	collider.y = (int)transform->GetPosition().y + offset.y;
+	collider.x = static_cast<int>(transform->GetPosition().x + offset.x);
+	collider.y = static_cast<int>(transform->GetPosition().y + offset.y);
 }

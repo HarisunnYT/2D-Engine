@@ -9,11 +9,11 @@
 SDL_Renderer* EngineCore::Renderer = nullptr;
 SDL_Event EngineCore::Event;
 ECS* EngineCore::Ecs = nullptr;
-SDL_Rect EngineCore::Camera = { 0, 0, EngineCore::screenSize.x, EngineCore::screenSize.y };
+SDL_Rect EngineCore::Camera = { 0, 0, (int)EngineCore::screenSize.x, (int)EngineCore::screenSize.y };
 
 bool EngineCore::isRunning = false;
 bool EngineCore::isDebug = false;
-Vector2 EngineCore::screenSize = Vector2(800, 600);
+Vector2 EngineCore::screenSize = Vector2(800.0f, 600.0f);
 
 Game* game = nullptr;
 
@@ -35,7 +35,7 @@ void EngineCore::Init(const char* title, int xpos, int ypos, bool fullscreen)
 			flags = SDL_WINDOW_FULLSCREEN;
 		}
 
-		window = SDL_CreateWindow(title, xpos, ypos, screenSize.x, screenSize.y, flags);
+		window = SDL_CreateWindow(title, xpos, ypos, static_cast<int>(screenSize.x), static_cast<int>(screenSize.y), flags);
 		Renderer = SDL_CreateRenderer(window, -1, 0);
 
 		SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);

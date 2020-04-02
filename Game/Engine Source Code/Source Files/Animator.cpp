@@ -61,6 +61,8 @@ int Animator::GetAnimIndex(const char* animName)
 			return a.index;
 		}
 	}
+
+	return 0;
 }
 
 std::string Animator::Parse()

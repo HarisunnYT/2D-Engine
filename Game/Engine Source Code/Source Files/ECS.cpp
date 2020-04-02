@@ -102,14 +102,16 @@ Entity& ECS::AddEntity(const char* path)
 		Entity* entity = &EngineCore::Ecs->AddEntity();
 		for (auto& str : values)
 		{
-			if (str.find("transform") != string::npos && Transform::TryParse(str, entity));
-			else if (str.find("collider") != string::npos && Collider::TryParse(str, entity));
-			else if (str.find("spriterenderer") != string::npos && SpriteRenderer::TryParse(str, entity));
-			else if (str.find("rigidbody") != string::npos && Rigidbody::TryParse(str, entity));
-			else if (str.find("playercontroller") != string::npos && PlayerController::TryParse(str, entity));
-			else if (str.find("animator") != string::npos && Animator::TryParse(str, entity));
+			if (str.find("transform") != string::npos && Transform::TryParse(str, entity)) {}
+			else if (str.find("collider") != string::npos && Collider::TryParse(str, entity)) {}
+			else if (str.find("spriterenderer") != string::npos && SpriteRenderer::TryParse(str, entity)) {}
+			else if (str.find("rigidbody") != string::npos && Rigidbody::TryParse(str, entity)) {}
+			else if (str.find("playercontroller") != string::npos && PlayerController::TryParse(str, entity)) {}
+			else if (str.find("animator") != string::npos && Animator::TryParse(str, entity)) {}
 		}
 
 		return *entity;
 	}
+
+	throw std::invalid_argument("prefab does not exist");
 }

@@ -31,13 +31,13 @@ void Tile::Init()
 	transform->scale = startingScale;
 
 	collider = &entity->AddComponent<Collider>("tile");
-	collider->SetSize(Vector2(sourceRect.w, sourceRect.h));
+	collider->SetSize(Vector2((float)sourceRect.w, (float)sourceRect.h));
 }
 
 void Tile::Update()
 {
-	destinationRect.x = transform->GetPosition().x - EngineCore::Camera.x * transform->scale.x;
-	destinationRect.y = transform->GetPosition().y - EngineCore::Camera.y * transform->scale.y;
+	destinationRect.x = static_cast<int>(transform->GetPosition().x - EngineCore::Camera.x * transform->scale.x);
+	destinationRect.y = static_cast<int>(transform->GetPosition().y - EngineCore::Camera.y * transform->scale.y);
 
 	destinationRect.w = static_cast<int>(size.x * transform->scale.x);
 	destinationRect.h = static_cast<int>(size.y * transform->scale.y);
