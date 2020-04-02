@@ -108,6 +108,7 @@ Entity& ECS::AddEntity(const char* path)
 			else if (str.find("rigidbody") != string::npos && Rigidbody::TryParse(str, entity)) {}
 			else if (str.find("playercontroller") != string::npos && PlayerController::TryParse(str, entity)) {}
 			else if (str.find("animator") != string::npos && Animator::TryParse(str, entity)) {}
+			else if (str.find("tile") != string::npos && Tile::TryParse(str, entity)) {}
 		}
 
 		return *entity;

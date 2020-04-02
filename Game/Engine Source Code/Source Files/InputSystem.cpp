@@ -1,5 +1,6 @@
 #include "InputSystem.h"
 
+SDL_Point InputSystem::MousePosition;
 vector<int> InputSystem::keysHeld;
 
 bool InputSystem::KeyHeld(int SDL_CODE)
@@ -29,21 +30,12 @@ bool InputSystem::KeyReleased(int SDL_CODE)
 
 bool InputSystem::MousePressed()
 {
-	return SDL_PollEvent(&EngineCore::Event) == SDL_MOUSEBUTTONDOWN;
+	return EngineCore::Event.type == SDL_MOUSEBUTTONDOWN;
 }
 
 bool InputSystem::MouseReleased()
 {
-	return SDL_PollEvent(&EngineCore::Event) == SDL_MOUSEBUTTONUP;
-}
-
-Vector2 InputSystem::MousePosition()
-{
-	int x;
-	int y;
-	SDL_GetMouseState(&x, &y);
-
-	return Vector2(x, y);
+	return EngineCore::Event.type == SDL_MOUSEBUTTONUP;
 }
 
 void InputSystem::Update()
@@ -57,4 +49,6 @@ void InputSystem::Update()
 	{
 		keysHeld.erase(remove(keysHeld.begin(), keysHeld.end(), key), keysHeld.end());
 	}
+
+	SDL_GetMouseState(&MousePosition.x, &MousePosition.y);
 }

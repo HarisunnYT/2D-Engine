@@ -18,9 +18,9 @@ public:
 	static bool MousePressed();
 	static bool MouseReleased();
 
-	static Vector2 MousePosition();
-
 	static void Update();
+
+	static SDL_Point MousePosition;
 
 private:
 

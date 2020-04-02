@@ -23,13 +23,18 @@ void TileMap::LoadMap(std::string mapPath, const char* spriteSheetPath, Vector2 
 	{
 		for (int x = 0; x < mpSize.x; x++)
 		{
+			std::string id;
 			mapFile.get(c);
 			sourceY = static_cast<int>(atoi(&c) * tileSize.y);
+
+			id.push_back(c);
 
 			mapFile.get(c);
 			sourceX = static_cast<int>(atoi(&c) * tileSize.x);
 
-			AddTile(spriteSheetPath, Vector3(x * tileSize.x * scale, y * tileSize.y * scale, 0), tileSize, Vector2(static_cast<float>(sourceX), static_cast<float>(sourceY)), scale);
+			id.push_back(c);
+
+			AddTile(spriteSheetPath, id, Vector3(x * tileSize.x * scale, y * tileSize.y * scale, 0), tileSize, Vector2(static_cast<float>(sourceX), static_cast<float>(sourceY)), scale);
 			mapFile.ignore();
 		}
 	}
@@ -39,9 +44,20 @@ void TileMap::LoadMap(std::string mapPath, const char* spriteSheetPath, Vector2 
 	mapSize = mpSize * scale;
 }
 
-void TileMap::AddTile(const char* spriteSheetPath, Vector3 position, Vector2 size, Vector2 source, float scale)
+void TileMap::AddTile(const char* spriteSheetPath, std::string id, Vector3 position, Vector2 size, Vector2 source, float scale)
 {
-	auto& tile(EngineCore::Ecs->AddEntity());
+	std::string p = "Assets/Prefabs/Tiles/" + id;
+	std::ifstream inFile(p);
 
-	tile.AddComponent<Tile>(spriteSheetPath, position, size, source, scale);
+	if (inFile.good())
+	{
+		auto& tile (EngineCore::Ecs->AddEntity(p.c_str()));
+		tile.GetComponent<Tile>().ManualConstruction(position, scale);
+		tile.GetComponent<Tile>().Init();
+	}
+	else
+	{
+		auto& tile(EngineCore::Ecs->AddEntity());
+		tile.AddComponent<Tile>(spriteSheetPath, position, size, source, scale);
+	}
 }

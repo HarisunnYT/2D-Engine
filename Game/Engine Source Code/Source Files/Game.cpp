@@ -11,10 +11,11 @@
 TileMap* tileMap = nullptr;
 Entity* player = nullptr;
 Entity* ground = nullptr;
+Entity* grassTile = nullptr;
 
 Game::Game()
 {
-	EngineCore::isDebug = false;
+	EngineCore::isDebug = true;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
 	player->GetComponent<Animator>().PlayAnimation(1);
@@ -22,7 +23,10 @@ Game::Game()
 	tileMap = new TileMap();
 	tileMap->LoadMap("Assets/map.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(16, 16), 3.5f);
 
-	ground = &EngineCore::Ecs->AddEntity("Assets/Prefabs/ground");
+	//grassTile = &EngineCore::Ecs->AddEntity();
+	//grassTile->AddComponent<Tile>("Assets/terrain_ss.png", Vector3(0, 0, 0), Vector2(16, 16), Vector2(3 * 16, 0 * 16), 3.5f);
+
+	//ground = &EngineCore::Ecs->AddEntity("Assets/Prefabs/ground");
 }
 
 Game::~Game()
@@ -31,7 +35,10 @@ Game::~Game()
 
 void Game::Update()
 {
-	//std::cout << InputSystem::MousePosition().ToString() << std::endl;
+	if (InputSystem::KeyPressed(SDLK_SPACE))
+	{
+		//grassTile->SaveToDisk("Assets/Prefabs/Tiles/");
+	}
 }
 
 void Game::Render()

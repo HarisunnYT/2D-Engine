@@ -35,6 +35,8 @@ public:
 
 	std::string Tag;
 
+	SDL_Rect collider;
+
 private:
 
 	void UpdateCollider();
@@ -44,8 +46,6 @@ private:
 
 	Vector2				offset;
 	Vector2				size;
-
-	SDL_Rect			collider;
 };
 
 #endif

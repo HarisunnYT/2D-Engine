@@ -1,27 +1,29 @@
 #include "Tile.h"
 
-Tile::Tile(const char* p, Vector3 pos, Vector2 mSize, Vector2 source, float s)
+std::string Tile::componentName = "tile";
+
+Tile::Tile(const char* p, Vector3 pos, Vector2 mSize, Vector2 mSource, float s)
 {
-	startingPosition = pos;
+	currentPath = p;
 	size = mSize;
-	startingScale = Vector2(s, s);
+	source = mSource;
 
 	texture = TextureManager::LoadTexture(p);
 
-	sourceRect.x = static_cast<int>(source.x);
-	sourceRect.y = static_cast<int>(source.y);
-	sourceRect.w = static_cast<int>(size.x);
-	sourceRect.h = static_cast<int>(size.y);
-
-	destinationRect.x = static_cast<int>(pos.x);
-	destinationRect.y = static_cast<int>(pos.y);
-	destinationRect.w = static_cast<int>(size.x * s);
-	destinationRect.h = static_cast<int>(size.y * s);
+	ManualConstruction(pos, s);
 }
 
 Tile::~Tile()
 {
 	SDL_DestroyTexture(texture);
+}
+
+void Tile::ManualConstruction(Vector3 pos, float s)
+{
+	startingPosition = pos;
+	startingScale = Vector2(s, s);
+
+	SetRects();
 }
 
 void Tile::Init()
@@ -46,4 +48,51 @@ void Tile::Update()
 void Tile::Draw()
 {
 	TextureManager::Draw(texture, sourceRect, destinationRect);
+}
+
+std::string Tile::Parse()
+{
+	std::stringstream ss;
+	{
+		cereal::JSONOutputArchive oarchive(ss);
+		oarchive(Tile::componentName, currentPath, size.ToString(), source.ToString());
+	}
+
+	return ss.str();
+}
+
+bool Tile::TryParse(std::string value, Entity* entity)
+{
+	std::string name;
+	std::string inPath;
+	std::string inSize;
+	std::string inSource;
+
+	std::stringstream ss(value);
+	{
+		cereal::JSONInputArchive oarchive(ss);
+		oarchive(name, inPath, inSize, inSource);
+	}
+
+	if (name == Tile::componentName)
+	{
+		entity->AddComponent<Tile>(inPath.c_str(), Vector3(0, 0, 0), Vector2::FromString(inSize), Vector2::FromString(inSource), 1);
+
+		return true;
+	}
+
+	return false;
+}
+
+void Tile::SetRects()
+{
+	sourceRect.x = static_cast<int>(source.x);
+	sourceRect.y = static_cast<int>(source.y);
+	sourceRect.w = static_cast<int>(size.x);
+	sourceRect.h = static_cast<int>(size.y);
+
+	destinationRect.x = static_cast<int>(startingPosition.x);
+	destinationRect.y = static_cast<int>(startingPosition.y);
+	destinationRect.w = static_cast<int>(size.x * startingScale.x);
+	destinationRect.h = static_cast<int>(size.y * startingScale.y);
 }
