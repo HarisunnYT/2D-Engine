@@ -14,8 +14,6 @@ public:
 
 	Camera();
 
-	void Update() override;
-
 	SDL_Rect offset;
 
 private:

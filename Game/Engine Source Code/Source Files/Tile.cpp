@@ -39,8 +39,8 @@ void Tile::Init()
 
 void Tile::Update()
 {
-	destinationRect.x = static_cast<int>(transform->GetPosition().x - EngineCore::camera->offset.x * transform->scale.x);
-	destinationRect.y = static_cast<int>(transform->GetPosition().y - EngineCore::camera->offset.y * transform->scale.y);
+	destinationRect.x = static_cast<int>(transform->GetPosition().x);
+	destinationRect.y = static_cast<int>(transform->GetPosition().y);
 
 	destinationRect.w = static_cast<int>(size.x * transform->scale.x);
 	destinationRect.h = static_cast<int>(size.y * transform->scale.y);

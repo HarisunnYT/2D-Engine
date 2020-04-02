@@ -15,12 +15,12 @@ Transform::Transform(Vector3 pos) : Transform()
 
 Vector3 Transform::GetPosition()
 {
-	return position;
+	return Vector3(position.x - EngineCore::camera->offset.x, position.y - EngineCore::camera->offset.y, position.z);
 }
 
 void Transform::SetPosition(Vector3 *pos)
 {
-	position = Vector3(pos->x - EngineCore::camera->offset.x, pos->y - EngineCore::camera->offset.y, pos->z);
+	position = Vector3(pos->x + EngineCore::camera->offset.x, pos->y + EngineCore::camera->offset.y, pos->z);
 }
 
 std::string Transform::Parse()
