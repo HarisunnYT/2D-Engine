@@ -48,7 +48,10 @@ void Tile::Update()
 
 void Tile::Draw()
 {
-	TextureManager::Draw(texture, sourceRect, destinationRect);
+	if (EngineCore::camera->InsideCameraView(&destinationRect))
+	{
+		TextureManager::Draw(texture, sourceRect, destinationRect);
+	}
 }
 
 std::string Tile::Parse()

@@ -1,6 +1,7 @@
 #include "SpriteRenderer.h"
 #include "TextureManager.h"
 #include "Transform.h"
+#include "Camera.h"
 
 std::string SpriteRenderer::componentName = "spriterenderer";
 
@@ -38,7 +39,10 @@ void SpriteRenderer::Draw()
 	destinationRect.w = static_cast<int>(spriteSize.x * transform->scale.x);
 	destinationRect.h = static_cast<int>(spriteSize.y * transform->scale.y);
 
-	TextureManager::Draw(texture, sourceRect, destinationRect);
+	if (EngineCore::camera->InsideCameraView(&destinationRect))
+	{
+		TextureManager::Draw(texture, sourceRect, destinationRect);
+	}
 }
 
 void SpriteRenderer::SetTexture(const char* path)

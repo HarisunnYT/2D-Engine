@@ -38,6 +38,8 @@ void Game::Update()
 			}
 		}
 	}
+
+	EngineCore::camera->offset.x += 1;
 }
 
 void Game::Render()
