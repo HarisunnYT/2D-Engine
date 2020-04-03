@@ -1,11 +1,31 @@
 #include "TextureManager.h"
 
-SDL_Texture* TextureManager::LoadTexture(const char* texture)
+map<const char*, SDL_Texture*> TextureManager::loadedTextures;
+
+TextureManager::~TextureManager()
 {
-	SDL_Surface* tempSurface = IMG_Load(texture);
+	for (auto& t : loadedTextures)
+	{
+		SDL_DestroyTexture(t.second);
+	}
+}
+
+SDL_Texture* TextureManager::LoadTexture(const char* fileName)
+{
+	for (auto& t : loadedTextures)
+	{
+		if (t.first == fileName)
+		{
+			return t.second;
+		}
+	}
+
+	SDL_Surface* tempSurface = IMG_Load(fileName);
 	SDL_Texture* tex = SDL_CreateTextureFromSurface(EngineCore::Renderer, tempSurface);
 
 	SDL_FreeSurface(tempSurface);
+
+	loadedTextures.emplace(fileName, tex);
 
 	return tex;
 }

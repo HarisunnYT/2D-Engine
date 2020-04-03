@@ -12,7 +12,6 @@ SpriteRenderer::SpriteRenderer(const char* p, Vector2 size)
 
 SpriteRenderer::~SpriteRenderer()
 {
-	SDL_DestroyTexture(texture);
 }
 
 void SpriteRenderer::Init()
