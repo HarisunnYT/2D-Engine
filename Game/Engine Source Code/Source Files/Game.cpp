@@ -19,7 +19,7 @@ Game::Game()
 	player->GetComponent<Animator>().PlayAnimation(1);
 
 	tileMap = new TileMap();
-	tileMap->LoadMap("Assets/map.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(16, 16), 3.5f);
+	tileMap->LoadMap("Assets/map2.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(77, 16), 3.5f);
 }
 
 Game::~Game()

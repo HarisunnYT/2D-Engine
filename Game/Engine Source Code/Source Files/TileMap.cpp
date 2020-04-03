@@ -30,17 +30,30 @@ void TileMap::LoadMap(std::string mapPath, const char* spriteSheetPath, Vector2 
 			id.push_back(c);
 
 			mapFile.get(c);
-			sourceX = static_cast<int>(atoi(&c) * tileSize.x);
 
-			id.push_back(c);
+			if (c == ',')
+			{
+				sourceX = sourceY;
+				sourceY = 0;
+				id.insert(id.begin(), '0');
+			}
+			else
+			{
+				sourceX = static_cast<int>(atoi(&c) * tileSize.x);
+				mapFile.ignore();
+				id.push_back(c);
+			}
 
 			AddTile(spriteSheetPath, id, Vector3(x * tileSize.x * scale, y * tileSize.y * scale, 0), tileSize, Vector2(static_cast<float>(sourceX), static_cast<float>(sourceY)), scale);
-			mapFile.ignore();
+
+			if (x == static_cast<int>(mpSize.x - 1))
+			{
+				mapFile.ignore();
+			}
 		}
 	}
 
 	mapFile.close();
-
 	mapSize = mpSize * scale;
 }
 
