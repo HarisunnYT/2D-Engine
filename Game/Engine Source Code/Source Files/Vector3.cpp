@@ -96,6 +96,17 @@ Vector3& Vector3::operator/=(float multiplier)
 	return this->Divide(multiplier);
 }
 
+bool Vector3::operator==(const Vector3& p)
+{
+	float dist = (x + y + z) - (p.x + p.y + p.z);
+	return dist < 0.05f;
+}
+
+bool Vector3::operator!=(const Vector3& p)
+{
+	return !(*this == p);
+}
+
 Vector3& Vector3::Zero()
 {
 	return this->Multiply(0);

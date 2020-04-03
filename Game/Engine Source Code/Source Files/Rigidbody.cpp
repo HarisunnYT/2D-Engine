@@ -14,7 +14,10 @@ void Rigidbody::Init()
 
 void Rigidbody::Update()
 {
-	velocity.y += Physics::gravity.y * mass;
+	if (useGravity)
+	{
+		velocity.y += Physics::gravity.y * mass;
+	}
 }
 
 void Rigidbody::Physics()

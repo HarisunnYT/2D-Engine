@@ -15,6 +15,8 @@ public:
 	Vector3 GetPosition();
 	void SetPosition(Vector3 *pos);
 
+	Vector3 GetRawPosition();
+
 	Vector2 scale;
 
 	std::string Parse() override;

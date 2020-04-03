@@ -48,6 +48,8 @@ void EngineCore::Init(const char* title, int xpos, int ypos, bool fullscreen)
 		isRunning = false;
 	}
 
+	Collision::Init();
+
 	camera = new Camera();
 	Ecs = new ECS();
 	game = new Game();
@@ -93,6 +95,7 @@ void EngineCore::Render()
 	game->Render();
 	Ecs->Draw();
 	Ecs->DebugDraw();
+	Collision::DebugDraw();
 
 	SDL_RenderPresent(Renderer);
 }

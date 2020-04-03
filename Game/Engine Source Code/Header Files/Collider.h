@@ -46,6 +46,8 @@ private:
 
 	Vector2				offset;
 	Vector2				size;
+
+	Vector3				previousPosition;
 };
 
 #endif

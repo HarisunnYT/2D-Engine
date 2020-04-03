@@ -39,7 +39,7 @@ void Game::Update()
 		}
 	}
 
-	EngineCore::camera->offset.x += 1;
+	//EngineCore::camera->offset.x += 1;
 }
 
 void Game::Render()
@@ -51,18 +51,23 @@ void Game::Physics()
 	Vector2 velocity = player->GetComponent<Rigidbody>().GetVelocity();
 	SDL_Rect playerCol = player->GetComponent<Collider>().GetCollider();
 
-	for (auto& c : EngineCore::Ecs->transforms)
+	for (auto& g : Collision::grid)
 	{
-		Collider* col = &c->entity->GetComponent<Collider>();
-		if (col != nullptr && col->Tag == "ground")
+		if (Collision::AABB(playerCol, g.first))
 		{
-			if (Collision::AABB(col->GetCollider(), playerCol))
+			for (auto& c : g.second)
 			{
-				if (velocity.y < 0)
+				if (c->Tag == "ground")
 				{
-					velocity.y = 0;
+					if (Collision::AABB(c->GetCollider(), playerCol))
+					{
+						if (velocity.y < 0)
+						{
+							velocity.y = 0;
+						}
+						player->GetComponent<Rigidbody>().SetVelocity(velocity);
+					}
 				}
-				player->GetComponent<Rigidbody>().SetVelocity(velocity);
 			}
 		}
 	}

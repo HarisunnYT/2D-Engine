@@ -8,14 +8,14 @@ Camera::Camera()
 
 bool Camera::InsideCameraView(SDL_Rect* rect)
 {
-	inputTopLeft = Vector2(rect->x, rect->y);
-	inputBottomLeft = Vector2(rect->x, rect->y + rect->h);
+	inputTopLeft = Vector2(static_cast<float>(rect->x), static_cast<float>(rect->y));
+	inputBottomLeft = Vector2(static_cast<float>(rect->x), static_cast<float>(rect->y + rect->h));
 
-	inputTopRight = Vector2(rect->x + rect->w, rect->y);
-	inputBottomRight = Vector2(rect->x + rect->w, rect->y + rect->h);
+	inputTopRight = Vector2(static_cast<float>(rect->x + rect->w), static_cast<float>(rect->y));
+	inputBottomRight = Vector2(static_cast<float>(rect->x + rect->w), static_cast<float>(rect->y + rect->h));
 
 	if (inputTopRight.x >= screenTopLeft.x && inputTopLeft.x <= screenTopRight.x &&
-		inputBottomLeft.y > screenTopLeft.y && inputTopRight.y < screenBottomRight.y)
+		inputBottomLeft.y >= screenTopLeft.y && inputTopRight.y <= screenBottomRight.y)
 	{
 		return true;
 	}

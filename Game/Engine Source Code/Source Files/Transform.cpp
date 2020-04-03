@@ -23,6 +23,11 @@ void Transform::SetPosition(Vector3 *pos)
 	position = Vector3(pos->x + EngineCore::camera->offset.x, pos->y + EngineCore::camera->offset.y, pos->z);
 }
 
+Vector3 Transform::GetRawPosition()
+{
+	return position;
+}
+
 std::string Transform::Parse()
 {
 	std::stringstream ss;

@@ -12,10 +12,17 @@ class Collision
 {
 public:
 
+	static void Init();
+	static void DebugDraw();
+
+	static void UpdateGrid(Collider* collider);
+
 	static bool AABB(const SDL_Rect& rectA, const SDL_Rect& rectB);
 	static bool AABB(Collider& colA, Collider& colB);
 
 	static vector<Collider*> colliders;
+	static vector<pair<SDL_Rect, vector<Collider*>>> grid;
+
 
 };
 

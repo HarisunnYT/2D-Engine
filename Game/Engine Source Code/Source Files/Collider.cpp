@@ -34,6 +34,12 @@ void Collider::Init()
 void Collider::Update()
 {
 	UpdateCollider();
+
+	if (transform->GetRawPosition() != previousPosition)
+	{
+		Collision::UpdateGrid(this);
+	}
+	previousPosition = transform->GetRawPosition();
 }
 
 void Collider::DebugDraw()
