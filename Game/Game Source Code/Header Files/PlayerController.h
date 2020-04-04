@@ -15,7 +15,7 @@ public:
 	PlayerController(float speed = 1);
 
 	void Init() override;
-	void Update() override;
+	void LateUpdate() override;
 
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);

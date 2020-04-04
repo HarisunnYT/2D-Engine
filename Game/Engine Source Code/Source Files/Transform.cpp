@@ -18,9 +18,9 @@ Vector3 Transform::GetPosition()
 	return Vector3(position.x - EngineCore::camera->offset.x, position.y - EngineCore::camera->offset.y, position.z);
 }
 
-void Transform::SetPosition(Vector3 *pos)
+void Transform::SetPosition(Vector3 pos)
 {
-	position = Vector3(pos->x + EngineCore::camera->offset.x, pos->y + EngineCore::camera->offset.y, pos->z);
+	position = Vector3(pos.x + EngineCore::camera->offset.x, pos.y + EngineCore::camera->offset.y, pos.z);
 }
 
 Vector3 Transform::GetRawPosition()
@@ -53,7 +53,7 @@ bool Transform::TryParse(std::string value, Entity* entity)
 
 	if (name == Transform::componentName)
 	{
-		entity->GetComponent<Transform>().SetPosition(&Vector3::FromString(inPos));
+		entity->GetComponent<Transform>().SetPosition(Vector3::FromString(inPos));
 		entity->GetComponent<Transform>().scale = Vector2::FromString(inScale);
 
 		return true;

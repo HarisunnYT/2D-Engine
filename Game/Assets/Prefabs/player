@@ -5,7 +5,7 @@
 }
 {
     "value0": "rigidbody",
-    "value1": 1.0,
+    "value1": 3.0,
     "value2": true
 }
 {
@@ -17,8 +17,8 @@
 {
     "value0": "collider",
     "value1": "player",
-    "value2": "(30.000000,20.000000)",
-    "value3": "(30.000000,50.000000)",
+    "value2": "(47.5.000000,15.000000)",
+    "value3": "(15.000000,50.000000)",
     "value4": false
 }
 {

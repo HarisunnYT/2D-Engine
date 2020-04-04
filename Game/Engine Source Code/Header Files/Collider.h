@@ -23,6 +23,8 @@ public:
 	void SetSize(Vector2 size);
 	void SetOffset(Vector2 offset);
 
+	void UpdateCollider();
+
 	const SDL_Rect GetCollider();
 
 	std::string Parse() override;
@@ -46,7 +48,6 @@ public:
 
 private:
 
-	void UpdateCollider();
 
 	Transform*			transform = nullptr;
 	SpriteRenderer*		spriteRenderer = nullptr;

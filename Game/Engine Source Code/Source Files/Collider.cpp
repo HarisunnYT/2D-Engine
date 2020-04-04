@@ -1,4 +1,5 @@
 #include "Collider.h"
+#include "Camera.h"
 
 std::string Collider::componentName = "collider";
 
@@ -34,17 +35,14 @@ void Collider::Init()
 	UpdateCollider();
 
 	Collision::colliders.push_back(this);
+	Collision::UpdateGrid(this);
 }
 
 void Collider::Update()
 {
 	UpdateCollider();
 
-	if (transform->GetRawPosition() != previousPosition)
-	{
-		Collision::UpdateGrid(this);
-	}
-	previousPosition = transform->GetRawPosition();
+	previousPosition = transform->GetPosition();
 }
 
 void Collider::DebugDraw()
@@ -66,11 +64,15 @@ void Collider::SetSize(Vector2 s)
 {
 	size = s;
 	UpdateCollider();
+
+	Collision::UpdateGrid(this);
 }
 
 void Collider::SetOffset(Vector2 o)
 {
 	offset = o;
+
+	Collision::UpdateGrid(this);
 }
 
 const SDL_Rect Collider::GetCollider()

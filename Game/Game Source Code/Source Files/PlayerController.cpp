@@ -16,7 +16,7 @@ void PlayerController::Init()
 	collider = &entity->GetComponent<Collider>();
 }
 
-void PlayerController::Update()
+void PlayerController::LateUpdate()
 {
 	Vector2 velocity = rigidbody->GetVelocity();
 	if (InputSystem::KeyHeld(SDLK_a))
@@ -36,7 +36,7 @@ void PlayerController::Update()
 
 	if (InputSystem::KeyPressed(SDLK_SPACE))
 	{
-		velocity.y = 100;
+		velocity.y = 150;
 	}
 
 	rigidbody->SetVelocity(velocity);

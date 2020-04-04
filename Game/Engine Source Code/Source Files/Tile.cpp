@@ -30,7 +30,7 @@ void Tile::ManualConstruction(Vector3 pos, float s)
 void Tile::Init()
 {
 	transform = &entity->GetComponent<Transform>();
-	transform->SetPosition(&startingPosition);
+	transform->SetPosition(startingPosition);
 	transform->scale = startingScale;
 
 	collider = &entity->AddComponent<Collider>("tile", true);

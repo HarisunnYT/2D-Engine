@@ -13,7 +13,7 @@ public:
 	Transform(Vector3 pos);
 
 	Vector3 GetPosition();
-	void SetPosition(Vector3 *pos);
+	void SetPosition(Vector3 pos);
 
 	Vector3 GetRawPosition();
 

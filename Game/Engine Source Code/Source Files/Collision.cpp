@@ -1,15 +1,19 @@
 #include "Collision.h"
 #include "Collider.h"
+#include "Camera.h"
 
-int gridSize = 200;
+int squareSize = 500;
+Vector2 gridSize = Vector2(20, 2);
 
 vector<pair<SDL_Rect, vector<Collider*>>> Collision::grid;
 bool Collision::drawGrid = false;
 
+SDL_Rect tempRec;
+
 void Collision::Init()
 {
-	int cols = static_cast<int>(EngineCore::screenSize.x / gridSize);
-	int rows = static_cast<int>(EngineCore::screenSize.y / gridSize);
+	int cols = static_cast<int>(gridSize.x);
+	int rows = static_cast<int>(gridSize.y);
 
 	for (int x = 0; x < cols; x++)
 	{
@@ -17,10 +21,10 @@ void Collision::Init()
 		{
 			SDL_Rect rect;
 
-			rect.x = x * gridSize;
-			rect.y = y * gridSize;
-			rect.w = gridSize;
-			rect.h = gridSize;
+			rect.x = x * squareSize;
+			rect.y = y * squareSize;
+			rect.w = squareSize;
+			rect.h = squareSize;
 
 			grid.push_back(pair<SDL_Rect, vector<Collider*>>(rect, vector<Collider*>()));
 		}
@@ -33,8 +37,13 @@ void Collision::DebugDraw()
 	{
 		for (auto& g : grid)
 		{
+			tempRec.x = g.first.x - EngineCore::camera->offset.x;
+			tempRec.y = g.first.y - EngineCore::camera->offset.y;
+			tempRec.w = squareSize;
+			tempRec.h = squareSize;
+
 			SDL_SetRenderDrawColor(EngineCore::Renderer, 0, 255, 0, 255);
-			SDL_RenderDrawRect(EngineCore::Renderer, &g.first);
+			SDL_RenderDrawRect(EngineCore::Renderer, &tempRec);
 			SDL_SetRenderDrawColor(EngineCore::Renderer, 255, 255, 255, 255);
 		}
 	}
@@ -42,6 +51,11 @@ void Collision::DebugDraw()
 
 void Collision::UpdateGrid(Collider* collider)
 {
+	if (collider->Trigger)
+	{
+		return;
+	}
+
 	//add collider to correct grid
 	for (auto& g : grid)
 	{
@@ -63,7 +77,12 @@ void Collision::CheckCollision(Collider* collider)
 {
 	for (auto& g : Collision::grid)
 	{
-		if (AABB(collider->collider, g.first))
+		tempRec.x = g.first.x - EngineCore::camera->offset.x;
+		tempRec.y = g.first.y - EngineCore::camera->offset.y;
+		tempRec.w = squareSize;
+		tempRec.h = squareSize;
+
+		if (AABB(collider->collider, tempRec))
 		{
 			for (auto& c : g.second)
 			{
@@ -93,26 +112,38 @@ void Collision::CheckCollision(Collider* collider)
 						{
 							if (deltaX > 0.0f)
 							{
-								thisTransform->SetPosition(&Vector3(pos.x + intersectX, pos.y, pos.z));
-								thisRigidbody->SetVelocity(Vector2(0, thisRigidbody->GetVelocity().y));
+								thisTransform->SetPosition(Vector3(pos.x + intersectX, pos.y, pos.z));
+								if (thisRigidbody->GetVelocity().x > 0)
+								{
+									thisRigidbody->SetVelocity(Vector2(0, thisRigidbody->GetVelocity().y));
+								}
 							}
 							else
 							{
-								thisTransform->SetPosition(&Vector3(pos.x - intersectX, pos.y, pos.z));
-								thisRigidbody->SetVelocity(Vector2(0, thisRigidbody->GetVelocity().y));
+								thisTransform->SetPosition(Vector3(pos.x - intersectX, pos.y, pos.z));
+								if (thisRigidbody->GetVelocity().x < 0)
+								{
+									thisRigidbody->SetVelocity(Vector2(0, thisRigidbody->GetVelocity().y));
+								}
 							}
 						}
 						else
 						{
 							if (deltaY > 0.0f)
 							{
-								thisTransform->SetPosition(&Vector3(pos.x, pos.y + intersectY, pos.z));
-								thisRigidbody->SetVelocity(Vector2(thisRigidbody->GetVelocity().x, 0));
+								thisTransform->SetPosition(Vector3(pos.x, pos.y + intersectY, pos.z));
+								if (thisRigidbody->GetVelocity().y < 0) 
+								{
+									thisRigidbody->SetVelocity(Vector2(thisRigidbody->GetVelocity().x, 0));
+								}
 							}
 							else
 							{
-								thisTransform->SetPosition(&Vector3(pos.x, pos.y - intersectY, pos.z));
-								thisRigidbody->SetVelocity(Vector2(thisRigidbody->GetVelocity().x, 0));
+								thisTransform->SetPosition(Vector3(pos.x, pos.y - intersectY, pos.z));
+								if (thisRigidbody->GetVelocity().y > 0)
+								{
+									thisRigidbody->SetVelocity(Vector2(thisRigidbody->GetVelocity().x, 0));
+								}
 							}
 						}
 
