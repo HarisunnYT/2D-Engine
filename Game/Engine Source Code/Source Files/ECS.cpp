@@ -52,6 +52,22 @@ void ECS::Physics()
 	}
 }
 
+void ECS::LateUpdate()
+{
+	for (auto& e : entities)
+	{
+		e->LateUpdate();
+	}
+}
+
+void ECS::FixedUpdate()
+{
+	for (auto& e : entities)
+	{
+		e->FixedUpdate();
+	}
+}
+
 void ECS::DebugDraw()
 {
 	if (EngineCore::isDebug)

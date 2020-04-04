@@ -1,32 +1,42 @@
 #include "EngineCore.h"
+#include <time.h>
 
 EngineCore* engineCore = nullptr;
 
 const int FPS = 60;
-const int frameDelay = 1000 / FPS;
+const int frameDelay = 100 / FPS;
+
+float accumulatedTime;
+
+void Tick(EngineCore* engineCore, float dTime)
+{
+	accumulatedTime += dTime;
+	while (accumulatedTime > EngineCore::fixedTimeStep)
+	{
+		engineCore->FixedUpdate();
+		accumulatedTime -= EngineCore::fixedTimeStep;
+	}
+}
 
 int main(int agrc, char* argv[])
 {
 	engineCore = new EngineCore();
 	engineCore->Init("EngineCore", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, false);
 
-	Uint32 frameStart;
-	int frameTime;
+	int lastTime = clock();
 
 	while (engineCore->Running())
 	{
-		frameStart = SDL_GetTicks();
+		int currentTime = clock();
+		float dTime = (currentTime - lastTime) / (float)CLOCKS_PER_SEC;
 
 		engineCore->HandleEvents();
-		engineCore->Update();
+		engineCore->Update(dTime);
 		engineCore->Render();
 
-		frameTime = SDL_GetTicks() - frameStart;
+		Tick(engineCore, dTime);
 
-		if (frameDelay > frameTime)
-		{
-			SDL_Delay(frameDelay - frameTime);
-		}
+		lastTime = currentTime;
 	}
 
 	engineCore->Clean();

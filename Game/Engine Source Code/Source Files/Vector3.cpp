@@ -112,6 +112,21 @@ Vector3& Vector3::Zero()
 	return this->Multiply(0);
 }
 
+Vector3 Vector3::Normalised()
+{
+	Vector3 vec;
+	vec.x = x / Magnitude();
+	vec.y = y / Magnitude();
+	vec.z = z / Magnitude();
+
+	return vec;
+}
+
+float Vector3::Magnitude()
+{
+	return sqrt((x * x) + (y * y) + (z * z));
+}
+
 std::string Vector3::ToString()
 {
 	std::string strX = std::to_string(x);

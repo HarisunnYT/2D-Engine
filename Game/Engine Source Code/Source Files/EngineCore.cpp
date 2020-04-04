@@ -16,6 +16,9 @@ bool EngineCore::isRunning = false;
 bool EngineCore::isDebug = false;
 Vector2 EngineCore::screenSize = Vector2(800.0f, 600.0f);
 
+float EngineCore::deltaTime = 0;
+float EngineCore::fixedTimeStep = 0.02f;
+
 Game* game = nullptr;
 
 EngineCore::EngineCore()
@@ -70,22 +73,32 @@ void EngineCore::HandleEvents()
 	}
 }
 
-void EngineCore::Update()
+void EngineCore::Update(float dTime)
 {
+	EngineCore::deltaTime = dTime;
+
 	InputSystem::Update();
 
 	Ecs->Refresh();
 	Ecs->Update();
 
 	game->Update();
-	game->Physics();
 
+	game->Physics();
 	Ecs->Physics();
+
+	Ecs->LateUpdate();
 
 	if (InputSystem::KeyReleased(SDLK_ESCAPE))
 	{
 		EngineCore::isRunning = false;
 	}
+}
+
+void EngineCore::FixedUpdate()
+{
+	game->FixedUpdate();
+	Ecs->FixedUpdate();
 }
 
 void EngineCore::Render()

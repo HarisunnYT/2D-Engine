@@ -36,6 +36,9 @@ public:
 	Vector2& operator /=(float multiplier);
 
 	Vector2& Zero();
+	Vector2 Normalised();
+
+	float Magnitude();
 
 	std::string ToString();
 	static Vector2 FromString(std::string str);

@@ -19,6 +19,8 @@ public:
 	virtual void Update() {}
 	virtual void Draw() {}
 	virtual void Physics() {}
+	virtual void LateUpdate() {}
+	virtual void FixedUpdate() {}
 	virtual void DebugDraw() {}
 
 	virtual std::string Parse() { return ""; }

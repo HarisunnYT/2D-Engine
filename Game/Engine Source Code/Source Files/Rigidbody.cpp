@@ -20,9 +20,9 @@ void Rigidbody::Update()
 	}
 }
 
-void Rigidbody::Physics()
+void Rigidbody::LateUpdate()
 {
-	transform->SetPosition(&(transform->GetPosition() + Vector3(velocity.x, -velocity.y, 0)));
+	transform->SetPosition(&(transform->GetPosition() + (Vector3(velocity.x, -velocity.y, 0) * EngineCore::fixedTimeStep)));
 }
 
 void Rigidbody::SetVelocity(Vector2 v)

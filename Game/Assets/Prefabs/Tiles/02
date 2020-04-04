@@ -7,7 +7,8 @@
     "value0": "collider",
     "value1": "ground",
     "value2": "(0.000000,0.000000)",
-    "value3": "(16.000000,16.000000)"
+    "value3": "(16.000000,16.000000)",
+    "value4": false
 }
 {
     "value0": "tile",

@@ -36,7 +36,7 @@ void PlayerController::Update()
 
 	if (InputSystem::KeyPressed(SDLK_SPACE))
 	{
-		velocity.y = 10;
+		velocity.y = 100;
 	}
 
 	rigidbody->SetVelocity(velocity);

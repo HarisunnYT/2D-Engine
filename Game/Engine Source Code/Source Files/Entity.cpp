@@ -38,6 +38,22 @@ void Entity::Physics()
 	}
 }
 
+void Entity::LateUpdate()
+{
+	for (auto& c : components)
+	{
+		c->LateUpdate();
+	}
+}
+
+void Entity::FixedUpdate()
+{
+	for (auto& c : components)
+	{
+		c->FixedUpdate();
+	}
+}
+
 void Entity::DebugDraw()
 {
 	for (auto& c : components)

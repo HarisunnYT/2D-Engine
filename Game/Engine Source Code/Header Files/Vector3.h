@@ -36,6 +36,9 @@ public:
 	bool operator !=(const Vector3& p);
 
 	Vector3& Zero();
+	Vector3 Normalised();
+
+	float Magnitude();
 
 	std::string ToString();
 	static Vector3 FromString(std::string str);

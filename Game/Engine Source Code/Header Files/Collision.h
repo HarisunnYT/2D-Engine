@@ -16,6 +16,7 @@ public:
 	static void DebugDraw();
 
 	static void UpdateGrid(Collider* collider);
+	static void CheckCollision(Collider* collider);
 
 	static bool AABB(const SDL_Rect& rectA, const SDL_Rect& rectB);
 	static bool AABB(Collider& colA, Collider& colB);
@@ -23,7 +24,7 @@ public:
 	static vector<Collider*> colliders;
 	static vector<pair<SDL_Rect, vector<Collider*>>> grid;
 
-
+	static bool drawGrid;
 };
 
 #endif

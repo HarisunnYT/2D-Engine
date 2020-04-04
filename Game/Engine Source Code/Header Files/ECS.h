@@ -22,6 +22,8 @@ public:
 	void Draw();
 	void Refresh();
 	void Physics();
+	void LateUpdate();
+	void FixedUpdate();
 	void DebugDraw();
 
 	Entity& AddEntity();

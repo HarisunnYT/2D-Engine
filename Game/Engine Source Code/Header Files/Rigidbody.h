@@ -15,7 +15,7 @@ public:
 
 	void Init() override;
 	void Update() override;
-	void Physics() override;
+	void LateUpdate() override;
 
 	void SetVelocity(Vector2 velocity);
 	Vector2 GetVelocity();

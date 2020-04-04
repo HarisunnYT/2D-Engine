@@ -1,5 +1,6 @@
 #include "Vector2.h"
 #include <vector>
+#include <math.h>
 
 Vector2::Vector2(float X, float Y)
 {
@@ -95,6 +96,20 @@ Vector2& Vector2::operator/=(float multiplier)
 Vector2& Vector2::Zero()
 {
 	return this->Multiply(0);
+}
+
+Vector2 Vector2::Normalised()
+{
+	Vector2 vec;
+	vec.x = x / Magnitude();
+	vec.y = y / Magnitude();
+
+	return vec;
+}
+
+float Vector2::Magnitude()
+{
+	return sqrt((x * x) + (y * y));
 }
 
 std::string Vector2::ToString()

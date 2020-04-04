@@ -4,9 +4,10 @@ std::string Collider::componentName = "collider";
 
 vector<Collider*> Collision::colliders;
 
-Collider::Collider(std::string tag)
+Collider::Collider(std::string tag, bool isTrigger)
 {
 	Tag = tag;
+	Trigger = isTrigger;
 
 	offset = Vector2(0, 0);
 	size = Vector2(1, 1);
@@ -18,6 +19,10 @@ void Collider::Init()
 	if (entity->HasComponent<SpriteRenderer>())
 	{
 		spriteRenderer = &entity->GetComponent<SpriteRenderer>();
+	}
+	if (entity->HasComponent<Rigidbody>())
+	{
+		rigidbody = &entity->GetComponent<Rigidbody>();
 	}
 
 	if (spriteRenderer != nullptr)
@@ -49,6 +54,14 @@ void Collider::DebugDraw()
 	SDL_SetRenderDrawColor(EngineCore::Renderer, 255, 255, 255, 255);
 }
 
+void Collider::Physics()
+{
+	if (rigidbody != nullptr)
+	{
+		Collision::CheckCollision(this);
+	}
+}
+
 void Collider::SetSize(Vector2 s)
 {
 	size = s;
@@ -72,7 +85,7 @@ std::string Collider::Parse()
 	std::stringstream ss;
 	{
 		cereal::JSONOutputArchive oarchive(ss);
-		oarchive(Collider::componentName, Tag, offset.ToString(), size.ToString());
+		oarchive(Collider::componentName, Tag, offset.ToString(), size.ToString(), Trigger);
 	}
 
 	return ss.str();
@@ -84,16 +97,17 @@ bool Collider::TryParse(std::string value, Entity* entity)
 	std::string tag;
 	std::string inOffset;
 	std::string inSize;
+	bool inTrigger;
 
 	std::stringstream ss(value);
 	{
 		cereal::JSONInputArchive oarchive(ss);
-		oarchive(name, tag, inOffset, inSize);
+		oarchive(name, tag, inOffset, inSize, inTrigger);
 	}
 
 	if (name == Collider::componentName)
 	{
-		entity->AddComponent<Collider>(tag);
+		entity->AddComponent<Collider>(tag, inTrigger);
 		entity->GetComponent<Collider>().SetSize(Vector2::FromString(inSize));
 		entity->GetComponent<Collider>().SetOffset(Vector2::FromString(inOffset));
 
@@ -101,6 +115,21 @@ bool Collider::TryParse(std::string value, Entity* entity)
 	}
 
 	return false;
+}
+
+Vector2 Collider::GetMinBounds()
+{
+	return Vector2(static_cast<float>(collider.x), static_cast<float>(collider.y));
+}
+
+Vector2 Collider::GetMaxBounds()
+{
+	return Vector2(static_cast<float>(collider.x + collider.w), static_cast<float>(collider.y + collider.h));
+}
+
+Vector2 Collider::Centre()
+{
+	return Vector2(static_cast<float>(collider.x + (collider.w / 2)), static_cast<float>(collider.y + (collider.h / 2)));
 }
 
 void Collider::UpdateCollider()

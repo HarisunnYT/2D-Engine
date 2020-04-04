@@ -23,7 +23,8 @@ public:
 	void Init(const char* title, int xpos, int ypos, bool fullscreen);
 
 	void HandleEvents();
-	void Update();
+	void Update(float dTime);
+	void FixedUpdate();
 	void Render();
 	void Clean();
 
@@ -38,6 +39,9 @@ public:
 	static bool				isDebug;
 
 	static Vector2			screenSize;
+
+	static float			deltaTime;
+	static float			fixedTimeStep;
 
 private:
 

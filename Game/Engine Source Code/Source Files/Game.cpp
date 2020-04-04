@@ -10,13 +10,17 @@
 
 TileMap* tileMap = nullptr;
 Entity* player = nullptr;
+Entity* ground = nullptr;
 
 Game::Game()
 {
-	EngineCore::isDebug = false;
+	EngineCore::isDebug = true;
+	Collision::drawGrid = false;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
 	player->GetComponent<Animator>().PlayAnimation(1);
+
+	//ground = &EngineCore::Ecs->AddEntity("Assets/Prefabs/ground");
 
 	tileMap = new TileMap();
 	tileMap->LoadMap("Assets/map2.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(77, 16), 3.5f);
@@ -34,7 +38,7 @@ void Game::Update()
 		{
 			if (c->entity->HasComponent<Collider>() && SDL_PointInRect(const_cast<SDL_Point*>(&InputSystem::MousePosition), const_cast<SDL_Rect*>(&c->entity->GetComponent<Collider>().collider)))
 			{
-				c->scale *= 0;
+				c->SetPosition(&Vector3(10000, 0, 0));
 			}
 		}
 	}
@@ -48,27 +52,8 @@ void Game::Render()
 
 void Game::Physics()
 {
-	Vector2 velocity = player->GetComponent<Rigidbody>().GetVelocity();
-	SDL_Rect playerCol = player->GetComponent<Collider>().GetCollider();
+}
 
-	for (auto& g : Collision::grid)
-	{
-		if (Collision::AABB(playerCol, g.first))
-		{
-			for (auto& c : g.second)
-			{
-				if (c->Tag == "ground")
-				{
-					if (Collision::AABB(c->GetCollider(), playerCol))
-					{
-						if (velocity.y < 0)
-						{
-							velocity.y = 0;
-						}
-						player->GetComponent<Rigidbody>().SetVelocity(velocity);
-					}
-				}
-			}
-		}
-	}
+void Game::FixedUpdate()
+{
 }
