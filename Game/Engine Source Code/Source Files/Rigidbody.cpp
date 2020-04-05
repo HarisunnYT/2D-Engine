@@ -14,10 +14,31 @@ void Rigidbody::Init()
 
 void Rigidbody::Update()
 {
-	if (useGravity)
+	if (useGravity && !sleeping)
 	{
 		velocity.y += Physics::gravity.y * mass;
 	}
+
+	float threshold = abs(transform->GetRawPosition().y - lastPosition.y);
+
+	if (!sleeping && threshold < sleepThreshold)
+	{
+		if (sleepTimer == 0)
+		{
+			sleepTimer = SDL_GetTicks() + timeTillSleep;
+		}
+		else if (SDL_GetTicks() >= sleepTimer)
+		{
+			sleeping = true;
+		}
+	}
+	else if (threshold > sleepThreshold)
+	{
+		sleeping = false;
+		sleepTimer = 0;
+	}
+
+	lastPosition = transform->GetRawPosition();
 }
 
 void Rigidbody::LateUpdate()
@@ -27,12 +48,29 @@ void Rigidbody::LateUpdate()
 
 void Rigidbody::SetVelocity(Vector2 v)
 {
+	float mag = abs(v.x - velocity.x);
+	if (mag > 0.0)
+	{
+		ForceAwake();
+	}
+
 	velocity = v;
 }
 
 Vector2 Rigidbody::GetVelocity()
 {
 	return velocity;
+}
+
+bool Rigidbody::IsSleeping()
+{
+	return sleeping;
+}
+
+void Rigidbody::ForceAwake()
+{
+	sleeping = false;
+	sleepTimer = 0;
 }
 
 std::string Rigidbody::Parse()

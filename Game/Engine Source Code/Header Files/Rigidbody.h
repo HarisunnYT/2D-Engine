@@ -20,6 +20,9 @@ public:
 	void SetVelocity(Vector2 velocity);
 	Vector2 GetVelocity();
 
+	bool IsSleeping();
+	void ForceAwake();
+
 	float mass = 1;
 
 	std::string Parse() override;
@@ -37,7 +40,15 @@ private:
 	Transform*		transform = nullptr;
 	Vector2			velocity;
 
+	Vector3			lastPosition;
+
 	bool			useGravity = true;
+	bool			sleeping = false;
+
+	float			sleepThreshold = 1.0f;
+
+	int				timeTillSleep = 1000;
+	int				sleepTimer = 0;
 };
 
 #endif

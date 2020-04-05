@@ -23,10 +23,10 @@ public:
 
 	Vector2& operator =(const Vector2& p);
 
-	Vector2& operator +(const Vector2& p);
+	Vector2 operator +(const Vector2& p);
 	Vector2& operator +=(const Vector2& p);
 
-	Vector2& operator -(const Vector2& p);
+	Vector2 operator -(const Vector2& p);
 	Vector2& operator -=(const Vector2& p);
 
 	Vector2& operator *(float multiplier);

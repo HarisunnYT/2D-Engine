@@ -53,9 +53,9 @@ Vector2& Vector2::operator=(const Vector2& p)
 	return this->Equals(p);
 }
 
-Vector2& Vector2::operator+(const Vector2& p)
+Vector2 Vector2::operator+(const Vector2& p)
 {
-	return this->Add(p);
+	return Vector2(x + p.x, y + p.y);
 }
 
 Vector2& Vector2::operator+=(const Vector2& p)
@@ -63,9 +63,9 @@ Vector2& Vector2::operator+=(const Vector2& p)
 	return this->Add(p);
 }
 
-Vector2& Vector2::operator-(const Vector2& p)
+Vector2 Vector2::operator-(const Vector2& p)
 {
-	return this->Subtract(p);
+	return Vector2(x - p.x, y - p.y);
 }
 
 Vector2& Vector2::operator-=(const Vector2& p)

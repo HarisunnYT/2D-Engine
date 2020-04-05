@@ -100,12 +100,12 @@ void Collision::CheckCollision(Collider* collider)
 					float intersectX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
 					float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
 
-					float push = 1.0f;
 
 					Transform* thisTransform = &collider->entity->GetComponent<Transform>();
 					Rigidbody* thisRigidbody = &collider->entity->GetComponent<Rigidbody>();
 
 					Vector3 pos = thisTransform->GetPosition();
+					float push = thisRigidbody->mass;
 
 					if (intersectX < 0.0 && intersectY < 0.0f)
 					{
@@ -132,6 +132,7 @@ void Collision::CheckCollision(Collider* collider)
 						{
 							if (deltaY > 0.0f)
 							{
+								intersectY /= 2;
 								thisTransform->SetPosition(Vector3(pos.x, pos.y + intersectY, pos.z));
 								if (thisRigidbody->GetVelocity().y < 0) 
 								{

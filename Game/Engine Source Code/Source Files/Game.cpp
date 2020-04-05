@@ -15,8 +15,8 @@ Entity* player = nullptr;
 
 Game::Game()
 {
-	EngineCore::isDebug = true;
-	Collision::drawGrid = false;
+	EngineCore::isDebug = false;
+	Collision::drawGrid = true;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
 	player->GetComponent<Animator>().PlayAnimation(1);
@@ -40,6 +40,7 @@ void Game::Update()
 		{
 			if (entity->HasComponent<Collider>() && entity->GetComponent<Collider>().Tag == "ground" && SDL_PointInRect(const_cast<SDL_Point*>(&InputSystem::MousePosition), const_cast<SDL_Rect*>(&entity->GetComponent<Collider>().collider)))
 			{
+				player->GetComponent<Rigidbody>().ForceAwake();
 				entity->SetActive(false);
 				break;
 			}
