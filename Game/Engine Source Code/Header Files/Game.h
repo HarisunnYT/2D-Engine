@@ -13,6 +13,7 @@ public:
 	~Game();
 
 	void Update();
+	void LateUpdate();
 	void Render();
 	void Physics();
 	void FixedUpdate();

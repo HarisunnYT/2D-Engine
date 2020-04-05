@@ -3,8 +3,6 @@
 
 std::string Collider::componentName = "collider";
 
-vector<Collider*> Collision::colliders;
-
 Collider::Collider(std::string tag, bool isTrigger)
 {
 	Tag = tag;
@@ -31,11 +29,6 @@ void Collider::Init()
 		size.x = spriteRenderer->spriteSize.x;
 		size.y = spriteRenderer->spriteSize.y;
 	}
-
-	UpdateCollider();
-
-	Collision::colliders.push_back(this);
-	Collision::UpdateGrid(this);
 }
 
 void Collider::Update()
@@ -58,6 +51,18 @@ void Collider::Physics()
 	{
 		Collision::CheckCollision(this);
 	}
+}
+
+void Collider::OnEnable()
+{
+	UpdateCollider();
+
+	Collision::UpdateGrid(this);
+}
+
+void Collider::OnDisable()
+{
+	Collision::UpdateGrid(this);
 }
 
 void Collider::SetSize(Vector2 s)

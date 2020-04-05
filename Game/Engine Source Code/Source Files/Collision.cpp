@@ -6,6 +6,7 @@ int squareSize = 500;
 Vector2 gridSize = Vector2(20, 2);
 
 vector<pair<SDL_Rect, vector<Collider*>>> Collision::grid;
+
 bool Collision::drawGrid = false;
 
 SDL_Rect tempRec;
@@ -66,7 +67,7 @@ void Collision::UpdateGrid(Collider* collider)
 		{
 			g.second.push_back(collider);
 		}
-		else if (!colliderInsideGrid && gridContainsCollider)
+		else if (!colliderInsideGrid && gridContainsCollider || (gridContainsCollider && !collider->entity->IsActive()))
 		{
 			g.second.erase(remove(g.second.begin(), g.second.end(), collider), g.second.end());
 		}
@@ -86,13 +87,13 @@ void Collision::CheckCollision(Collider* collider)
 		{
 			for (auto& c : g.second)
 			{
-				if (c != collider && !c->Trigger)
+				if (c != collider && !c->Trigger && c->entity->IsActive())
 				{
 					Vector2 otherPosition = c->Centre();
-					Vector2 otherHalfSize = Vector2(c->collider.w / 2, c->collider.h / 2);
+					Vector2 otherHalfSize = Vector2((float)c->collider.w / 2, (float)c->collider.h / 2);
 
 					Vector2 thisPosition = collider->Centre();
-					Vector2 thisHalfSize = Vector2(collider->collider.w / 2, collider->collider.h / 2);
+					Vector2 thisHalfSize = Vector2((float)collider->collider.w / 2, (float)collider->collider.h / 2);
 
 					float deltaX = otherPosition.x - thisPosition.x;
 					float deltaY = otherPosition.y - thisPosition.y;

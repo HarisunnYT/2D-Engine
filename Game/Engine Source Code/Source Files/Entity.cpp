@@ -6,7 +6,17 @@
 
 Entity::Entity()
 {
-	ECS::transforms.push_back(&AddComponent<Transform>());
+	transform = &AddComponent<Transform>();
+
+	OnEnable();
+}
+
+Entity::~Entity()
+{
+	//for (auto& c : components)
+	//{
+	//	delete *c;
+	//}
 }
 
 void Entity::Update()
@@ -27,7 +37,7 @@ void Entity::Draw()
 
 void Entity::Destroy()
 {
-	active = false;
+	delete this;
 }
 
 void Entity::Physics()
@@ -62,9 +72,41 @@ void Entity::DebugDraw()
 	}
 }
 
+void Entity::OnEnable()
+{
+	for (auto& c : components)
+	{
+		c->OnEnable();
+	}
+}
+
+void Entity::OnDisable()
+{
+	for (auto& c : components)
+	{
+		c->OnDisable();
+	}
+}
+
 bool Entity::IsActive() const
 {
 	return active;
+}
+
+void Entity::SetActive(bool a)
+{
+	active = a;
+
+	if (a)
+	{
+		EngineCore::Ecs->entities.push_back(this);
+		OnEnable();
+	}
+	else
+	{
+		OnDisable();
+		EngineCore::Ecs->entities.remove(this);
+	}
 }
 
 void Entity::SaveToDisk(const char* path)

@@ -19,6 +19,8 @@ public:
 	void Update() override;
 	void DebugDraw() override;
 	void Physics() override;
+	void OnEnable() override;
+	void OnDisable() override;
 
 	void SetSize(Vector2 size);
 	void SetOffset(Vector2 offset);

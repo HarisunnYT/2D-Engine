@@ -7,7 +7,10 @@
 #include <fstream>
 #include <iostream>
 
-std::vector<Transform*> ECS::transforms;
+ECS::ECS()
+{
+	entities = std::list<Entity*>();
+}
 
 void ECS::Update()
 {
@@ -19,36 +22,33 @@ void ECS::Update()
 
 struct compare_z_depth
 {
-	inline bool operator() (Transform *a, Transform *b)
+	inline bool operator() (Entity *a, Entity *b)
 	{
-		return a->GetPosition().z < b->GetPosition().z;
+		return a->transform->GetPosition().z < b->transform->GetPosition().z;
 	}
 };
 
 
 void ECS::Draw()
 {
-	sort(transforms.begin(), transforms.end(), compare_z_depth());
-	for (auto& transform : transforms)
+	entities.sort(compare_z_depth());
+	for (auto& entity : entities)
 	{
-		transform->entity->Draw();
+		if (entity != nullptr)
+		{
+			entity->Draw();
+		}
 	}
-}
-
-void ECS::Refresh()
-{
-	entities.erase(std::remove_if(std::begin(entities), std::end(entities), [](const std::unique_ptr<Entity>& mEntity)
-	{
-		return !mEntity->IsActive();
-	}),
-	std::end(entities));
 }
 
 void ECS::Physics()
 {
 	for (auto& e : entities)
 	{
-		e->Physics();
+		if (e != nullptr)
+		{
+			e->Physics();
+		}
 	}
 }
 
@@ -56,7 +56,10 @@ void ECS::LateUpdate()
 {
 	for (auto& e : entities)
 	{
-		e->LateUpdate();
+		if (e != nullptr)
+		{
+			e->LateUpdate();
+		}
 	}
 }
 
@@ -64,7 +67,10 @@ void ECS::FixedUpdate()
 {
 	for (auto& e : entities)
 	{
-		e->FixedUpdate();
+		if (e != nullptr)
+		{
+			e->FixedUpdate();
+		}
 	}
 }
 
@@ -72,9 +78,12 @@ void ECS::DebugDraw()
 {
 	if (EngineCore::isDebug)
 	{
-		for (auto& transform : transforms)
+		for (auto& entity : entities)
 		{
-			transform->entity->DebugDraw();
+			if (entity != nullptr)
+			{
+				entity->DebugDraw();
+			}
 		}
 	}
 }
@@ -87,7 +96,7 @@ Entity& ECS::AddEntity()
 
 Entity& ECS::AddEntity(Entity* entity)
 {
-	std::unique_ptr<Entity> uPtr{ entity };
+	Entity* uPtr{ entity };
 	entities.emplace_back(std::move(uPtr));
 
 	return *entity;
@@ -131,6 +140,8 @@ Entity& ECS::AddEntity(const char* path)
 			else if (str.find("animator") != string::npos && Animator::TryParse(str, entity)) {}
 			else if (str.find("tile") != string::npos && Tile::TryParse(str, entity)) {}
 		}
+
+		entities.emplace_back(std::move(entity));
 
 		return *entity;
 	}

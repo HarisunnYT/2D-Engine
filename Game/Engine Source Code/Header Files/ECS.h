@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <bitset>
 #include <array>
+#include <list>
 
 class Entity;
 class Transform;
@@ -18,9 +19,10 @@ class ECS
 {
 public:
 
+	ECS();
+
 	void Update();
 	void Draw();
-	void Refresh();
 	void Physics();
 	void LateUpdate();
 	void FixedUpdate();
@@ -30,11 +32,10 @@ public:
 	Entity& AddEntity(Entity* entity);
 	Entity& AddEntity(const char* path);
 
-	static std::vector<Transform*> transforms;
+	std::list<Entity*> entities;
 
 private:
 
-	std::vector<std::unique_ptr<Entity>> entities;
 };
 
 #endif

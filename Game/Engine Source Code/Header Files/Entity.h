@@ -35,11 +35,13 @@ constexpr std::size_t MaxComponents = 32;
 using ComponentBitSet = std::bitset<MaxComponents>;
 using ComponentArray = std::array<Component*, MaxComponents>;
 
+class Transform;
 class Entity
 {
 public:
 
 	Entity();
+	~Entity();
 
 	virtual void Update();
 	virtual void Draw();
@@ -49,7 +51,11 @@ public:
 	virtual void FixedUpdate();
 	virtual void DebugDraw();
 
+	virtual void OnEnable();
+	virtual void OnDisable();
+
 	bool IsActive() const;
+	void SetActive(bool active);
 
 	void SaveToDisk(const char* path);
 
@@ -84,6 +90,8 @@ public:
 		auto ptr(componentArray[GetComponentTypeID<T>()]);
 		return *static_cast<T*>(ptr);
 	}
+
+	Transform* transform;
 
 private:
 

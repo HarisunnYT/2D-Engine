@@ -23,6 +23,9 @@ public:
 	virtual void FixedUpdate() {}
 	virtual void DebugDraw() {}
 
+	virtual void OnEnable() {}
+	virtual void OnDisable() {}
+
 	virtual std::string Parse() { return ""; }
 
 };

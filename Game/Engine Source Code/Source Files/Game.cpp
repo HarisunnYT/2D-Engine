@@ -15,8 +15,8 @@ Entity* player = nullptr;
 
 Game::Game()
 {
-	EngineCore::isDebug = false;
-	Collision::drawGrid = true;
+	EngineCore::isDebug = true;
+	Collision::drawGrid = false;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
 	player->GetComponent<Animator>().PlayAnimation(1);
@@ -36,14 +36,19 @@ void Game::Update()
 {
 	if (InputSystem::MousePressed())
 	{
-		for (auto& c : EngineCore::Ecs->transforms)
+		for (auto& entity : EngineCore::Ecs->entities)
 		{
-			if (c->entity->HasComponent<Collider>() && c->entity->GetComponent<Collider>().Tag == "ground" && SDL_PointInRect(const_cast<SDL_Point*>(&InputSystem::MousePosition), const_cast<SDL_Rect*>(&c->entity->GetComponent<Collider>().collider)))
+			if (entity->HasComponent<Collider>() && entity->GetComponent<Collider>().Tag == "ground" && SDL_PointInRect(const_cast<SDL_Point*>(&InputSystem::MousePosition), const_cast<SDL_Rect*>(&entity->GetComponent<Collider>().collider)))
 			{
-				c->SetPosition(Vector3(10000, 0, 0));
+				entity->SetActive(false);
+				break;
 			}
 		}
 	}
+}
+
+void Game::LateUpdate()
+{
 }
 
 void Game::Render()
@@ -56,5 +61,5 @@ void Game::Physics()
 
 void Game::FixedUpdate()
 {
-	EngineCore::camera->offset.x += 1;
+	//EngineCore::camera->offset.x += 1;
 }
