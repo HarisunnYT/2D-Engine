@@ -33,8 +33,11 @@ void Tile::Init()
 	transform->SetPosition(startingPosition);
 	transform->scale = startingScale;
 
-	//collider = &entity->AddComponent<Collider>("tile", true);
-	//collider->SetSize(Vector2((float)sourceRect.w, (float)sourceRect.h));
+	if (entity->HasComponent<Collider>())
+	{
+		collider = &entity->GetComponent<Collider>();
+		collider->SetSize(Vector2((float)sourceRect.w, (float)sourceRect.h));
+	}
 }
 
 void Tile::Update()

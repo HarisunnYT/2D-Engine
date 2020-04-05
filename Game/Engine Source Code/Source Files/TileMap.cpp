@@ -62,15 +62,16 @@ void TileMap::AddTile(const char* spriteSheetPath, std::string id, Vector3 posit
 	std::string p = "Assets/Prefabs/Tiles/" + id;
 	std::ifstream inFile(p);
 
+	Entity* tile;
 	if (inFile.good())
 	{
-		auto& tile (EngineCore::Ecs->AddEntity(p.c_str()));
-		tile.GetComponent<Tile>().ManualConstruction(position, scale);
-		tile.GetComponent<Tile>().Init();
+		tile = &(EngineCore::Ecs->AddEntity(p.c_str()));
+		tile->GetComponent<Tile>().ManualConstruction(position, scale);
+		tile->GetComponent<Tile>().Init();
 	}
 	else
 	{
-		auto& tile(EngineCore::Ecs->AddEntity());
-		tile.AddComponent<Tile>(spriteSheetPath, position, size, source, scale);
+		tile = &(EngineCore::Ecs->AddEntity());
+		tile->AddComponent<Tile>(spriteSheetPath, position, size, source, scale);
 	}
 }

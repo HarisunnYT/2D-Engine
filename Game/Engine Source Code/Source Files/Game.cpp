@@ -12,11 +12,12 @@ TileMap* tileMap = nullptr;
 TileMap* backgroundMap = nullptr;
 
 Entity* player = nullptr;
+Entity* tile = nullptr;
 
 Game::Game()
 {
-	EngineCore::isDebug = false;
-	Collision::drawGrid = true;
+	EngineCore::isDebug = true;
+	Collision::drawGrid = false;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
 	player->GetComponent<Animator>().PlayAnimation(1);

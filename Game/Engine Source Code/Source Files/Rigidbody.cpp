@@ -49,7 +49,7 @@ void Rigidbody::LateUpdate()
 void Rigidbody::SetVelocity(Vector2 v)
 {
 	float mag = abs(v.x - velocity.x);
-	if (mag > 0.0)
+	if (mag > 0.0 || v.x != 0)
 	{
 		ForceAwake();
 	}
