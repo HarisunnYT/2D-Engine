@@ -7,14 +7,9 @@ bool InputSystem::KeyHeld(Uint8 SDL_SCANCODE)
 	return SDL_GetKeyboardState(NULL)[SDL_SCANCODE];
 }
 
-bool InputSystem::MousePressed()
+bool InputSystem::Mouse(int button)
 {
-	return EngineCore::Event.type == SDL_MOUSEBUTTONDOWN;
-}
-
-bool InputSystem::MouseReleased()
-{
-	return EngineCore::Event.type == SDL_MOUSEBUTTONUP;
+	return SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(button);
 }
 
 void InputSystem::Update()

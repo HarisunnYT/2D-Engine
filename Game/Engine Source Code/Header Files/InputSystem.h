@@ -13,8 +13,7 @@ public:
 
 	static bool KeyHeld(Uint8 SDL_SCANCODE);
 
-	static bool MousePressed();
-	static bool MouseReleased();
+	static bool Mouse(int button);
 
 	static void Update();
 

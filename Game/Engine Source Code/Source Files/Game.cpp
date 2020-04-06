@@ -23,10 +23,10 @@ Game::Game()
 	player->GetComponent<Animator>().PlayAnimation(1);
 
 	backgroundMap = new TileMap();
-	backgroundMap->LoadMap("Assets/bgmap.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(77, 16), 3.5f);
+	backgroundMap->LoadMap("Assets/bgmap.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(77, 13), 3.5f);
 
 	tileMap = new TileMap();
-	tileMap->LoadMap("Assets/map.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(77, 16), 3.5f);
+	tileMap->LoadMap("Assets/map.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(77, 13), 3.5f);
 
 	particle = &EngineCore::Ecs->AddEntity();
 	particle->AddComponent<Particle>("Assets/explosion.png", Vector2(96, 96), Vector2(10, 5), 10, 1);
@@ -40,7 +40,7 @@ Game::~Game()
 
 void Game::Update()
 {
-	if (InputSystem::MousePressed())
+	if (InputSystem::Mouse(SDL_BUTTON_LEFT))
 	{
 		for (auto& entity : EngineCore::Ecs->entities)
 		{
@@ -73,5 +73,5 @@ void Game::Physics()
 
 void Game::FixedUpdate()
 {
-	//EngineCore::camera->offset.x += 1;
+	EngineCore::camera->offset.x += 1;
 }
