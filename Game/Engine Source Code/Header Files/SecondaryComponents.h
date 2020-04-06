@@ -6,5 +6,6 @@
 #include "PlayerController.h"
 #include "Animator.h"
 #include "Camera.h"
+#include "Particle.h"
 
 #endif

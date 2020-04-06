@@ -11,9 +11,7 @@ class InputSystem
 {
 public:
 
-	static bool KeyHeld(int SDL_CODE);
-	static bool KeyPressed(int SDL_CODE);
-	static bool KeyReleased(int SDL_CODE);
+	static bool KeyHeld(Uint8 SDL_SCANCODE);
 
 	static bool MousePressed();
 	static bool MouseReleased();
@@ -21,10 +19,6 @@ public:
 	static void Update();
 
 	static SDL_Point MousePosition;
-
-private:
-
-	static vector<int> keysHeld;
 
 };
 

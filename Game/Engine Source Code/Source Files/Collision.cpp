@@ -2,7 +2,7 @@
 #include "Collider.h"
 #include "Camera.h"
 
-int squareSize = 500;
+int squareSize = 448;
 Vector2 gridSize = Vector2(20, 2);
 
 vector<pair<SDL_Rect, vector<Collider*>>> Collision::grid;
@@ -74,8 +74,12 @@ void Collision::UpdateGrid(Collider* collider)
 	}
 }
 
-void Collision::CheckCollision(Collider* collider)
+bool Collision::CheckCollision(Collider* collider, Hit& hit)
 {
+	bool collided = false;
+	bool pushedX = false;
+	bool pushedY = false;
+
 	for (auto& g : Collision::grid)
 	{
 		tempRec.x = g.first.x - EngineCore::camera->offset.x;
@@ -100,63 +104,55 @@ void Collision::CheckCollision(Collider* collider)
 					float intersectX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
 					float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
 
-
 					Transform* thisTransform = &collider->entity->GetComponent<Transform>();
 					Rigidbody* thisRigidbody = &collider->entity->GetComponent<Rigidbody>();
 
 					Vector3 pos = thisTransform->GetPosition();
-					float push = thisRigidbody->mass;
+					float push = 0.0;//thisRigidbody->mass;
 
 					if (intersectX < 0.0 && intersectY < 0.0f)
 					{
 						if (intersectX > intersectY)
 						{
-							if (deltaX > 0.0f)
+							if (!pushedX && abs(intersectX) > 1.0f)
 							{
-								thisTransform->SetPosition(Vector3(pos.x + intersectX, pos.y, pos.z));
-								if (thisRigidbody->GetVelocity().x > 0)
+								pushedX = true;
+								if (deltaX > 0.0f)
 								{
-									thisRigidbody->SetVelocity(Vector2(0, thisRigidbody->GetVelocity().y));
+									thisTransform->SetPosition(Vector3(pos.x + intersectX, pos.y, pos.z));
 								}
-							}
-							else
-							{
-								thisTransform->SetPosition(Vector3(pos.x - intersectX, pos.y, pos.z));
-								if (thisRigidbody->GetVelocity().x < 0)
+								else
 								{
-									thisRigidbody->SetVelocity(Vector2(0, thisRigidbody->GetVelocity().y));
+									thisTransform->SetPosition(Vector3(pos.x - intersectX, pos.y, pos.z));
 								}
 							}
 						}
-						else
+						else 
 						{
-							if (deltaY > 0.0f)
+							if (!pushedY && abs(intersectY) > 1.0f)
 							{
-								intersectY /= 2;
-								thisTransform->SetPosition(Vector3(pos.x, pos.y + intersectY, pos.z));
-								if (thisRigidbody->GetVelocity().y < 0) 
+								pushedY = true;
+								if (deltaY > 0.0f)
 								{
-									thisRigidbody->SetVelocity(Vector2(thisRigidbody->GetVelocity().x, 0));
+									thisTransform->SetPosition(Vector3(pos.x, pos.y + intersectY, pos.z));
 								}
-							}
-							else
-							{
-								thisTransform->SetPosition(Vector3(pos.x, pos.y - intersectY, pos.z));
-								if (thisRigidbody->GetVelocity().y > 0)
+								else
 								{
-									thisRigidbody->SetVelocity(Vector2(thisRigidbody->GetVelocity().x, 0));
+									thisTransform->SetPosition(Vector3(pos.x, pos.y - intersectY, pos.z));
 								}
 							}
 						}
 
-						return;
+						hit = Hit((otherPosition - thisPosition).Normalised(), c);
+
+						collided = true;
 					}
 				}
 			}
 		}
 	}
 
-	return;
+	return collided;
 }
 
 bool Collision::AABB(const SDL_Rect& rectA, const SDL_Rect& rectB)

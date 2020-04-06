@@ -14,7 +14,9 @@ SDL_Texture* TextureManager::LoadTexture(const char* fileName)
 {
 	for (auto& t : loadedTextures)
 	{
-		if (t.first == fileName)
+		std::string str1 = t.first;
+		std::string str2 = fileName;
+		if (str1 == str2)
 		{
 			return t.second;
 		}

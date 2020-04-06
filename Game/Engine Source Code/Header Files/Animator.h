@@ -14,14 +14,16 @@ struct Animation
 	int index;
 	int frames;
 	int speed;
+	bool looping;
 
 	Animation() = default;
-	Animation(std::string n, int i, int f, int s)
+	Animation(std::string n, int i, int f, int s, bool loop = true)
 	{
 		name = n;
 		index = i;
 		frames = f;
 		speed = s;
+		looping = loop;
 	}
 
 	std::string ToString()
@@ -70,11 +72,14 @@ public:
 	void Init() override;
 	void Update() override;
 
-	void AddNewAnimation(std::string animName, int index, int frames, int speed);
+	void AddNewAnimation(std::string animName, int index, int frames, int speed, bool loop = true);
 	void AddNewAnimation(Animation& animation);
 
 	void PlayAnimation(const char* animName);
 	void PlayAnimation(int index);
+
+	bool FinishedAnimation(const char* animName);
+	bool FinishedAnimation(int index);
 
 	int animIndex = 0;
 	std::vector<Animation> animations;
@@ -91,12 +96,17 @@ public:
 
 private:
 
-	int frames = 1;
-	int speed = 100; //delay between frames in milliseconds
-
-	std::string animsString;
-
 	int GetAnimIndex(const char* animName);
+
+	const char*		currentAnimationName;
+
+	int				frames = 1;
+	int				speed = 100; //delay between frames in milliseconds
+	bool			looping = true;
+
+	int				ticksOffset;
+
+	std::string		animsString;
 };
 
 #endif

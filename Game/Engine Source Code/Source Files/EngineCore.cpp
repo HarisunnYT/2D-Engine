@@ -80,7 +80,6 @@ void EngineCore::Update(float dTime)
 	InputSystem::Update();
 
 	Ecs->Update();
-
 	game->Update();
 
 	game->Physics();
@@ -89,7 +88,7 @@ void EngineCore::Update(float dTime)
 	Ecs->LateUpdate();
 	game->LateUpdate();
 
-	if (InputSystem::KeyReleased(SDLK_ESCAPE))
+	if (InputSystem::KeyHeld(SDLK_ESCAPE))
 	{
 		EngineCore::isRunning = false;
 	}

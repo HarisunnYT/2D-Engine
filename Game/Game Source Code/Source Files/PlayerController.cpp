@@ -16,15 +16,15 @@ void PlayerController::Init()
 	collider = &entity->GetComponent<Collider>();
 }
 
-void PlayerController::LateUpdate()
+void PlayerController::Update()
 {
 	Vector2 velocity = rigidbody->GetVelocity();
-	if (InputSystem::KeyHeld(SDLK_a))
+	if (InputSystem::KeyHeld(SDL_SCANCODE_A))
 	{
 		velocity.x = -1 * speed;
 		animator->PlayAnimation("WalkLeft");
 	}
-	else if (InputSystem::KeyHeld(SDLK_d))
+	else if (InputSystem::KeyHeld(SDL_SCANCODE_D))
 	{
 		velocity.x = 1 * speed;
 		animator->PlayAnimation("WalkRight");
@@ -34,7 +34,7 @@ void PlayerController::LateUpdate()
 		velocity.x = 0;
 	}
 
-	if (InputSystem::KeyPressed(SDLK_SPACE))
+	if (InputSystem::KeyHeld(SDL_SCANCODE_SPACE) && velocity.y == 0)
 	{
 		velocity.y = 150;
 	}

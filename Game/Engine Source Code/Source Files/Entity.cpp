@@ -96,17 +96,7 @@ bool Entity::IsActive() const
 void Entity::SetActive(bool a)
 {
 	active = a;
-
-	if (a)
-	{
-		EngineCore::Ecs->entities.push_back(this);
-		OnEnable();
-	}
-	else
-	{
-		OnDisable();
-		EngineCore::Ecs->entities.remove(this);
-	}
+	EngineCore::Ecs->SubscribeEntityStateChange(this, active);
 }
 
 void Entity::SaveToDisk(const char* path)

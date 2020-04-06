@@ -145,6 +145,7 @@
     <ClCompile Include="Engine Source Code\Source Files\EngineCore.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\Entity.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\Game.cpp" />
+    <ClCompile Include="Engine Source Code\Source Files\Hit.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\InputSystem.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\Physics.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\Point.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Engine Source Code\Source Files\Vector3.cpp" />
     <ClCompile Include="Game Source Code\Source Files\PlayerController.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Source Code\Header Files\Animator.h" />
@@ -170,6 +172,7 @@
     <ClInclude Include="Engine Source Code\Header Files\EngineCore.h" />
     <ClInclude Include="Engine Source Code\Header Files\Entity.h" />
     <ClInclude Include="Engine Source Code\Header Files\Game.h" />
+    <ClInclude Include="Engine Source Code\Header Files\Hit.h" />
     <ClInclude Include="Engine Source Code\Header Files\InputSystem.h" />
     <ClInclude Include="Engine Source Code\Header Files\Physics.h" />
     <ClInclude Include="Engine Source Code\Header Files\Point.h" />
@@ -183,6 +186,7 @@
     <ClInclude Include="Engine Source Code\Header Files\Vector2.h" />
     <ClInclude Include="Engine Source Code\Header Files\Vector3.h" />
     <ClInclude Include="Game Source Code\Header Files\PlayerController.h" />
+    <ClInclude Include="Particle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

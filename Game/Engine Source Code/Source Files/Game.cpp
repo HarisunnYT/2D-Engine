@@ -12,11 +12,11 @@ TileMap* tileMap = nullptr;
 TileMap* backgroundMap = nullptr;
 
 Entity* player = nullptr;
-Entity* tile = nullptr;
+Entity* particle = nullptr;
 
 Game::Game()
 {
-	EngineCore::isDebug = true;
+	EngineCore::isDebug = false;
 	Collision::drawGrid = false;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
@@ -26,7 +26,12 @@ Game::Game()
 	backgroundMap->LoadMap("Assets/bgmap.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(77, 16), 3.5f);
 
 	tileMap = new TileMap();
-	tileMap->LoadMap("Assets/map2.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(77, 16), 3.5f);
+	tileMap->LoadMap("Assets/map.map", "Assets/terrain_ss.png", Vector2(16, 16), Vector2(77, 16), 3.5f);
+
+	particle = &EngineCore::Ecs->AddEntity();
+	particle->AddComponent<Particle>("Assets/explosion.png", Vector2(96, 96), Vector2(10, 5), 10, 1);
+	particle->SetActive(false);
+
 }
 
 Game::~Game()
@@ -41,7 +46,12 @@ void Game::Update()
 		{
 			if (entity->HasComponent<Collider>() && entity->GetComponent<Collider>().Tag == "ground" && SDL_PointInRect(const_cast<SDL_Point*>(&InputSystem::MousePosition), const_cast<SDL_Rect*>(&entity->GetComponent<Collider>().collider)))
 			{
-				player->GetComponent<Rigidbody>().ForceAwake();
+				Vector3 targetPos = entity->transform->GetPosition();
+				targetPos.x -= particle->GetComponent<Particle>().spriteSize.x / 4;
+				targetPos.y -= particle->GetComponent<Particle>().spriteSize.y / 4;
+				particle->SetActive(true);
+				particle->transform->SetPosition(targetPos);
+
 				entity->SetActive(false);
 				break;
 			}

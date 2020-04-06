@@ -47,10 +47,6 @@ void Collider::DebugDraw()
 
 void Collider::Physics()
 {
-	if (rigidbody != nullptr)
-	{
-		Collision::CheckCollision(this);
-	}
 }
 
 void Collider::OnEnable()

@@ -2,6 +2,8 @@
 
 std::string Rigidbody::componentName = "rigidbody";
 
+Hit hit;
+
 Rigidbody::Rigidbody(bool gravity)
 {
 	useGravity = gravity;
@@ -12,33 +14,42 @@ void Rigidbody::Init()
 	transform = &entity->GetComponent<Transform>();
 }
 
-void Rigidbody::Update()
+void Rigidbody::Physics()
 {
-	if (useGravity && !sleeping)
+	if (entity->HasComponent<Collider>())
 	{
-		velocity.y += Physics::gravity.y * mass;
-	}
-
-	float threshold = abs(transform->GetRawPosition().y - lastPosition.y);
-
-	if (!sleeping && threshold < sleepThreshold)
-	{
-		if (sleepTimer == 0)
+		if (Collision::CheckCollision(&entity->GetComponent<Collider>(), hit))
 		{
-			sleepTimer = SDL_GetTicks() + timeTillSleep;
-		}
-		else if (SDL_GetTicks() >= sleepTimer)
-		{
-			sleeping = true;
-		}
-	}
-	else if (threshold > sleepThreshold)
-	{
-		sleeping = false;
-		sleepTimer = 0;
-	}
+			int xRounded = abs(hit.normal.x) > 0.8f ? (hit.normal.x > 0 ? 1 : -1) : 0;
+			int yRounded = abs(hit.normal.y) > 0.8f ? (hit.normal.y > 0 ? 1 : -1) : 0;
+			if ((yRounded == 1 && velocity.y < 0))
+			{
+				velocity = Vector2(velocity.x, 0);
+			}
+			else if ((xRounded == 1 && velocity.x > 0) || (xRounded == -1 && velocity.x < 0))
+			{
+				velocity = Vector2(0, velocity.y);
+			}
 
-	lastPosition = transform->GetRawPosition();
+			if (yRounded == -1 && velocity.y > 0)
+			{
+				velocity.y *= -0.25;
+			}
+
+			if (xRounded == 0 && yRounded == 0)
+			{
+				ApplyGravity();
+			}
+		}
+		else
+		{
+			ApplyGravity();
+		}
+	}
+	else
+	{
+		ApplyGravity();
+	}
 }
 
 void Rigidbody::LateUpdate()
@@ -48,29 +59,12 @@ void Rigidbody::LateUpdate()
 
 void Rigidbody::SetVelocity(Vector2 v)
 {
-	float mag = abs(v.x - velocity.x);
-	if (mag > 0.0 || v.x != 0)
-	{
-		ForceAwake();
-	}
-
 	velocity = v;
 }
 
 Vector2 Rigidbody::GetVelocity()
 {
 	return velocity;
-}
-
-bool Rigidbody::IsSleeping()
-{
-	return sleeping;
-}
-
-void Rigidbody::ForceAwake()
-{
-	sleeping = false;
-	sleepTimer = 0;
 }
 
 std::string Rigidbody::Parse()
@@ -105,6 +99,14 @@ bool Rigidbody::TryParse(std::string value, Entity* entity)
 	}
 
 	return false;
+}
+
+void Rigidbody::ApplyGravity()
+{
+	if (useGravity)
+	{
+		velocity.y += Physics::gravity.y * mass;
+	}
 }
 
 

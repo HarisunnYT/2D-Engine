@@ -1,5 +1,6 @@
 #include "EngineCore.h"
 #include <time.h>
+#include "InputSystem.h"
 
 EngineCore* engineCore = nullptr;
 

@@ -8,6 +8,7 @@
 #include "Collision.h"
 #include "Physics.h"
 #include "Components.h"
+#include "Hit.h"
 
 #include <stdio.h>
 

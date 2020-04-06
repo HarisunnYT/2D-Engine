@@ -6,6 +6,8 @@
 #include "EngineCore.h"
 
 class Transform;
+class Collider;
+class Hit;
 class Rigidbody : public Component
 {
 public:
@@ -14,14 +16,11 @@ public:
 	Rigidbody(bool useGravity);
 
 	void Init() override;
-	void Update() override;
+	void Physics() override;
 	void LateUpdate() override;
 
 	void SetVelocity(Vector2 velocity);
 	Vector2 GetVelocity();
-
-	bool IsSleeping();
-	void ForceAwake();
 
 	float mass = 1;
 
@@ -37,18 +36,13 @@ public:
 
 private:
 
+	void ApplyGravity();
+
 	Transform*		transform = nullptr;
+
 	Vector2			velocity;
 
-	Vector3			lastPosition;
-
 	bool			useGravity = true;
-	bool			sleeping = false;
-
-	float			sleepThreshold = 1.0f;
-
-	int				timeTillSleep = 1000;
-	int				sleepTimer = 0;
 };
 
 #endif

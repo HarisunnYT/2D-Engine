@@ -15,30 +15,41 @@ void Animator::Init()
 
 void Animator::Update()
 {
-	sourceRect.x = sourceRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
-	sourceRect.y = animIndex * static_cast<int>(spriteSize.y);
+	if (looping || (!looping && sourceRect.x < spriteSize.x * (frames - 1)))
+	{
+		sourceRect.x = sourceRect.w * static_cast<int>(((SDL_GetTicks() - ticksOffset) / speed) % frames);
+		sourceRect.y = animIndex * static_cast<int>(spriteSize.y);
+	}
 
 	SpriteRenderer::Update();
 }
 
-void Animator::AddNewAnimation(std::string animName, int index, int frames, int speed)
+void Animator::AddNewAnimation(std::string animName, int index, int frames, int speed, bool loop)
 {
-	Animation a = Animation(animName, index, frames, speed);
+	Animation a = Animation(animName, index, frames, speed, loop);
 	animations.push_back(a);
 }
 
 void Animator::AddNewAnimation(Animation& animation)
 {
-	AddNewAnimation(animation.name, animation.index, animation.frames, animation.speed);
+	AddNewAnimation(animation.name, animation.index, animation.frames, animation.speed, animation.looping);
 }
 
 void Animator::PlayAnimation(const char* animName)
 {
-	int i = GetAnimIndex(animName);
+	if (currentAnimationName != animName)
+	{
+		int i = GetAnimIndex(animName);
 
-	animIndex = animations[i].index;
-	frames = animations[i].frames;
-	speed = animations[i].speed;
+		ticksOffset = SDL_GetTicks();
+
+		animIndex = animations[i].index;
+		frames = animations[i].frames;
+		speed = animations[i].speed;
+		looping = animations[i].looping;
+
+		currentAnimationName = animName;
+	}
 }
 
 void Animator::PlayAnimation(int index)
@@ -48,6 +59,31 @@ void Animator::PlayAnimation(int index)
 		if (anim.index == index)
 		{
 			PlayAnimation(anim.name.c_str());
+		}
+	}
+}
+
+bool Animator::FinishedAnimation(const char* animName)
+{
+	int i = GetAnimIndex(animName);
+
+	if (looping)
+	{
+		return true;
+	}
+	else
+	{
+		return sourceRect.x >= spriteSize.x * (frames - 1);
+	}
+}
+
+bool Animator::FinishedAnimation(int index)
+{
+	for (auto anim : animations)
+	{
+		if (anim.index == index)
+		{
+			return FinishedAnimation(anim.name.c_str());
 		}
 	}
 }

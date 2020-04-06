@@ -16,7 +16,10 @@ void ECS::Update()
 {
 	for (auto& e : entities)
 	{
-		e->Update();
+		if (e != nullptr)
+		{
+			e->Update();
+		}
 	}
 }
 
@@ -61,6 +64,22 @@ void ECS::LateUpdate()
 			e->LateUpdate();
 		}
 	}
+
+	for (auto& e : changedEntities)
+	{
+		if (e.second)
+		{
+			EngineCore::Ecs->entities.push_back(e.first);
+			e.first->OnEnable();
+		}
+		else
+		{
+			e.first->OnDisable();
+			EngineCore::Ecs->entities.remove(e.first);
+		}
+	}
+
+	changedEntities.clear();
 }
 
 void ECS::FixedUpdate()
@@ -86,6 +105,11 @@ void ECS::DebugDraw()
 			}
 		}
 	}
+}
+
+void ECS::SubscribeEntityStateChange(Entity* entity, bool state)
+{
+	changedEntities.push_back(pair<Entity*, bool>(entity, state));
 }
 
 Entity& ECS::AddEntity()

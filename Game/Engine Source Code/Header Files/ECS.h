@@ -28,6 +28,8 @@ public:
 	void FixedUpdate();
 	void DebugDraw();
 
+	void SubscribeEntityStateChange(Entity* entity, bool state);
+
 	Entity& AddEntity();
 	Entity& AddEntity(Entity* entity);
 	Entity& AddEntity(const char* path);
@@ -35,6 +37,8 @@ public:
 	std::list<Entity*> entities;
 
 private:
+
+	std::list<std::pair<Entity*, bool>> changedEntities;
 
 };
 
