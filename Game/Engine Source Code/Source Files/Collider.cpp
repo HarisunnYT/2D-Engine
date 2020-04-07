@@ -42,7 +42,7 @@ void Collider::DebugDraw()
 {
 	SDL_SetRenderDrawColor(EngineCore::Renderer, 0, 255, 0, 255);
 	SDL_RenderDrawRect(EngineCore::Renderer, &collider);
-	SDL_SetRenderDrawColor(EngineCore::Renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(EngineCore::Renderer, 99, 173, 255, 255);
 }
 
 void Collider::Physics()

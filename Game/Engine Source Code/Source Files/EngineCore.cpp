@@ -42,7 +42,7 @@ void EngineCore::Init(const char* title, int xpos, int ypos, bool fullscreen)
 		window = SDL_CreateWindow(title, xpos, ypos, static_cast<int>(screenSize.x), static_cast<int>(screenSize.y), flags);
 		Renderer = SDL_CreateRenderer(window, -1, 0);
 
-		SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(Renderer, 99, 173, 255, 255);
 
 		isRunning = true;
 	}

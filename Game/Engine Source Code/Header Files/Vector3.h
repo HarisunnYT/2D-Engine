@@ -36,6 +36,8 @@ public:
 	bool operator !=(const Vector3& p);
 
 	static Vector3 Zero();
+	static Vector3 Lerp(const Vector3& vecA, const Vector3& vecB, float time);
+
 	Vector3 Normalised();
 
 	float Magnitude();

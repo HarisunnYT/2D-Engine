@@ -38,7 +38,7 @@ void Rigidbody::Physics()
 				velocity.y *= -0.25;
 			}
 
-			if (xRounded == 0 && yRounded == 0)
+			if (yRounded == 0)
 			{
 				ApplyGravity();
 			}

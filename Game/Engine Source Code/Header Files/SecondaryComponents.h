@@ -3,9 +3,11 @@
 #ifndef SECONDARYCOMPONENTS_H
 #define SECONDARYCOMPONENTS_H
 
-#include "PlayerController.h"
 #include "Animator.h"
 #include "Camera.h"
 #include "Particle.h"
+
+#include "PlayerController.h"
+#include "Brick.h"
 
 #endif

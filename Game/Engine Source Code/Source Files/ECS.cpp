@@ -3,6 +3,7 @@
 #include "Animator.h"
 
 #include "PlayerController.h"
+#include "Brick.h"
 
 #include <fstream>
 #include <iostream>
@@ -156,13 +157,14 @@ Entity& ECS::AddEntity(const char* path)
 		Entity* entity = &EngineCore::Ecs->AddEntity();
 		for (auto& str : values)
 		{
-			if (str.find("transform") != string::npos && Transform::TryParse(str, entity)) {}
-			else if (str.find("collider") != string::npos && Collider::TryParse(str, entity)) {}
-			else if (str.find("spriterenderer") != string::npos && SpriteRenderer::TryParse(str, entity)) {}
-			else if (str.find("rigidbody") != string::npos && Rigidbody::TryParse(str, entity)) {}
-			else if (str.find("playercontroller") != string::npos && PlayerController::TryParse(str, entity)) {}
-			else if (str.find("animator") != string::npos && Animator::TryParse(str, entity)) {}
-			else if (str.find("tile") != string::npos && Tile::TryParse(str, entity)) {}
+			if (str.find(Transform::componentName) != string::npos && Transform::TryParse(str, entity)) {}
+			else if (str.find(Collider::componentName) != string::npos && Collider::TryParse(str, entity)) {}
+			else if (str.find(SpriteRenderer::componentName) != string::npos && SpriteRenderer::TryParse(str, entity)) {}
+			else if (str.find(Rigidbody::componentName) != string::npos && Rigidbody::TryParse(str, entity)) {}
+			else if (str.find(PlayerController::componentName) != string::npos && PlayerController::TryParse(str, entity)) {}
+			else if (str.find(Animator::componentName) != string::npos && Animator::TryParse(str, entity)) {}
+			else if (str.find(Tile::componentName) != string::npos && Tile::TryParse(str, entity)) {}
+			else if (str.find(Brick::componentName) != string::npos && Brick::TryParse(str, entity)) {}
 		}
 
 		entities.emplace_back(std::move(entity));

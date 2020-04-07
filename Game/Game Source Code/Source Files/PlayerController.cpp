@@ -1,5 +1,6 @@
 #include "PlayerController.h"
 #include "InputSystem.h"
+#include "Brick.h"
 
 std::string PlayerController::componentName = "playercontroller";
 
@@ -48,7 +49,6 @@ void PlayerController::Update()
 
 	if (jumping && InputSystem::KeyHeld(SDL_SCANCODE_SPACE) && velocity.y < maxJumpVelocity)
 	{
-		std::cout << velocity.y << std::endl;
 		velocity.y += jumpLerpSpeed;
 	}
 
@@ -57,10 +57,14 @@ void PlayerController::Update()
 
 void PlayerController::OnCollision(Hit* hit)
 {
-	if (hit->collider->Tag == "brick" && hit->normal.y < -0.95f) 
+	if (hit->normal.y < -0.95f)
 	{
-		hit->collider->entity->GetComponent<Tile>().SetSource(Vector2(144.0f, 16.0f));
-		hit->collider->Trigger = true;
+		if (hit->collider->Tag == "brick")
+		{
+			hit->collider->entity->GetComponent<Brick>().Bump();
+		}
+
+		jumping = false;
 	}
 }
 

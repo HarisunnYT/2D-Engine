@@ -112,6 +112,15 @@ Vector3 Vector3::Zero()
 	return Vector3(0, 0, 0);
 }
 
+Vector3 Vector3::Lerp(const Vector3& vecA, const Vector3& vecB, float time)
+{
+	float x = (vecA.x * (1.0f - time)) + (vecB.x * time);
+	float y = (vecA.y * (1.0f - time)) + (vecB.y * time);
+	float z = (vecA.z * (1.0f - time)) + (vecB.z * time);
+
+	return Vector3(x, y, z);
+}
+
 Vector3 Vector3::Normalised()
 {
 	Vector3 vec;
