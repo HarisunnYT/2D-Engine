@@ -3,6 +3,11 @@
 
 std::string Brick::componentName = "brick";
 
+Brick::Brick(int type)
+{
+	brickType = type;
+}
+
 void Brick::FixedUpdate()
 {
 	if (bumping)
@@ -33,13 +38,19 @@ void Brick::FixedUpdate()
 
 void Brick::Bump()
 {
-	if (!bumping)
+	if (!bumping && canBump)
 	{
 		fromPosition = entity->transform->GetRawPosition();
 		toPosition = entity->transform->GetRawPosition() + Vector3(0, bumpAmount, 0);
 
 		timer = 0.0f;
 		bumping = true;
+
+		if (brickType == ITEMSPAWNER)
+		{
+			entity->GetComponent<Tile>().SetSource(Vector2(96.0f, 32.0f));
+			canBump = false;
+		}
 	}
 }
 
@@ -56,17 +67,18 @@ std::string Brick::Parse()
 
 bool Brick::TryParse(std::string value, Entity* entity)
 {
+	int brickType;
 	std::string name;
 
 	std::stringstream ss(value);
 	{
 		cereal::JSONInputArchive oarchive(ss);
-		oarchive(name);
+		oarchive(name, brickType);
 	}
 
 	if (name == Brick::componentName)
 	{
-		entity->AddComponent<Brick>();
+		entity->AddComponent<Brick>(brickType);
 
 		return true;
 	}

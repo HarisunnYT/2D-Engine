@@ -17,5 +17,6 @@
     "value3": "(16.000000,0.000000)"
 }
 {
-    "value0": "brick"
+    "value0": "brick",
+    "value1": 0
 }

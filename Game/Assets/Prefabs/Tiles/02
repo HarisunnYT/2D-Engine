@@ -5,7 +5,7 @@
 }
 {
     "value0": "collider",
-    "value1": "ground",
+    "value1": "brick",
     "value2": "(0.000000,0.000000)",
     "value3": "(16.000000,16.000000)",
     "value4": false
@@ -15,4 +15,8 @@
     "value1": "Assets/Map/tileset.png",
     "value2": "(16.000000,16.000000)",
     "value3": "(32.000000,0.000000)"
+}
+{
+    "value0": "brick",
+    "value1": 1
 }

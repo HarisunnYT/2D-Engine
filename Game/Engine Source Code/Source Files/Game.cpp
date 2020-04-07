@@ -36,7 +36,7 @@ void Game::Update()
 {
 	if (player->transform->GetPosition().x > EngineCore::screenSize.x / 2 && player->transform->GetRawPosition().x > previousPlayerPosition.x)
 	{
-		EngineCore::camera->offset.x = player->transform->GetRawPosition().x - (EngineCore::screenSize.x / 2);
+		EngineCore::camera->offset.x = static_cast<int>(player->transform->GetRawPosition().x - (EngineCore::screenSize.x / 2));
 	}
 	previousPlayerPosition = player->transform->GetRawPosition();
 }

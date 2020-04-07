@@ -57,7 +57,7 @@ void PlayerController::Update()
 
 void PlayerController::OnCollision(Hit* hit)
 {
-	if (hit->normal.y < -0.95f)
+	if (hit->normal.y < -0.8f)
 	{
 		if (hit->collider->Tag == "brick")
 		{

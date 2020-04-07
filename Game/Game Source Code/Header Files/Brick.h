@@ -5,12 +5,19 @@
 
 #include "EngineCore.h"
 
+enum
+{
+	BRICK,
+	ITEMSPAWNER
+};
+
 class Brick : public Component
 {
 public:
 
-	void FixedUpdate() override;
+	Brick(int brickType);
 
+	void FixedUpdate() override;
 	void Bump();
 
 	std::string Parse() override;
@@ -20,11 +27,14 @@ public:
 	template<class Archive>
 	void Serialize(Archive& archive)
 	{
-		archive(componentName);
+		archive(componentName, brickType);
 	}
 
 private:
 
+	int			brickType;
+
+	bool		canBump = true;
 	bool		bumping = false;
 	int			bumpAmount = -20;
 	float		bumpDuration = 0.1f;
