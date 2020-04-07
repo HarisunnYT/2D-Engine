@@ -107,9 +107,9 @@ bool Vector3::operator!=(const Vector3& p)
 	return !(*this == p);
 }
 
-Vector3& Vector3::Zero()
+Vector3 Vector3::Zero()
 {
-	return this->Multiply(0);
+	return Vector3(0, 0, 0);
 }
 
 Vector3 Vector3::Normalised()

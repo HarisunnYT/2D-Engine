@@ -35,7 +35,7 @@ public:
 	Vector2& operator /(float multiplier);
 	Vector2& operator /=(float multiplier);
 
-	Vector2& Zero();
+	static Vector2 Zero();
 	Vector2 Normalised();
 
 	float Magnitude();

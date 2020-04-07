@@ -12,7 +12,7 @@
 }
 {
     "value0": "tile",
-    "value1": "Assets/terrain_ss.png",
+    "value1": "Assets/Map/tileset.png",
     "value2": "(16.000000,16.000000)",
     "value3": "(48.000000,0.000000)"
 }

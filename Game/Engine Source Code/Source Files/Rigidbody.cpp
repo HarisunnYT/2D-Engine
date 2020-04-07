@@ -18,8 +18,10 @@ void Rigidbody::Physics()
 {
 	if (entity->HasComponent<Collider>())
 	{
-		if (Collision::CheckCollision(&entity->GetComponent<Collider>(), hit))
+		if (Collision::CheckCollision(&entity->GetComponent<Collider>(), hit) && hit.collider != nullptr)
 		{
+			entity->OnCollision(&hit);
+
 			int xRounded = abs(hit.normal.x) > 0.8f ? (hit.normal.x > 0 ? 1 : -1) : 0;
 			int yRounded = abs(hit.normal.y) > 0.8f ? (hit.normal.y > 0 ? 1 : -1) : 0;
 			if ((yRounded == 1 && velocity.y < 0))
@@ -54,7 +56,7 @@ void Rigidbody::Physics()
 
 void Rigidbody::LateUpdate()
 {
-	transform->SetPosition((transform->GetPosition() + (Vector3(velocity.x, -velocity.y, 0) * EngineCore::fixedTimeStep)));
+	transform->SetRawPosition((transform->GetRawPosition() + (Vector3(velocity.x, -velocity.y, 0) * EngineCore::fixedTimeStep)));
 }
 
 void Rigidbody::SetVelocity(Vector2 v)

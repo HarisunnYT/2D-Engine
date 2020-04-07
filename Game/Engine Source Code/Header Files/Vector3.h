@@ -35,7 +35,7 @@ public:
 	bool operator ==(const Vector3& p);
 	bool operator !=(const Vector3& p);
 
-	Vector3& Zero();
+	static Vector3 Zero();
 	Vector3 Normalised();
 
 	float Magnitude();

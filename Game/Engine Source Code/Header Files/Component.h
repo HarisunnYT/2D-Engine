@@ -8,6 +8,7 @@
 #include <string>
 
 class Entity;
+class Hit;
 class Component
 {
 public:
@@ -25,6 +26,8 @@ public:
 
 	virtual void OnEnable() {}
 	virtual void OnDisable() {}
+
+	virtual void OnCollision(Hit* hit) {}
 
 	virtual std::string Parse() { return ""; }
 

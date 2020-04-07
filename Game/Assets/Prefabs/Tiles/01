@@ -5,14 +5,14 @@
 }
 {
     "value0": "collider",
-    "value1": "ground",
+    "value1": "brick",
     "value2": "(0.000000,0.000000)",
     "value3": "(16.000000,16.000000)",
     "value4": false
 }
 {
     "value0": "tile",
-    "value1": "Assets/terrain_ss.png",
+    "value1": "Assets/Map/tileset.png",
     "value2": "(16.000000,16.000000)",
     "value3": "(16.000000,0.000000)"
 }

@@ -88,6 +88,14 @@ void Entity::OnDisable()
 	}
 }
 
+void Entity::OnCollision(Hit* hit)
+{
+	for (auto& c : components)
+	{
+		c->OnCollision(hit);
+	}
+}
+
 bool Entity::IsActive() const
 {
 	return active;

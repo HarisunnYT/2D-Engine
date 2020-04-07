@@ -13,6 +13,7 @@ class Collider : public Component
 {
 public:
 
+	Collider() = default;
 	Collider(std::string tag, bool isTrigger);
 
 	void Init() override;

@@ -17,6 +17,8 @@ public:
 	void Init() override;
 	void Update() override;
 
+	void OnCollision(Hit* hit) override;
+
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);
 	static std::string componentName;
@@ -30,6 +32,10 @@ public:
 private:
 
 	float speed = 2.0f;
+	float jumpSpeed = 100.0f;
+	float jumpLerpSpeed = 5.0f;
+
+	float maxJumpVelocity = 225.0f;
 
 	Transform* transform;
 	Rigidbody* rigidbody;

@@ -36,6 +36,7 @@ using ComponentBitSet = std::bitset<MaxComponents>;
 using ComponentArray = std::array<Component*, MaxComponents>;
 
 class Transform;
+class Hit;
 class Entity
 {
 public:
@@ -53,6 +54,8 @@ public:
 
 	virtual void OnEnable();
 	virtual void OnDisable();
+
+	virtual void OnCollision(Hit* hit);
 
 	bool IsActive() const;
 	void SetActive(bool active);

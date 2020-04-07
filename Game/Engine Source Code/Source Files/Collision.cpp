@@ -80,6 +80,8 @@ bool Collision::CheckCollision(Collider* collider, Hit& hit)
 	bool pushedX = false;
 	bool pushedY = false;
 
+	hit = Hit(Vector2::Zero(), nullptr);
+
 	for (auto& g : Collision::grid)
 	{
 		tempRec.x = g.first.x - EngineCore::camera->offset.x;
@@ -143,7 +145,8 @@ bool Collision::CheckCollision(Collider* collider, Hit& hit)
 							}
 						}
 
-						hit = Hit((otherPosition - thisPosition).Normalised(), c);
+						hit.normal = (otherPosition - thisPosition).Normalised();
+						hit.collider = c;
 
 						collided = true;
 					}

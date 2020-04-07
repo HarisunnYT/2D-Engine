@@ -16,6 +16,7 @@ public:
 	void SetPosition(Vector3 pos);
 
 	Vector3 GetRawPosition();
+	void SetRawPosition(Vector3 pos);
 
 	Vector2 scale;
 

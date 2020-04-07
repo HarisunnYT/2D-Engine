@@ -74,4 +74,18 @@ void TileMap::AddTile(const char* spriteSheetPath, std::string id, Vector3 posit
 		tile = &(EngineCore::Ecs->AddEntity());
 		tile->AddComponent<Tile>(spriteSheetPath, position, size, source, scale);
 	}
+
+	tiles.push_back(tile);
+}
+
+void TileMap::SetOffset(Vector3 pos)
+{
+	for (auto& t : tiles)
+	{
+		if (t != nullptr)
+		{
+			Vector3 p = t->transform->GetPosition();
+			t->transform->SetPosition(Vector3(p.x + pos.x, p.y + pos.y, pos.z));
+		}
+	}
 }

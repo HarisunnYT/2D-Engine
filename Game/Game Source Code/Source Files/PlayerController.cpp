@@ -3,6 +3,8 @@
 
 std::string PlayerController::componentName = "playercontroller";
 
+bool jumping = false;
+
 PlayerController::PlayerController(float s)
 {
 	speed = s;
@@ -36,10 +38,30 @@ void PlayerController::Update()
 
 	if (InputSystem::KeyHeld(SDL_SCANCODE_SPACE) && velocity.y == 0)
 	{
-		velocity.y = 150;
+		velocity.y += jumpSpeed;
+		jumping = true;
+	}
+	else if (!InputSystem::KeyHeld(SDL_SCANCODE_SPACE) || velocity.y >= maxJumpVelocity)
+	{
+		jumping = false;
+	}
+
+	if (jumping && InputSystem::KeyHeld(SDL_SCANCODE_SPACE) && velocity.y < maxJumpVelocity)
+	{
+		std::cout << velocity.y << std::endl;
+		velocity.y += jumpLerpSpeed;
 	}
 
 	rigidbody->SetVelocity(velocity);
+}
+
+void PlayerController::OnCollision(Hit* hit)
+{
+	if (hit->collider->Tag == "brick" && hit->normal.y < -0.95f) 
+	{
+		hit->collider->entity->GetComponent<Tile>().SetSource(Vector2(144.0f, 16.0f));
+		hit->collider->Trigger = true;
+	}
 }
 
 std::string PlayerController::Parse()

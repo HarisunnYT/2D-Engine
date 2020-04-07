@@ -23,6 +23,8 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	void SetSource(Vector2 source);
+
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);
 	static std::string componentName;

@@ -4,9 +4,6 @@
 
 EngineCore* engineCore = nullptr;
 
-const int FPS = 60;
-const int frameDelay = 100 / FPS;
-
 float accumulatedTime;
 
 void Tick(EngineCore* engineCore, float dTime)

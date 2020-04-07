@@ -28,6 +28,11 @@ Vector3 Transform::GetRawPosition()
 	return position;
 }
 
+void Transform::SetRawPosition(Vector3 pos)
+{
+	position = pos;
+}
+
 std::string Transform::Parse()
 {
 	std::stringstream ss;

@@ -57,6 +57,12 @@ void Tile::Draw()
 	}
 }
 
+void Tile::SetSource(Vector2 s)
+{
+	source = s;
+	SetRects();
+}
+
 std::string Tile::Parse()
 {
 	std::stringstream ss;

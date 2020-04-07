@@ -93,9 +93,9 @@ Vector2& Vector2::operator/=(float multiplier)
 	return this->Divide(multiplier);
 }
 
-Vector2& Vector2::Zero()
+Vector2 Vector2::Zero()
 {
-	return this->Multiply(0);
+	return Vector2(0, 0);
 }
 
 Vector2 Vector2::Normalised()

@@ -17,7 +17,7 @@ bool EngineCore::isDebug = false;
 Vector2 EngineCore::screenSize = Vector2(800.0f, 600.0f);
 
 float EngineCore::deltaTime = 0;
-float EngineCore::fixedTimeStep = 0.02f;
+float EngineCore::fixedTimeStep = 0.01f;
 
 Game* game = nullptr;
 
