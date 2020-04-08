@@ -28,6 +28,7 @@ public:
 	virtual void OnDisable() {}
 
 	virtual void OnCollision(Hit* hit) {}
+	virtual void OnTrigger(Hit* hit) {}
 
 	virtual std::string Parse() { return ""; }
 

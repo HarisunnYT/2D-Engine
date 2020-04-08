@@ -11,10 +11,10 @@ struct Animation
 {
 	std::string name;
 
-	int index;
-	int frames;
-	int speed;
-	bool looping;
+	int index = 0;
+	int frames = 0;
+	int speed = 0;
+	bool looping = true;
 
 	Animation() = default;
 	Animation(std::string n, int i, int f, int s, bool loop = true)

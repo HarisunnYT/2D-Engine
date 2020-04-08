@@ -96,6 +96,14 @@ void Entity::OnCollision(Hit* hit)
 	}
 }
 
+void Entity::OnTrigger(Hit* hit)
+{
+	for (auto& c : components)
+	{
+		c->OnTrigger(hit);
+	}
+}
+
 bool Entity::IsActive() const
 {
 	return active;

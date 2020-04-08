@@ -111,6 +111,9 @@
     <ClCompile Include="Game Source Code\Source Files\Brick.cpp">
       <Filter>Source Files\Game\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Game Source Code\Source Files\Coin.cpp">
+      <Filter>Source Files\Game\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Source Code\Header Files\Collision.h">
@@ -182,9 +185,6 @@
     <ClInclude Include="Engine Source Code\Header Files\Hit.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Particle.h">
-      <Filter>Header Files\Engine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Game Source Code\Header Files\PlayerController.h">
       <Filter>Header Files\Game\Components</Filter>
     </ClInclude>
@@ -192,6 +192,9 @@
       <Filter>Header Files\Engine\Components</Filter>
     </ClInclude>
     <ClInclude Include="Game Source Code\Header Files\Brick.h">
+      <Filter>Header Files\Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Source Code\Header Files\Coin.h">
       <Filter>Header Files\Game\Components</Filter>
     </ClInclude>
   </ItemGroup>

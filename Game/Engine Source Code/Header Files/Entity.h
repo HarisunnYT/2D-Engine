@@ -56,6 +56,7 @@ public:
 	virtual void OnDisable();
 
 	virtual void OnCollision(Hit* hit);
+	virtual void OnTrigger(Hit* hit);
 
 	bool IsActive() const;
 	void SetActive(bool active);

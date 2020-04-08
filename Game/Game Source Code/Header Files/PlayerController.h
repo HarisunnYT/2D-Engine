@@ -18,6 +18,7 @@ public:
 	void Update() override;
 
 	void OnCollision(Hit* hit) override;
+	void OnTrigger(Hit* hit) override;
 
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);

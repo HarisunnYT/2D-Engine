@@ -25,6 +25,16 @@ public:
 
 	void SetSpeed(int speed);
 
+	std::string Parse() override;
+	static bool TryParse(std::string value, Entity* entity);
+	static std::string componentName;
+
+	template<class Archive>
+	void Serialize(Archive& archive)
+	{
+		archive(componentName, currentPath, frames.ToString(), spriteSize.ToString(), speed, endType);
+	}
+
 private:
 
 	Vector2			frames;

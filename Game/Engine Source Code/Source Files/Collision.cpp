@@ -52,11 +52,6 @@ void Collision::DebugDraw()
 
 void Collision::UpdateGrid(Collider* collider)
 {
-	if (collider->Trigger)
-	{
-		return;
-	}
-
 	//add collider to correct grid
 	for (auto& g : grid)
 	{
@@ -93,7 +88,7 @@ bool Collision::CheckCollision(Collider* collider, Hit& hit)
 		{
 			for (auto& c : g.second)
 			{
-				if (c != collider && !c->Trigger && c->entity->IsActive())
+				if (c != collider && c->entity->IsActive())
 				{
 					Vector2 otherPosition = c->Centre();
 					Vector2 otherHalfSize = Vector2((float)c->collider.w / 2, (float)c->collider.h / 2);
@@ -114,41 +109,49 @@ bool Collision::CheckCollision(Collider* collider, Hit& hit)
 
 					if (intersectX < 0.0 && intersectY < 0.0f)
 					{
-						if (intersectX > intersectY)
-						{
-							if (!pushedX && abs(intersectX) > 1.0f)
-							{
-								pushedX = true;
-								if (deltaX > 0.0f)
-								{
-									thisTransform->SetPosition(Vector3(pos.x + intersectX, pos.y, pos.z));
-								}
-								else
-								{
-									thisTransform->SetPosition(Vector3(pos.x - intersectX, pos.y, pos.z));
-								}
-							}
-						}
-						else 
-						{
-							if (!pushedY && abs(intersectY) > 1.0f)
-							{
-								pushedY = true;
-								if (deltaY > 0.0f)
-								{
-									thisTransform->SetPosition(Vector3(pos.x, pos.y + intersectY, pos.z));
-								}
-								else
-								{
-									thisTransform->SetPosition(Vector3(pos.x, pos.y - intersectY, pos.z));
-								}
-							}
-						}
-
 						hit.normal = (otherPosition - thisPosition).Normalised();
 						hit.collider = c;
 
-						collided = true;
+						if (c->Trigger)
+						{
+							collider->entity->OnTrigger(&hit);
+							c->entity->OnTrigger(&hit);
+						}
+						else
+						{
+							if (intersectX > intersectY)
+							{
+								if (!pushedX && abs(intersectX) > 1.0f)
+								{
+									pushedX = true;
+									if (deltaX > 0.0f)
+									{
+										thisTransform->SetPosition(Vector3(pos.x + intersectX, pos.y, pos.z));
+									}
+									else
+									{
+										thisTransform->SetPosition(Vector3(pos.x - intersectX, pos.y, pos.z));
+									}
+								}
+							}
+							else
+							{
+								if (!pushedY && abs(intersectY) > 1.0f)
+								{
+									pushedY = true;
+									if (deltaY > 0.0f)
+									{
+										thisTransform->SetPosition(Vector3(pos.x, pos.y + intersectY, pos.z));
+									}
+									else
+									{
+										thisTransform->SetPosition(Vector3(pos.x, pos.y - intersectY, pos.z));
+									}
+								}
+							}
+
+							collided = true;
+						}
 					}
 				}
 			}

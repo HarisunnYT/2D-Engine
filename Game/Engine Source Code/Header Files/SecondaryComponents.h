@@ -9,5 +9,6 @@
 
 #include "PlayerController.h"
 #include "Brick.h"
+#include "Coin.h"
 
 #endif

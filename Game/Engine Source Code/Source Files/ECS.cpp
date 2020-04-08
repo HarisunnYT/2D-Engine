@@ -1,9 +1,11 @@
 #include "ECS.h"
 #include "Entity.h"
 #include "Animator.h"
+#include "Particle.h"
 
 #include "PlayerController.h"
 #include "Brick.h"
+#include "Coin.h"
 
 #include <fstream>
 #include <iostream>
@@ -161,10 +163,12 @@ Entity& ECS::AddEntity(const char* path)
 			else if (str.find(Collider::componentName) != string::npos && Collider::TryParse(str, entity)) {}
 			else if (str.find(SpriteRenderer::componentName) != string::npos && SpriteRenderer::TryParse(str, entity)) {}
 			else if (str.find(Rigidbody::componentName) != string::npos && Rigidbody::TryParse(str, entity)) {}
-			else if (str.find(PlayerController::componentName) != string::npos && PlayerController::TryParse(str, entity)) {}
 			else if (str.find(Animator::componentName) != string::npos && Animator::TryParse(str, entity)) {}
 			else if (str.find(Tile::componentName) != string::npos && Tile::TryParse(str, entity)) {}
+			else if (str.find(Particle::componentName) != string::npos && Particle::TryParse(str, entity)) {}
+			else if (str.find(PlayerController::componentName) != string::npos && PlayerController::TryParse(str, entity)) {}
 			else if (str.find(Brick::componentName) != string::npos && Brick::TryParse(str, entity)) {}
+			else if (str.find(Coin::componentName) != string::npos && Coin::TryParse(str, entity)) {}
 		}
 
 		entities.emplace_back(std::move(entity));

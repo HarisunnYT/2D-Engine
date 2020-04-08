@@ -86,6 +86,8 @@ bool Animator::FinishedAnimation(int index)
 			return FinishedAnimation(anim.name.c_str());
 		}
 	}
+
+	return false;
 }
 
 int Animator::GetAnimIndex(const char* animName)

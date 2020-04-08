@@ -5,6 +5,9 @@
 std::string PlayerController::componentName = "playercontroller";
 
 bool jumping = false;
+bool inAir = false;
+
+int currentDirection = 0;
 
 PlayerController::PlayerController(float s)
 {
@@ -25,12 +28,24 @@ void PlayerController::Update()
 	if (InputSystem::KeyHeld(SDL_SCANCODE_A))
 	{
 		velocity.x = -1 * speed;
-		animator->PlayAnimation("WalkLeft");
+
+		if (inAir)
+			animator->PlayAnimation("JumpLeft");
+		else
+			animator->PlayAnimation("WalkLeft");
+
+		currentDirection = -1;
 	}
 	else if (InputSystem::KeyHeld(SDL_SCANCODE_D))
 	{
 		velocity.x = 1 * speed;
-		animator->PlayAnimation("WalkRight");
+		
+		if (inAir)
+			animator->PlayAnimation("JumpRight");
+		else
+			animator->PlayAnimation("WalkRight");
+
+		currentDirection = 1;
 	}
 	else
 	{
@@ -41,6 +56,9 @@ void PlayerController::Update()
 	{
 		velocity.y += jumpSpeed;
 		jumping = true;
+		inAir = true;
+
+		animator->PlayAnimation(currentDirection > 0 ? "JumpRight" : "JumpLeft");
 	}
 	else if (!InputSystem::KeyHeld(SDL_SCANCODE_SPACE) || velocity.y >= maxJumpVelocity)
 	{
@@ -65,6 +83,20 @@ void PlayerController::OnCollision(Hit* hit)
 		}
 
 		jumping = false;
+	}
+	else if (hit->normal.y > 0.8f && !jumping)
+	{
+		inAir = false;
+		animator->PlayAnimation(currentDirection > 0 ? "WalkRight" : "WalkLeft");
+	}
+}
+
+void PlayerController::OnTrigger(Hit* hit)
+{
+	if (hit->collider->Tag == "invisibleBrick" && hit->normal.y < -0.8f && rigidbody->GetVelocity().y > 0)
+	{
+		hit->collider->entity->GetComponent<Collider>().Trigger = false;
+		hit->collider->entity->GetComponent<Tile>().SetSource(Vector2(96.0f, 32.0f));
 	}
 }
 

@@ -1,25 +1,14 @@
 #pragma once
 
-#ifndef BRICK_H
-#define BRICK_H
+#ifndef COIN_H
+#define COIN_H
 
 #include "EngineCore.h"
 
-enum
+class Coin : public Component
 {
-	BRICK,
-	ITEMSPAWNER,
-	COINSPAWNER,
-	INVISIBLE
-};
 
-class Brick : public Component
-{
 public:
-
-	Brick(int brickType);
-
-	void Init() override;
 
 	void FixedUpdate() override;
 	void Bump();
@@ -31,17 +20,14 @@ public:
 	template<class Archive>
 	void Serialize(Archive& archive)
 	{
-		archive(componentName, brickType);
+		archive(componentName);
 	}
 
 private:
 
-	int			brickType;
-
-	bool		canBump = true;
 	bool		bumping = false;
-	int			bumpAmount = -20;
-	float		bumpDuration = 0.1f;
+	int			bumpAmount = -130;
+	float		bumpDuration = 0.15f;
 	float		timer = 0.0;
 
 	Vector3		fromPosition;

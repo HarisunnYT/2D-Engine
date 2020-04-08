@@ -1,5 +1,7 @@
 #include "Particle.h"
 
+std::string Particle::componentName = "particle";
+
 Particle::Particle(const char* path, Vector2 sheetSize, Vector2 f, int s, int eType) : SpriteRenderer(path, sheetSize)
 {
 	frames = f;
@@ -23,7 +25,7 @@ void Particle::Update()
 	int xOffset = static_cast<int>((SDL_GetTicks() - ticksOffset) / speed) % static_cast<int>(frames.x);
 	int yOffset = floor(totalOffset / frames.x);
 
-	if (yOffset == 0 && !initialPlay && endType != PARTICLE_LOOP)
+	if (!initialPlay && endType != PARTICLE_LOOP && ((frames.y > 0 && yOffset == 0) || (frames.y == 0 && xOffset == 0)))
 	{
 		switch (endType)
 		{
@@ -37,7 +39,7 @@ void Particle::Update()
 
 		return;
 	}
-	else if (yOffset > 0)
+	else if ((frames.y > 0 && yOffset > 0) || (frames.y == 0 && xOffset > 0))
 	{
 		initialPlay = false;
 	}
@@ -55,4 +57,40 @@ void Particle::OnEnable()
 void Particle::SetSpeed(int s)
 {
 	speed = s;
+}
+
+std::string Particle::Parse()
+{
+	std::stringstream ss;
+	{
+		cereal::JSONOutputArchive oarchive(ss);
+		oarchive(Particle::componentName, currentPath, frames.ToString(), spriteSize.ToString(), speed, endType);
+	}
+
+	return ss.str();
+}
+
+bool Particle::TryParse(std::string value, Entity* entity)
+{
+	std::string name;
+	std::string inPath;
+	std::string inSize;
+	std::string inFrames;
+	int inSpeed;
+	int inEndType;
+
+	std::stringstream ss(value);
+	{
+		cereal::JSONInputArchive oarchive(ss);
+		oarchive(name, inPath, inFrames, inSize, inSpeed, inEndType);
+	}
+
+	if (name == Particle::componentName)
+	{
+		entity->AddComponent<Particle>(inPath.c_str(), Vector2::FromString(inSize), Vector2::FromString(inFrames), inSpeed, inEndType);
+
+		return true;
+	}
+
+	return false;
 }
