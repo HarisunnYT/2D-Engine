@@ -1,11 +1,10 @@
 #include "Brick.h"
 #include "Coin.h"
+#include "Mushroom.h"
 
 #include <time.h>
 
 std::string Brick::componentName = "brick";
-
-Entity* coin;
 
 Brick::Brick(int type)
 {
@@ -14,10 +13,15 @@ Brick::Brick(int type)
 
 void Brick::Init()
 {
-	if (brickType == COINSPAWNER)
+	if (brickType == ITEMSPAWNER)
 	{
-		coin = &EngineCore::Ecs->AddEntity("Assets/Prefabs/coin");
-		coin->SetActive(false);
+		item = &EngineCore::Ecs->AddEntity("Assets/Prefabs/mushroom");
+		item->SetActive(false);
+	}
+	else if (brickType == COINSPAWNER)
+	{
+		item = &EngineCore::Ecs->AddEntity("Assets/Prefabs/coin");
+		item->SetActive(false);
 	}
 }
 
@@ -59,11 +63,20 @@ void Brick::Bump()
 		timer = 0.0f;
 		bumping = true;
 
-		if (brickType >= ITEMSPAWNER)
+		if (brickType == ITEMSPAWNER)
 		{
-			coin->transform->SetPosition(entity->transform->GetPosition() + Vector3(-12, -75, 0));
-			coin->GetComponent<Coin>().Bump();
-			coin->SetActive(true);
+			item->transform->SetPosition(entity->transform->GetPosition() + Vector3(5, -10, -5));
+			item->SetActive(true);
+			item->GetComponent<Mushroom>().Spawn();
+
+			entity->GetComponent<Tile>().SetSource(Vector2(96.0f, 32.0f));
+			canBump = false;
+		}
+		else if (brickType == COINSPAWNER)
+		{
+			item->transform->SetPosition(entity->transform->GetPosition() + Vector3(-5, -60, 0));
+			item->GetComponent<Coin>().Bump();
+			item->SetActive(true);
 
 			entity->GetComponent<Tile>().SetSource(Vector2(96.0f, 32.0f));
 			canBump = false;

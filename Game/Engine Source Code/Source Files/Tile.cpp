@@ -89,7 +89,7 @@ bool Tile::TryParse(std::string value, Entity* entity)
 
 	if (name == Tile::componentName)
 	{
-		entity->AddComponent<Tile>(inPath.c_str(), Vector3(0, 0, 0), Vector2::FromString(inSize), Vector2::FromString(inSource), 1.0f);
+		entity->AddComponent<Tile>(inPath.c_str(), entity->GetComponent<Transform>().GetRawPosition(), Vector2::FromString(inSize), Vector2::FromString(inSource), 1.0f);
 
 		return true;
 	}

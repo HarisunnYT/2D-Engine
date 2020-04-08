@@ -1,28 +1,16 @@
 #pragma once
 
-#ifndef BRICK_H
-#define BRICK_H
+#ifndef MUSHROOM_H
+#define MUSHROOM_H
 
 #include "EngineCore.h"
 
-enum
-{
-	BRICK,
-	ITEMSPAWNER,
-	COINSPAWNER,
-	INVISIBLE
-};
-
-class Brick : public Component
+class Mushroom : public Component
 {
 public:
 
-	Brick(int brickType);
-
-	void Init() override;
-
+	void Spawn();
 	void FixedUpdate() override;
-	void Bump();
 
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);
@@ -31,23 +19,19 @@ public:
 	template<class Archive>
 	void Serialize(Archive& archive)
 	{
-		archive(componentName, brickType);
+		archive(componentName);
 	}
 
 private:
 
-	int			brickType;
-
-	bool		canBump = true;
-	bool		bumping = false;
-	int			bumpAmount = -20;
-	float		bumpDuration = 0.1f;
+	bool		spawning = false;
+	int			bumpAmount = -32;
+	float		bumpDuration = 0.5f;
 	float		timer = 0.0;
 
 	Vector3		fromPosition;
 	Vector3		toPosition;
 
-	Entity*		item;
 };
 
 #endif

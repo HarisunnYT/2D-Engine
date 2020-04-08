@@ -58,7 +58,8 @@ bool Transform::TryParse(std::string value, Entity* entity)
 
 	if (name == Transform::componentName)
 	{
-		entity->GetComponent<Transform>().SetPosition(Vector3::FromString(inPos));
+		Vector3 vec = Vector3::FromString(inPos);
+		entity->GetComponent<Transform>().SetPosition(vec);
 		entity->GetComponent<Transform>().scale = Vector2::FromString(inScale);
 
 		return true;
