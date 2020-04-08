@@ -22,7 +22,8 @@ public:
 	void SetVelocity(Vector2 velocity);
 	Vector2 GetVelocity();
 
-	float mass = 1;
+	float			mass = 1;
+	bool			useGravity = true;
 
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);
@@ -41,8 +42,6 @@ private:
 	Transform*		transform = nullptr;
 
 	Vector2			velocity;
-
-	bool			useGravity = true;
 };
 
 #endif

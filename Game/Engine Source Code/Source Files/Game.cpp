@@ -12,6 +12,8 @@ TileMap* tileMap = nullptr;
 
 Entity* player = nullptr;
 
+Entity* item = nullptr;
+
 Vector3 previousPlayerPosition;
 
 Game::Game()

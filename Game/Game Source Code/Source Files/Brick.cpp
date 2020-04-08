@@ -65,7 +65,7 @@ void Brick::Bump()
 
 		if (brickType == ITEMSPAWNER)
 		{
-			item->transform->SetPosition(entity->transform->GetPosition() + Vector3(5, -10, -5));
+			item->transform->SetPosition(entity->transform->GetPosition() + Vector3(1, -15, -5));
 			item->SetActive(true);
 			item->GetComponent<Mushroom>().Spawn();
 

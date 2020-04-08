@@ -7,8 +7,11 @@ void Mushroom::Spawn()
 	fromPosition = entity->transform->GetRawPosition();
 	toPosition = entity->transform->GetRawPosition() + Vector3(0.0f, (float)bumpAmount, 0.0f);
 
+	rigidbody = &entity->GetComponent<Rigidbody>();
+
 	timer = 0;
 	spawning = true;
+	spawned = false;
 }
 
 void Mushroom::FixedUpdate()
@@ -27,6 +30,25 @@ void Mushroom::FixedUpdate()
 		{
 			spawning = false;
 		}
+	}
+	else if (!spawned)
+	{
+		entity->GetComponent<Collider>().Trigger = false;
+		rigidbody->useGravity = true;
+
+		spawned = true;
+	}
+	else
+	{
+		rigidbody->SetVelocity(Vector2(direction * speed, rigidbody->GetVelocity().y));
+	}
+}
+
+void Mushroom::OnCollision(Hit* hit)
+{
+	if (abs(hit->normal.x) > 0.8f)
+	{
+		direction *= -1;
 	}
 }
 

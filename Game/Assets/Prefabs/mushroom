@@ -1,7 +1,7 @@
 {
     "value0": "transform",
     "value1": "(50.000000,50.000000,1.000000)",
-    "value2": "(0.1750000,0.1750000)"
+    "value2": "(0.2000,0.2000)"
 }
 {
     "value0": "spriterenderer",
@@ -13,8 +13,13 @@
     "value1": "mushroom",
     "value2": "(0.000000,0.000000)",
     "value3": "(256.000000,256.000000)",
-    "value4": false
+    "value4": true
 }
 {
     "value0": "mushroom"
+}
+{
+    "value0": "rigidbody",
+    "value1": 4.0,
+    "value2": false
 }
