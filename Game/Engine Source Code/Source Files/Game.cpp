@@ -18,7 +18,7 @@ Vector3 previousPlayerPosition;
 
 Game::Game()
 {
-	EngineCore::isDebug = true;
+	EngineCore::isDebug = false;
 	Collision::drawGrid = false;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");

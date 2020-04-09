@@ -21,6 +21,9 @@ void PlayerController::Init()
 
 void PlayerController::Update()
 {
+	if (growing)
+		return;
+
 	Vector2 velocity = rigidbody->GetVelocity();
 	if (InputSystem::KeyHeld(SDL_SCANCODE_A))
 	{
@@ -83,6 +86,21 @@ void PlayerController::Update()
 	rigidbody->SetVelocity(velocity);
 }
 
+void PlayerController::FixedUpdate()
+{
+	if (growing)
+	{
+		timer = timer + (EngineCore::fixedTimeStep / 2.0f);
+		float normTime = timer / growDuration;
+
+		if (normTime >= 1.0f)
+		{
+			entity->GetComponent<Rigidbody>().useGravity = true;
+			growing = false;
+		}
+	}
+}
+
 void PlayerController::OnCollision(Hit* hit)
 {
 	if (hit->normal.y < -0.8f)
@@ -97,7 +115,7 @@ void PlayerController::OnCollision(Hit* hit)
 
 		jumping = false;
 	}
-	else if (hit->normal.y > 0.8f && !jumping)
+	else if (hit->normal.y > 0.8f && !jumping && !growing)
 	{
 		inAir = false;
 		if (isBig)
@@ -118,9 +136,15 @@ void PlayerController::OnTrigger(Hit* hit)
 
 void PlayerController::SetBig(bool big)
 {
+	growing = true;
+
 	isBig = big;
 	collider->SetSize(Vector2(17, 30));
 	collider->SetOffset(Vector2(22, 5));
+
+	entity->GetComponent<Animator>().PlayAnimation("Grow");
+	entity->GetComponent<Rigidbody>().SetVelocity(Vector2(0, 0));
+	entity->GetComponent<Rigidbody>().useGravity = false;
 }
 
 std::string PlayerController::Parse()

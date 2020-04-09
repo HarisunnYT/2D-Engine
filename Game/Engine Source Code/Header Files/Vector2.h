@@ -35,7 +35,9 @@ public:
 	Vector2& operator /(float multiplier);
 	Vector2& operator /=(float multiplier);
 
+	static Vector2 Lerp(const Vector2& vecA, const Vector2& vecB, float time);
 	static Vector2 Zero();
+
 	Vector2 Normalised();
 
 	float Magnitude();

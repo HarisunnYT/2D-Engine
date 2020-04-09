@@ -112,6 +112,14 @@ float Vector2::Magnitude()
 	return sqrt((x * x) + (y * y));
 }
 
+Vector2 Vector2::Lerp(const Vector2& vecA, const Vector2& vecB, float time)
+{
+	float x = (vecA.x * (1.0f - time)) + (vecB.x * time);
+	float y = (vecA.y * (1.0f - time)) + (vecB.y * time);
+
+	return Vector2(x, y);
+}
+
 std::string Vector2::ToString()
 {
 	std::string strX = std::to_string(x);

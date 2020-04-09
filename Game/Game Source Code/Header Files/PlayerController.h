@@ -16,6 +16,7 @@ public:
 
 	void Init() override;
 	void Update() override;
+	void FixedUpdate() override;
 
 	void OnCollision(Hit* hit) override;
 	void OnTrigger(Hit* hit) override;
@@ -43,6 +44,10 @@ private:
 	bool		jumping = false;
 	bool		inAir = false;
 	bool		isBig = false;
+
+	bool		growing = false;
+	float		growDuration = 0.5f;
+	float		timer = 0;
 
 	int			currentDirection = 0;
 
