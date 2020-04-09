@@ -20,6 +20,8 @@ public:
 	void OnCollision(Hit* hit) override;
 	void OnTrigger(Hit* hit) override;
 
+	void SetBig(bool big);
+
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);
 	static std::string componentName;
@@ -32,16 +34,22 @@ public:
 
 private:
 
-	float speed = 2.0f;
-	float jumpSpeed = 100.0f;
-	float jumpLerpSpeed = 5.0f;
+	float		speed = 2.0f;
+	float		jumpSpeed = 100.0f;
+	float		jumpLerpSpeed = 5.0f;
 
-	float maxJumpVelocity = 225.0f;
+	float		maxJumpVelocity = 225.0f;
 
-	Transform* transform;
-	Rigidbody* rigidbody;
-	Animator* animator;
-	Collider* collider;
+	bool		jumping = false;
+	bool		inAir = false;
+	bool		isBig = false;
+
+	int			currentDirection = 0;
+
+	Transform*	transform = nullptr;
+	Rigidbody*	rigidbody = nullptr;
+	Animator*	animator = nullptr;
+	Collider*	collider = nullptr;
 
 };
 

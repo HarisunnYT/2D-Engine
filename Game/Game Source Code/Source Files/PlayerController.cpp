@@ -4,10 +4,7 @@
 
 std::string PlayerController::componentName = "playercontroller";
 
-bool jumping = false;
-bool inAir = false;
 
-int currentDirection = 0;
 
 PlayerController::PlayerController(float s)
 {
@@ -30,9 +27,9 @@ void PlayerController::Update()
 		velocity.x = -1 * speed;
 
 		if (inAir)
-			animator->PlayAnimation("JumpLeft");
+			animator->PlayAnimation(isBig ? "JumpLeftBig" : "JumpLeft");
 		else
-			animator->PlayAnimation("WalkLeft");
+			animator->PlayAnimation(isBig ? "WalkLeftBig" : "WalkLeft");
 
 		currentDirection = -1;
 	}
@@ -41,15 +38,22 @@ void PlayerController::Update()
 		velocity.x = 1 * speed;
 		
 		if (inAir)
-			animator->PlayAnimation("JumpRight");
+			animator->PlayAnimation(isBig ? "JumpRightBig" : "JumpRight");
 		else
-			animator->PlayAnimation("WalkRight");
+			animator->PlayAnimation(isBig ? "WalkRightBig" : "WalkRight");
 
 		currentDirection = 1;
 	}
 	else
 	{
 		velocity.x = 0;
+		if (!inAir)
+		{
+			if (isBig)
+				animator->PlayAnimation(currentDirection > 0 ? "IdleRightBig" : "IdleLeftBig");
+			else
+				animator->PlayAnimation(currentDirection > 0 ? "IdleRight" : "IdleLeft");
+		}
 	}
 
 	if (InputSystem::KeyHeld(SDL_SCANCODE_SPACE) && velocity.y == 0)
@@ -57,8 +61,6 @@ void PlayerController::Update()
 		velocity.y += jumpSpeed;
 		jumping = true;
 		inAir = true;
-
-		animator->PlayAnimation(currentDirection > 0 ? "JumpRight" : "JumpLeft");
 	}
 	else if (!InputSystem::KeyHeld(SDL_SCANCODE_SPACE) || velocity.y >= maxJumpVelocity)
 	{
@@ -70,6 +72,14 @@ void PlayerController::Update()
 		velocity.y += jumpLerpSpeed;
 	}
 
+	if (inAir)
+	{
+		if (isBig)
+			animator->PlayAnimation(currentDirection > 0 ? "JumpRightBig" : "JumpLeftBig");
+		else
+			animator->PlayAnimation(currentDirection > 0 ? "JumpRight" : "JumpLeft");
+	}
+
 	rigidbody->SetVelocity(velocity);
 }
 
@@ -79,7 +89,10 @@ void PlayerController::OnCollision(Hit* hit)
 	{
 		if (hit->collider->Tag == "brick")
 		{
-			hit->collider->entity->GetComponent<Brick>().Bump();
+			if (isBig && hit->collider->entity->GetComponent<Brick>().brickType == 0)
+				hit->collider->entity->SetActive(false);
+			else
+				hit->collider->entity->GetComponent<Brick>().Bump();
 		}
 
 		jumping = false;
@@ -87,7 +100,10 @@ void PlayerController::OnCollision(Hit* hit)
 	else if (hit->normal.y > 0.8f && !jumping)
 	{
 		inAir = false;
-		animator->PlayAnimation(currentDirection > 0 ? "WalkRight" : "WalkLeft");
+		if (isBig)
+			animator->PlayAnimation(currentDirection > 0 ? "WalkRightBig" : "WalkLeftBig");
+		else
+			animator->PlayAnimation(currentDirection > 0 ? "WalkRight" : "WalkLeft");
 	}
 }
 
@@ -98,6 +114,13 @@ void PlayerController::OnTrigger(Hit* hit)
 		hit->collider->entity->GetComponent<Collider>().Trigger = false;
 		hit->collider->entity->GetComponent<Tile>().SetSource(Vector2(96.0f, 32.0f));
 	}
+}
+
+void PlayerController::SetBig(bool big)
+{
+	isBig = big;
+	collider->SetSize(Vector2(17, 30));
+	collider->SetOffset(Vector2(22, 5));
 }
 
 std::string PlayerController::Parse()

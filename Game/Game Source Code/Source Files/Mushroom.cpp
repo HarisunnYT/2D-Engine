@@ -1,4 +1,5 @@
 #include "Mushroom.h"
+#include "PlayerController.h"
 
 std::string Mushroom::componentName = "mushroom";
 
@@ -49,6 +50,12 @@ void Mushroom::OnCollision(Hit* hit)
 	if (abs(hit->normal.x) > 0.8f)
 	{
 		direction *= -1;
+	}
+
+	if (hit->collider->Tag == "player")
+	{
+		hit->collider->entity->GetComponent<PlayerController>().SetBig(true);
+		entity->SetActive(false);
 	}
 }
 

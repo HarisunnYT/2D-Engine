@@ -2,7 +2,7 @@
 #include "Collider.h"
 #include "Camera.h"
 
-int squareSize = 448;
+int squareSize = 400;
 Vector2 gridSize = Vector2(20, 2);
 
 vector<pair<SDL_Rect, vector<Collider*>>> Collision::grid;
@@ -55,7 +55,12 @@ void Collision::UpdateGrid(Collider* collider)
 	//add collider to correct grid
 	for (auto& g : grid)
 	{
-		bool colliderInsideGrid = AABB(g.first, collider->collider);
+		tempRec.x = g.first.x - EngineCore::camera->offset.x;
+		tempRec.y = g.first.y - EngineCore::camera->offset.y;
+		tempRec.w = squareSize;
+		tempRec.h = squareSize;
+
+		bool colliderInsideGrid = AABB(tempRec, collider->collider);
 		bool gridContainsCollider = std::find(g.second.begin(), g.second.end(), collider) != g.second.end();
 
 		if (colliderInsideGrid && !gridContainsCollider)
@@ -149,6 +154,9 @@ bool Collision::CheckCollision(Collider* collider, Hit& hit)
 									}
 								}
 							}
+
+							collider->entity->OnCollision(&hit);
+							c->entity->OnCollision(&hit);
 
 							collided = true;
 						}

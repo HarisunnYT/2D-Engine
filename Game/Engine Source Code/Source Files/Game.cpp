@@ -12,17 +12,16 @@ TileMap* tileMap = nullptr;
 
 Entity* player = nullptr;
 
-Entity* item = nullptr;
+Entity* ground = nullptr;
 
 Vector3 previousPlayerPosition;
 
 Game::Game()
 {
-	EngineCore::isDebug = false;
+	EngineCore::isDebug = true;
 	Collision::drawGrid = false;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
-	player->GetComponent<Animator>().PlayAnimation(1);
 
 	tileMap = new TileMap();
 	tileMap->LoadMap("Assets/Map/map.map", "Assets/Map/tileset.png", Vector2(16, 16), Vector2(72, 11), 3.44f);

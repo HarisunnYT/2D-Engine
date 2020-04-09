@@ -34,9 +34,9 @@ public:
 		archive(componentName, brickType);
 	}
 
-private:
-
 	int			brickType;
+
+private:
 
 	bool		canBump = true;
 	bool		bumping = false;
