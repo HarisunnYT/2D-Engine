@@ -120,6 +120,17 @@ bool Collider::TryParse(std::string value, Entity* entity)
 	return false;
 }
 
+SDL_Rect Collider::RawCollider()
+{
+	SDL_Rect rect;
+	rect.x = collider.x - EngineCore::camera->offset.x;
+	rect.y = collider.y - EngineCore::camera->offset.y;
+	rect.w = collider.w;
+	rect.h = collider.h;
+
+	return rect;
+}
+
 Vector2 Collider::GetMinBounds()
 {
 	return Vector2(static_cast<float>(collider.x), static_cast<float>(collider.y));

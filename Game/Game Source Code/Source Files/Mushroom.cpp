@@ -47,7 +47,7 @@ void Mushroom::FixedUpdate()
 
 void Mushroom::OnCollision(Hit* hit)
 {
-	if (abs(hit->normal.x) > 0.8f)
+	if ((hit->normal.x > 0.8f && direction == 1) || (hit->normal.x < -0.8f && direction == -1))
 	{
 		direction *= -1;
 	}

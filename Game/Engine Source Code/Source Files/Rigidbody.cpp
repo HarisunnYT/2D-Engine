@@ -16,6 +16,9 @@ void Rigidbody::Init()
 
 void Rigidbody::Physics()
 {
+	if (!useGravity)
+		return;
+
 	if (entity->HasComponent<Collider>() && !entity->GetComponent<Collider>().Trigger)
 	{
 		if (Collision::CheckCollision(&entity->GetComponent<Collider>(), hit) && hit.collider != nullptr)

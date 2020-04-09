@@ -12,7 +12,7 @@ TileMap* tileMap = nullptr;
 
 Entity* player = nullptr;
 
-Entity* goomba = nullptr;
+vector<Entity*> goombas;
 
 Vector3 previousPlayerPosition;
 
@@ -24,10 +24,9 @@ Game::Game()
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
 
 	tileMap = new TileMap();
-	tileMap->LoadMap("Assets/Map/map.map", "Assets/Map/tileset.png", Vector2(16, 16), Vector2(72, 11), 3.44f);
+	tileMap->LoadMap("Assets/Map/map.map", "Assets/Map/tileset.png", Vector2(16, 16), Vector2(102, 11), 3.44f);
 
-	goomba = &EngineCore::Ecs->AddEntity("Assets/Prefabs/goomba");
-	goomba->GetComponent<Animator>().PlayAnimation(0);
+	SpawnGoombas();
 
 	EngineCore::camera->offset.x = static_cast<int>(player->transform->GetPosition().x);
 }
@@ -59,5 +58,49 @@ void Game::Physics()
 
 void Game::FixedUpdate()
 {
-	//EngineCore::camera->offset.x += 1;
+	for (auto& g : goombas)
+	{
+		if (EngineCore::camera->InsideCameraView(&g->GetComponent<Collider>().RawCollider()) && !g->IsActive() && !g->GetComponent<Goomba>().IsDead())
+		{
+			g->SetActive(true);
+		}
+	}
+}
+
+void Game::SpawnGoombas()
+{
+	Entity* goomba = &EngineCore::Ecs->AddEntity("Assets/Prefabs/goomba");
+	goomba->GetComponent<Animator>().PlayAnimation(0);
+	goombas.push_back(goomba);
+
+	Vector3 pos = goomba->transform->GetPosition();
+
+	goomba = &EngineCore::Ecs->AddEntity("Assets/Prefabs/goomba");
+	goomba->transform->SetPosition(Vector3(pos.x + 1000, pos.y, pos.z));
+	goombas.push_back(goomba);
+
+	goomba = &EngineCore::Ecs->AddEntity("Assets/Prefabs/goomba");
+	goomba->transform->SetPosition(Vector3(pos.x + 1400, pos.y, pos.z));
+	goombas.push_back(goomba);
+
+	goomba = &EngineCore::Ecs->AddEntity("Assets/Prefabs/goomba");
+	goomba->transform->SetPosition(Vector3(pos.x + 3100, pos.y - 300, pos.z));
+	goombas.push_back(goomba);
+
+	goomba = &EngineCore::Ecs->AddEntity("Assets/Prefabs/goomba");
+	goomba->transform->SetPosition(Vector3(pos.x + 3150, pos.y - 300, pos.z));
+	goombas.push_back(goomba);
+
+	goomba = &EngineCore::Ecs->AddEntity("Assets/Prefabs/goomba");
+	goomba->transform->SetPosition(Vector3(pos.x + 4400, pos.y, pos.z));
+	goombas.push_back(goomba);
+
+	goomba = &EngineCore::Ecs->AddEntity("Assets/Prefabs/goomba");
+	goomba->transform->SetPosition(Vector3(pos.x + 4450, pos.y, pos.z));
+	goombas.push_back(goomba);
+
+	for (auto& g : goombas)
+	{
+		g->SetActive(false);
+	}
 }

@@ -26,6 +26,11 @@ void Goomba::FixedUpdate()
 	}
 }
 
+void Goomba::OnEnable()
+{
+	entity->GetComponent<Animator>().PlayAnimation(0);
+}
+
 void Goomba::OnCollision(Hit* hit)
 {
 	if (hit->collider->Tag == "player")
@@ -47,10 +52,15 @@ void Goomba::OnCollision(Hit* hit)
 			hit->collider->entity->GetComponent<Rigidbody>().SetVelocity(Vector2(playerVel.x, 100));
 		}
 	}
-	else if (abs(hit->normal.x) > 0.8f)
+	else if ((hit->normal.x > 0.8f && direction == 1) || (hit->normal.x < -0.8f && direction == -1))
 	{
 		direction *= -1;
 	}
+}
+
+bool Goomba::IsDead()
+{
+	return dead;
 }
 
 std::string Goomba::Parse()

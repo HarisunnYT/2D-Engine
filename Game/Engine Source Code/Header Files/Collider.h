@@ -45,6 +45,8 @@ public:
 
 	SDL_Rect collider;
 
+	SDL_Rect RawCollider();
+
 	Vector2 GetMinBounds();
 	Vector2 GetMaxBounds();
 	Vector2 Centre();

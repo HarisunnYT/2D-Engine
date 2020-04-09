@@ -25,9 +25,11 @@ void PlayerController::Update()
 		return;
 
 	Vector2 velocity = rigidbody->GetVelocity();
+
 	if (InputSystem::KeyHeld(SDL_SCANCODE_A))
 	{
-		velocity.x = -1 * speed;
+		if (accel > -speed)
+			accel -= acceleration * EngineCore::fixedTimeStep;
 
 		if (inAir)
 			animator->PlayAnimation(isBig ? "JumpLeftBig" : "JumpLeft");
@@ -38,7 +40,8 @@ void PlayerController::Update()
 	}
 	else if (InputSystem::KeyHeld(SDL_SCANCODE_D))
 	{
-		velocity.x = 1 * speed;
+		if (accel < speed)
+			accel += acceleration * EngineCore::fixedTimeStep;
 		
 		if (inAir)
 			animator->PlayAnimation(isBig ? "JumpRightBig" : "JumpRight");
@@ -49,7 +52,7 @@ void PlayerController::Update()
 	}
 	else
 	{
-		velocity.x = 0;
+		accel = (accel * (1.0f - EngineCore::fixedTimeStep)) + (0 * EngineCore::fixedTimeStep);
 		if (!inAir)
 		{
 			if (isBig)
@@ -83,6 +86,8 @@ void PlayerController::Update()
 			animator->PlayAnimation(currentDirection > 0 ? "JumpRight" : "JumpLeft");
 	}
 
+	velocity.x = accel;
+
 	rigidbody->SetVelocity(velocity);
 }
 
@@ -105,7 +110,7 @@ void PlayerController::OnCollision(Hit* hit)
 {
 	if (hit->normal.y < -0.8f)
 	{
-		if (hit->collider->Tag == "brick")
+		if (hit->collider->Tag == "brick" && rigidbody->GetVelocity().y > 0)
 		{
 			if (isBig && hit->collider->entity->GetComponent<Brick>().brickType == 0)
 				hit->collider->entity->SetActive(false);

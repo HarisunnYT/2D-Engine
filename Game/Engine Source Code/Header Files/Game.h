@@ -17,6 +17,11 @@ public:
 	void Render();
 	void Physics();
 	void FixedUpdate();
+
+private:
+
+	void SpawnGoombas();
+
 };
 
 #endif

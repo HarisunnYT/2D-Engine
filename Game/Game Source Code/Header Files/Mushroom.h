@@ -33,7 +33,7 @@ private:
 	float		bumpDuration = 0.5f;
 	float		timer = 0.0;
 
-	float		speed = 80.0f;
+	float		speed = 90.0f;
 	int			direction = 1;
 
 	Vector3		fromPosition;

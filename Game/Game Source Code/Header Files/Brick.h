@@ -47,7 +47,7 @@ private:
 	Vector3		fromPosition;
 	Vector3		toPosition;
 
-	Entity*		item;
+	Entity*		item = nullptr;
 };
 
 #endif

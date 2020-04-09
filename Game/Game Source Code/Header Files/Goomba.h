@@ -12,8 +12,11 @@ public:
 
 	void Init() override;
 	void FixedUpdate() override;
+	void OnEnable() override;
 
 	void OnCollision(Hit* hit) override;
+
+	bool IsDead();
 
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);
@@ -27,7 +30,7 @@ public:
 
 private:
 
-	float		speed = 40.0f;
+	float		speed = 80.0f;
 	int			direction = -1;
 
 	float		deathDuration = 0.25f;

@@ -35,9 +35,11 @@ public:
 
 private:
 
-	float		speed = 2.0f;
+	float		speed = 1000000.0f;
 	float		jumpSpeed = 100.0f;
 	float		jumpLerpSpeed = 5.0f;
+	float		acceleration = 50.0f;
+	float		accel = 0.0f;
 
 	float		maxJumpVelocity = 225.0f;
 
