@@ -143,6 +143,7 @@ bool Collision::CheckCollision(Collider* collider, Hit& hit)
 							{
 								if (!pushedY && abs(intersectY) > 1.0f)
 								{
+									intersectY /= 2;
 									pushedY = true;
 									if (deltaY > 0.0f)
 									{

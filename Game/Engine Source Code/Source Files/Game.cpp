@@ -12,7 +12,7 @@ TileMap* tileMap = nullptr;
 
 Entity* player = nullptr;
 
-Entity* ground = nullptr;
+Entity* goomba = nullptr;
 
 Vector3 previousPlayerPosition;
 
@@ -25,6 +25,9 @@ Game::Game()
 
 	tileMap = new TileMap();
 	tileMap->LoadMap("Assets/Map/map.map", "Assets/Map/tileset.png", Vector2(16, 16), Vector2(72, 11), 3.44f);
+
+	goomba = &EngineCore::Ecs->AddEntity("Assets/Prefabs/goomba");
+	goomba->GetComponent<Animator>().PlayAnimation(0);
 
 	EngineCore::camera->offset.x = static_cast<int>(player->transform->GetPosition().x);
 }

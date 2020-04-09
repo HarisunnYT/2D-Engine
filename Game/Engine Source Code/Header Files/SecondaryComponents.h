@@ -11,5 +11,6 @@
 #include "Brick.h"
 #include "Coin.h"
 #include "Mushroom.h"
+#include "Goomba.h"
 
 #endif
