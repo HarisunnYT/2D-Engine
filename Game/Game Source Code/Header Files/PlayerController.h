@@ -23,6 +23,9 @@ public:
 
 	void SetBig(bool big);
 
+	void TakeDamage();
+	void Die();
+
 	std::string Parse() override;
 	static bool TryParse(std::string value, Entity* entity);
 	static std::string componentName;
@@ -34,6 +37,8 @@ public:
 	}
 
 private:
+
+	bool		hasInput = true;
 
 	float		speed = 1000000.0f;
 	float		jumpSpeed = 100.0f;

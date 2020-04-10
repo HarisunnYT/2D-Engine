@@ -12,7 +12,7 @@
     "value0": "animator",
     "value1": "Assets/mario_sheet.png",
     "value2": "(31.000000,32.000000)",
-    "value3": "13-WalkLeft,0,3,150:WalkRight,1,3,150:JumpLeft,2,1,150:JumpRight,3,1,150:IdleLeft,4,1,150:IdleRight,5,1,150:WalkLeftBig,6,3,150:WalkRightBig,7,3,150:JumpLeftBig,8,1,150:JumpRightBig,9,1,150:IdleLeftBig,10,1,150:IdleRightBig,11,1,150:Grow,12,3,150:"
+    "value3": "14-WalkLeft,0,3,150:WalkRight,1,3,150:JumpLeft,2,1,150:JumpRight,3,1,150:IdleLeft,4,1,150:IdleRight,5,1,150:WalkLeftBig,6,3,150:WalkRightBig,7,3,150:JumpLeftBig,8,1,150:JumpRightBig,9,1,150:IdleLeftBig,10,1,150:IdleRightBig,11,1,150:Grow,12,3,150:Die,13,1,150:"
 }
 {
     "value0": "collider",
@@ -24,4 +24,10 @@
 {
     "value0": "playercontroller",
     "value1": 80.0
+}
+{
+    "value0": "audiolistener"
+}
+{
+    "value0": "audiosource"
 }

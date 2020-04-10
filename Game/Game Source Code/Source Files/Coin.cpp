@@ -41,6 +41,8 @@ void Coin::Bump()
 
 		timer = 0.0f;
 		bumping = true;
+
+		entity->GetComponent<AudioSource>().Play(L"Assets/Audio/Coin.wav");
 	}
 }
 

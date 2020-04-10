@@ -21,7 +21,7 @@ void PlayerController::Init()
 
 void PlayerController::Update()
 {
-	if (growing)
+	if (growing || !hasInput)
 		return;
 
 	Vector2 velocity = rigidbody->GetVelocity();
@@ -67,6 +67,8 @@ void PlayerController::Update()
 		velocity.y += jumpSpeed;
 		jumping = true;
 		inAir = true;
+
+		entity->GetComponent<AudioSource>().Play(L"Assets/Audio/Jump.wav");
 	}
 	else if (!InputSystem::KeyHeld(SDL_SCANCODE_SPACE) || velocity.y >= maxJumpVelocity)
 	{
@@ -110,10 +112,12 @@ void PlayerController::OnCollision(Hit* hit)
 {
 	if (hit->normal.y < -0.8f)
 	{
-		if (hit->collider->Tag == "brick" && rigidbody->GetVelocity().y > 0)
+		if ((hit->collider->Tag == "brick" || hit->collider->Tag == "invisibleBrick") && rigidbody->GetVelocity().y > 0)
 		{
 			if (isBig && hit->collider->entity->GetComponent<Brick>().brickType == 0)
+			{
 				hit->collider->entity->SetActive(false);
+			}
 			else
 				hit->collider->entity->GetComponent<Brick>().Bump();
 		}
@@ -150,6 +154,28 @@ void PlayerController::SetBig(bool big)
 	entity->GetComponent<Animator>().PlayAnimation("Grow");
 	entity->GetComponent<Rigidbody>().SetVelocity(Vector2(0, 0));
 	entity->GetComponent<Rigidbody>().useGravity = false;
+}
+
+void PlayerController::TakeDamage()
+{
+	if (isBig)
+	{
+
+	}
+	else
+	{
+		hasInput = false;
+
+		collider->Trigger = true;
+		rigidbody->SetVelocity(Vector2(0, 200));
+
+		entity->GetComponent<AudioSource>().Play(L"Assets/Audio/Die.wav");
+		entity->GetComponent<Animator>().PlayAnimation("Die");
+	}
+}
+
+void PlayerController::Die()
+{
 }
 
 std::string PlayerController::Parse()

@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Repos\2D-Engine\Game;C:\Repos\2D-Engine\Game\Game Source Code\Header Files;C:\Repos\2D-Engine\Game\Engine Source Code\Header Files;C:\dev\SDL2_image-2.0.1\include;C:\dev\SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\dev\SDL2_image-2.0.1\lib\x86;C:\dev\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files %28x86%29\DirectXTK-master\Inc;C:\Repos\2D-Engine\Game;C:\Repos\2D-Engine\Game\Game Source Code\Header Files;C:\Repos\2D-Engine\Game\Engine Source Code\Header Files;C:\dev\SDL2_image-2.0.1\include;C:\dev\SDL2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Repos\2D-Engine\Game;C:\Repos\2D-Engine\Game\Game Source Code\Header Files;C:\Repos\2D-Engine\Game\Engine Source Code\Header Files;C:\dev\SDL2_image-2.0.1\include;C:\dev\SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\dev\SDL2_image-2.0.1\lib\x86;C:\dev\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files %28x86%29\DirectXTK-master\Inc;C:\Repos\2D-Engine\Game;C:\Repos\2D-Engine\Game\Game Source Code\Header Files;C:\Repos\2D-Engine\Game\Engine Source Code\Header Files;C:\dev\SDL2_image-2.0.1\include;C:\dev\SDL2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -84,7 +84,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Repos\2D-Engine\Game;C:\Repos\2D-Engine\Game\Engine Source Code\Header Files;C:\Repos\2D-Engine\Game\Game Source Code\Header Files;C:\dev\SDL2_image-2.0.1\include;C:\dev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\DirectXTK-master\Inc;C:\Repos\2D-Engine\Game;C:\Repos\2D-Engine\Game\Engine Source Code\Header Files;C:\Repos\2D-Engine\Game\Game Source Code\Header Files;C:\dev\SDL2_image-2.0.1\include;C:\dev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,7 +98,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Repos\2D-Engine\Game;C:\Repos\2D-Engine\Game\Engine Source Code\Header Files;C:\Repos\2D-Engine\Game\Game Source Code\Header Files;C:\dev\SDL2_image-2.0.1\include;C:\dev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\DirectXTK-master\Inc;C:\Repos\2D-Engine\Game;C:\Repos\2D-Engine\Game\Engine Source Code\Header Files;C:\Repos\2D-Engine\Game\Game Source Code\Header Files;C:\dev\SDL2_image-2.0.1\include;C:\dev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +138,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine Source Code\Source Files\Animator.cpp" />
+    <ClCompile Include="Engine Source Code\Source Files\AudioListener.cpp" />
+    <ClCompile Include="Engine Source Code\Source Files\AudioSource.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\Camera.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\Collider.cpp" />
     <ClCompile Include="Engine Source Code\Source Files\Collision.cpp" />
@@ -167,6 +169,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Source Code\Header Files\Animator.h" />
+    <ClInclude Include="Engine Source Code\Header Files\AudioListener.h" />
+    <ClInclude Include="Engine Source Code\Header Files\AudioSource.h" />
     <ClInclude Include="Engine Source Code\Header Files\Camera.h" />
     <ClInclude Include="Engine Source Code\Header Files\Collider.h" />
     <ClInclude Include="Engine Source Code\Header Files\Collision.h" />
@@ -195,6 +199,11 @@
     <ClInclude Include="Game Source Code\Header Files\Goomba.h" />
     <ClInclude Include="Game Source Code\Header Files\Mushroom.h" />
     <ClInclude Include="Game Source Code\Header Files\PlayerController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Program Files (x86)\DirectXTK-master\Audio\DirectXTKAudio_Desktop_2019_Win8.vcxproj">
+      <Project>{4f150a30-cecb-49d1-8283-6a3f57438cf5}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

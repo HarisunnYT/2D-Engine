@@ -11,6 +11,7 @@
 TileMap* tileMap = nullptr;
 
 Entity* player = nullptr;
+Entity* bgMusic = nullptr;
 
 vector<Entity*> goombas;
 
@@ -25,6 +26,10 @@ Game::Game()
 
 	tileMap = new TileMap();
 	tileMap->LoadMap("Assets/Map/map.map", "Assets/Map/tileset.png", Vector2(16, 16), Vector2(102, 11), 3.44f);
+
+	bgMusic = &EngineCore::Ecs->AddEntity();
+	bgMusic->AddComponent<AudioSource>();
+	bgMusic->GetComponent<AudioSource>().Play(L"Assets/Audio/bg.wav");
 
 	SpawnGoombas();
 

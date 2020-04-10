@@ -1,5 +1,6 @@
 #include "Goomba.h"
 #include "Animator.h"
+#include "PlayerController.h"
 
 std::string Goomba::componentName = "goomba";
 
@@ -50,6 +51,12 @@ void Goomba::OnCollision(Hit* hit)
 
 			Vector2 playerVel = hit->collider->entity->GetComponent<Rigidbody>().GetVelocity();
 			hit->collider->entity->GetComponent<Rigidbody>().SetVelocity(Vector2(playerVel.x, 100));
+
+			entity->GetComponent<AudioSource>().Play(L"Assets/Audio/Stomp.wav");
+		}
+		else
+		{
+			hit->collider->entity->GetComponent<PlayerController>().TakeDamage();
 		}
 	}
 	else if ((hit->normal.x > 0.8f && direction == 1) || (hit->normal.x < -0.8f && direction == -1))
@@ -76,7 +83,6 @@ std::string Goomba::Parse()
 
 bool Goomba::TryParse(std::string value, Entity* entity)
 {
-	int brickType;
 	std::string name;
 
 	std::stringstream ss(value);

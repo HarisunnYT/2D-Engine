@@ -23,7 +23,7 @@ void Particle::Update()
 
 	int totalOffset = static_cast<int>((SDL_GetTicks() - ticksOffset) / speed) % static_cast<int>(frames.x * frames.y);
 	int xOffset = static_cast<int>((SDL_GetTicks() - ticksOffset) / speed) % static_cast<int>(frames.x);
-	int yOffset = floor(totalOffset / frames.x);
+	int yOffset = static_cast<int>(floor(totalOffset / frames.x));
 
 	if (!initialPlay && endType != PARTICLE_LOOP && ((frames.y > 0 && yOffset == 0) || (frames.y == 0 && xOffset == 0)))
 	{

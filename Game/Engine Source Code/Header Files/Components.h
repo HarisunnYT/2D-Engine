@@ -9,5 +9,7 @@
 #include "Rigidbody.h"
 #include "Collider.h"
 #include "Tile.h"
+#include "AudioListener.h"
+#include "AudioSource.h"
 
 #endif

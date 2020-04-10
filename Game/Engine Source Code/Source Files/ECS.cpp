@@ -168,6 +168,8 @@ Entity& ECS::AddEntity(const char* path)
 			else if (str.find(Animator::componentName) != string::npos && Animator::TryParse(str, entity)) {}
 			else if (str.find(Tile::componentName) != string::npos && Tile::TryParse(str, entity)) {}
 			else if (str.find(Particle::componentName) != string::npos && Particle::TryParse(str, entity)) {}
+			else if (str.find(AudioListener::componentName) != string::npos && AudioListener::TryParse(str, entity)) {}
+			else if (str.find(AudioSource::componentName) != string::npos && AudioSource::TryParse(str, entity)) {}
 			else if (str.find(PlayerController::componentName) != string::npos && PlayerController::TryParse(str, entity)) {}
 			else if (str.find(Brick::componentName) != string::npos && Brick::TryParse(str, entity)) {}
 			else if (str.find(Coin::componentName) != string::npos && Coin::TryParse(str, entity)) {}

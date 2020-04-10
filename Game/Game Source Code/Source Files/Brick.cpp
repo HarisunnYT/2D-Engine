@@ -81,6 +81,14 @@ void Brick::Bump()
 			entity->GetComponent<Tile>().SetSource(Vector2(96.0f, 32.0f));
 			canBump = false;
 		}
+		else
+		{
+			entity->GetComponent<AudioSource>().Play(L"Assets/Audio/Bump.wav");
+		}
+	}
+	else if (!canBump)
+	{
+		entity->GetComponent<AudioSource>().Play(L"Assets/Audio/Bump.wav");
 	}
 }
 

@@ -13,6 +13,8 @@ void Mushroom::Spawn()
 	timer = 0;
 	spawning = true;
 	spawned = false;
+
+	entity->GetComponent<AudioSource>().Play(L"Assets/Audio/PowerUpAppears.wav");
 }
 
 void Mushroom::FixedUpdate()
@@ -56,6 +58,8 @@ void Mushroom::OnCollision(Hit* hit)
 	{
 		hit->collider->entity->GetComponent<PlayerController>().SetBig(true);
 		entity->SetActive(false);
+
+		entity->GetComponent<AudioSource>().Play(L"Assets/Audio/Upgrade.wav");
 	}
 }
 

@@ -14,6 +14,7 @@
 
 class Camera;
 class ECS;
+class AudioListener;
 class EngineCore
 {
 public:
@@ -35,6 +36,7 @@ public:
 	static SDL_Event		Event;
 	static ECS*				Ecs;
 	static Camera*			camera;
+	static AudioListener*	audioListener;
 
 	static bool				isRunning;
 	static bool				isDebug;

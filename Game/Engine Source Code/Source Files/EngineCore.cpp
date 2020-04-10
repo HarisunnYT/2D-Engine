@@ -11,6 +11,7 @@ SDL_Renderer* EngineCore::Renderer = nullptr;
 SDL_Event EngineCore::Event;
 ECS* EngineCore::Ecs = nullptr;
 Camera* EngineCore::camera = nullptr;
+AudioListener* EngineCore::audioListener = nullptr;
 
 bool EngineCore::isRunning = false;
 bool EngineCore::isDebug = false;

@@ -120,6 +120,12 @@
     <ClCompile Include="Game Source Code\Source Files\Goomba.cpp">
       <Filter>Source Files\Game\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\AudioListener.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Source Code\Source Files\AudioSource.cpp">
+      <Filter>Source Files\Engine\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Source Code\Header Files\Collision.h">
@@ -208,6 +214,12 @@
     </ClInclude>
     <ClInclude Include="Game Source Code\Header Files\Goomba.h">
       <Filter>Header Files\Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\AudioListener.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Source Code\Header Files\AudioSource.h">
+      <Filter>Header Files\Engine\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
