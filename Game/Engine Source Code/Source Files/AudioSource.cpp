@@ -9,6 +9,9 @@ AudioSource::AudioSource()
 
 void AudioSource::Play(const wchar_t* path)
 {
+	if (!EngineCore::audioListener->audioEnabled)
+		return;
+
 	for (auto& s : sounds)
 	{
 		if (s.path == path && SDL_GetTicks() > s.time)

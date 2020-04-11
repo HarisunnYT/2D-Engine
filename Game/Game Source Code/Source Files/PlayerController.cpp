@@ -106,6 +106,23 @@ void PlayerController::FixedUpdate()
 			growing = false;
 		}
 	}
+
+	if (invincible)
+	{
+		timer = timer + (EngineCore::fixedTimeStep / 2.0f);
+		float normTime = timer / invincibleDuration;
+
+		if (normTime >= 1.0f)
+		{
+			invincible = false;
+			entity->GetComponent<Animator>().enabled = true;
+		}
+		else if (SDL_GetTicks() > enabledFlipFlopTime)
+		{
+			entity->GetComponent<Animator>().enabled = !entity->GetComponent<Animator>().enabled;
+			enabledFlipFlopTime = SDL_GetTicks() + 100;
+		}
+	}
 }
 
 void PlayerController::OnCollision(Hit* hit)
@@ -143,11 +160,11 @@ void PlayerController::OnTrigger(Hit* hit)
 	}
 }
 
-void PlayerController::SetBig(bool big)
+void PlayerController::SetBig()
 {
 	growing = true;
 
-	isBig = big;
+	isBig = true;
 	collider->SetSize(Vector2(17, 30));
 	collider->SetOffset(Vector2(22, 5));
 
@@ -156,11 +173,25 @@ void PlayerController::SetBig(bool big)
 	entity->GetComponent<Rigidbody>().useGravity = false;
 }
 
+void PlayerController::SetSmall()
+{
+	isBig = false;
+	collider->SetSize(Vector2(10, 17));
+	collider->SetOffset(Vector2(32, 17));
+
+	invincible = true;
+	timer = 0;
+}
+
 void PlayerController::TakeDamage()
 {
+	if (invincible)
+		return;
+
 	if (isBig)
 	{
-
+		entity->GetComponent<AudioSource>().Play(L"Assets/Audio/Damaged.wav");
+		SetSmall();
 	}
 	else
 	{

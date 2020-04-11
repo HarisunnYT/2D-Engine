@@ -30,6 +30,8 @@ public:
 		archive(componentName);
 	}
 
+	bool audioEnabled = true;
+
 };
 
 #endif

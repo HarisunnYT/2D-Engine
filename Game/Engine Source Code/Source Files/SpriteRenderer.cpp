@@ -33,6 +33,9 @@ void SpriteRenderer::Init()
 
 void SpriteRenderer::Draw()
 {
+	if (!enabled)
+		return;
+
 	destinationRect.x = static_cast<int>(transform->GetPosition().x);
 	destinationRect.y = static_cast<int>(transform->GetPosition().y);
 

@@ -29,6 +29,8 @@ public:
 		archive(componentName, currentPath, size.ToString());
 	}
 
+	bool enabled = true;
+
 protected:
 
 	Transform*		transform;

@@ -23,6 +23,7 @@ Game::Game()
 	Collision::drawGrid = false;
 
 	player = &EngineCore::Ecs->AddEntity("Assets/Prefabs/player");
+	//player->GetComponent<AudioListener>().audioEnabled = false;
 
 	tileMap = new TileMap();
 	tileMap->LoadMap("Assets/Map/map.map", "Assets/Map/tileset.png", Vector2(16, 16), Vector2(102, 11), 3.44f);

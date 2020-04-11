@@ -56,7 +56,7 @@ void Mushroom::OnCollision(Hit* hit)
 
 	if (hit->collider->Tag == "player")
 	{
-		hit->collider->entity->GetComponent<PlayerController>().SetBig(true);
+		hit->collider->entity->GetComponent<PlayerController>().SetBig();
 		entity->SetActive(false);
 
 		entity->GetComponent<AudioSource>().Play(L"Assets/Audio/Upgrade.wav");

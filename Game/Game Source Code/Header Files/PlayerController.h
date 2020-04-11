@@ -21,7 +21,8 @@ public:
 	void OnCollision(Hit* hit) override;
 	void OnTrigger(Hit* hit) override;
 
-	void SetBig(bool big);
+	void SetBig();
+	void SetSmall();
 
 	void TakeDamage();
 	void Die();
@@ -54,6 +55,11 @@ private:
 
 	bool		growing = false;
 	float		growDuration = 0.5f;
+
+	bool		invincible = false;
+	float		invincibleDuration = 2.0f;
+	float		enabledFlipFlopTime;
+
 	float		timer = 0;
 
 	int			currentDirection = 0;
