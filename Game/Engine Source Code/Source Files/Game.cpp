@@ -52,6 +52,13 @@ void Game::Update()
 
 void Game::LateUpdate()
 {
+	for (auto& g : goombas)
+	{
+		if (EngineCore::camera->InsideCameraView(&g->GetComponent<Collider>().RawCollider()) && !g->IsActive() && !g->GetComponent<Goomba>().IsDead())
+		{
+			g->SetActive(true);
+		}
+	}
 }
 
 void Game::Render()
@@ -60,17 +67,6 @@ void Game::Render()
 
 void Game::Physics()
 {
-}
-
-void Game::FixedUpdate()
-{
-	for (auto& g : goombas)
-	{
-		if (EngineCore::camera->InsideCameraView(&g->GetComponent<Collider>().RawCollider()) && !g->IsActive() && !g->GetComponent<Goomba>().IsDead())
-		{
-			g->SetActive(true);
-		}
-	}
 }
 
 void Game::SpawnGoombas()

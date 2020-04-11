@@ -21,7 +21,7 @@ public:
 
 	void Init() override;
 
-	void FixedUpdate() override;
+	void Update() override;
 	void Bump();
 
 	std::string Parse() override;

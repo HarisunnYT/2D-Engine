@@ -16,7 +16,6 @@ public:
 
 	void Init() override;
 	void Update() override;
-	void FixedUpdate() override;
 
 	void OnCollision(Hit* hit) override;
 	void OnTrigger(Hit* hit) override;
@@ -41,24 +40,24 @@ private:
 
 	bool		hasInput = true;
 
-	float		speed = 1000000.0f;
-	float		jumpSpeed = 100.0f;
-	float		jumpLerpSpeed = 5.0f;
-	float		acceleration = 50.0f;
+	float		speed = 100.0f;
+	float		acceleration = 100.0f;
 	float		accel = 0.0f;
 
-	float		maxJumpVelocity = 225.0f;
+	float		jumpSpeed = 200.0f;
+	float		jumpLerpSpeed = 1000.0f;
+	float		maxJumpVelocity = 340.0f;
 
 	bool		jumping = false;
 	bool		inAir = false;
 	bool		isBig = false;
 
 	bool		growing = false;
-	float		growDuration = 0.5f;
+	float		growDuration = 1.0f;
 
 	bool		invincible = false;
 	float		invincibleDuration = 2.0f;
-	float		enabledFlipFlopTime;
+	float		enabledFlipFlopTime = 0.0f;
 
 	float		timer = 0;
 

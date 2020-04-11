@@ -25,7 +25,7 @@ public:
 	void Init(const char* title, int xpos, int ypos, bool fullscreen);
 
 	void HandleEvents();
-	void Update(float dTime);
+	void Update();
 	void FixedUpdate();
 	void Render();
 	void Clean();

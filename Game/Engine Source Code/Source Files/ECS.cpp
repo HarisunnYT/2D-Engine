@@ -21,7 +21,7 @@ void ECS::Update()
 {
 	for (auto& e : entities)
 	{
-		if (e != nullptr)
+		if (e != nullptr && e->IsActive())
 		{
 			e->Update();
 		}
@@ -85,17 +85,6 @@ void ECS::LateUpdate()
 	}
 
 	changedEntities.clear();
-}
-
-void ECS::FixedUpdate()
-{
-	for (auto& e : entities)
-	{
-		if (e != nullptr)
-		{
-			e->FixedUpdate();
-		}
-	}
 }
 
 void ECS::DebugDraw()

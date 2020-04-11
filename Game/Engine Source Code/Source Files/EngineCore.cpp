@@ -17,8 +17,8 @@ bool EngineCore::isRunning = false;
 bool EngineCore::isDebug = false;
 Vector2 EngineCore::screenSize = Vector2(800.0f, 600.0f);
 
-float EngineCore::deltaTime = 0;
-float EngineCore::fixedTimeStep = 0.01f;
+float EngineCore::deltaTime = 0.0;
+float EngineCore::fixedTimeStep = 0.1f;
 
 Game* game = nullptr;
 
@@ -74,10 +74,8 @@ void EngineCore::HandleEvents()
 	}
 }
 
-void EngineCore::Update(float dTime)
+void EngineCore::Update()
 {
-	EngineCore::deltaTime = dTime;
-
 	InputSystem::Update();
 
 	Ecs->Update();
@@ -93,12 +91,6 @@ void EngineCore::Update(float dTime)
 	{
 		EngineCore::isRunning = false;
 	}
-}
-
-void EngineCore::FixedUpdate()
-{
-	game->FixedUpdate();
-	Ecs->FixedUpdate();
 }
 
 void EngineCore::Render()

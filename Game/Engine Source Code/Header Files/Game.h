@@ -16,7 +16,6 @@ public:
 	void LateUpdate();
 	void Render();
 	void Physics();
-	void FixedUpdate();
 
 private:
 

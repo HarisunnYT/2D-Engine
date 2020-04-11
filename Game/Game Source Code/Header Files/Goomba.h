@@ -11,7 +11,7 @@ class Goomba : public Component
 public:
 
 	void Init() override;
-	void FixedUpdate() override;
+	void Update() override;
 	void OnEnable() override;
 
 	void OnCollision(Hit* hit) override;
@@ -30,7 +30,7 @@ public:
 
 private:
 
-	float		speed = 80.0f;
+	float		speed = 60.0f;
 	int			direction = -1;
 
 	float		deathDuration = 0.25f;

@@ -25,6 +25,7 @@ class AudioSource : public Component
 public:
 
 	AudioSource();
+	~AudioSource();
 
 	void Play(const wchar_t* path);
 

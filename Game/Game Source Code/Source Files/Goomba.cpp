@@ -9,7 +9,7 @@ void Goomba::Init()
 	rigidbody = &entity->GetComponent<Rigidbody>();
 }
 
-void Goomba::FixedUpdate()
+void Goomba::Update()
 {
 	if (!dead)
 	{

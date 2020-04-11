@@ -7,19 +7,18 @@ AudioSource::AudioSource()
 	sounds = vector<AudioClip>();
 }
 
+AudioSource::~AudioSource()
+{
+	for (auto& sound : sounds)
+	{
+		delete sound.sound;
+	}
+}
+
 void AudioSource::Play(const wchar_t* path)
 {
 	if (!EngineCore::audioListener->audioEnabled)
 		return;
-
-	for (auto& s : sounds)
-	{
-		if (s.path == path && SDL_GetTicks() > s.time)
-		{
-			s.sound->Play();
-			return;
-		}
-	}
 
 	soundEffect = std::make_unique<DirectX::SoundEffect>(EngineCore::audioListener->audioEngine.get(), path);
 	AudioClip clip = AudioClip(path, soundEffect.get(), SDL_GetTicks() + soundEffect->GetSampleDurationMS());

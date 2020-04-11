@@ -5,7 +5,7 @@
 }
 {
     "value0": "rigidbody",
-    "value1": 3.0,
+    "value1": 0.5,
     "value2": true
 }
 {
@@ -23,7 +23,7 @@
 }
 {
     "value0": "playercontroller",
-    "value1": 80.0
+    "value1": 120.0
 }
 {
     "value0": "audiolistener"

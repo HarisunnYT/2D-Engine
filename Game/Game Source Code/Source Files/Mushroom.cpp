@@ -17,11 +17,11 @@ void Mushroom::Spawn()
 	entity->GetComponent<AudioSource>().Play(L"Assets/Audio/PowerUpAppears.wav");
 }
 
-void Mushroom::FixedUpdate()
+void Mushroom::Update()
 {
 	if (spawning)
 	{
-		timer = timer + (EngineCore::fixedTimeStep / 2.0f);
+		timer = timer + EngineCore::deltaTime;;
 		float normTime = timer / bumpDuration;
 
 		if (normTime < 1.0f)

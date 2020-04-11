@@ -122,6 +122,8 @@ bool Collider::TryParse(std::string value, Entity* entity)
 
 SDL_Rect Collider::RawCollider()
 {
+	UpdateCollider();
+
 	SDL_Rect rect;
 	rect.x = collider.x - EngineCore::camera->offset.x;
 	rect.y = collider.y - EngineCore::camera->offset.y;

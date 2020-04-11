@@ -56,14 +56,6 @@ void Entity::LateUpdate()
 	}
 }
 
-void Entity::FixedUpdate()
-{
-	for (auto& c : components)
-	{
-		c->FixedUpdate();
-	}
-}
-
 void Entity::DebugDraw()
 {
 	for (auto& c : components)

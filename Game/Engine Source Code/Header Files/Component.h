@@ -21,7 +21,6 @@ public:
 	virtual void Draw() {}
 	virtual void Physics() {}
 	virtual void LateUpdate() {}
-	virtual void FixedUpdate() {}
 	virtual void DebugDraw() {}
 
 	virtual void OnEnable() {}

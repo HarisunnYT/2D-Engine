@@ -57,7 +57,7 @@ void Rigidbody::Physics()
 
 void Rigidbody::LateUpdate()
 {
-	transform->SetRawPosition((transform->GetRawPosition() + (Vector3(velocity.x, -velocity.y, 0) * EngineCore::fixedTimeStep)));
+	transform->SetRawPosition(transform->GetRawPosition() + (Vector3(velocity.x, -velocity.y, 0) * EngineCore::deltaTime));
 
 	if (entity->HasComponent<Collider>())
 	{
@@ -73,6 +73,14 @@ void Rigidbody::SetVelocity(Vector2 v)
 Vector2 Rigidbody::GetVelocity()
 {
 	return velocity;
+}
+
+void Rigidbody::ApplyGravity()
+{
+	if (useGravity)
+	{
+		velocity.y = velocity.y + Physics::gravity.y * mass;
+	}
 }
 
 std::string Rigidbody::Parse()
@@ -109,12 +117,5 @@ bool Rigidbody::TryParse(std::string value, Entity* entity)
 	return false;
 }
 
-void Rigidbody::ApplyGravity()
-{
-	if (useGravity)
-	{
-		velocity.y += Physics::gravity.y * mass;
-	}
-}
 
 

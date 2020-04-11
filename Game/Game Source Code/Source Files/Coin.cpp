@@ -2,11 +2,11 @@
 
 std::string Coin::componentName = "coin";
 
-void Coin::FixedUpdate()
+void Coin::Update()
 {
 	if (bumping)
 	{
-		timer = timer + (EngineCore::fixedTimeStep / 2.0f);
+		timer = timer + EngineCore::deltaTime;
 		float normTime = timer / bumpDuration;
 
 		if (normTime < 1.0f)

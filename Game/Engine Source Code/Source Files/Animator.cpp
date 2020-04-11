@@ -4,6 +4,8 @@ std::string Animator::componentName = "animator";
 
 Animator::Animator(const char* path, Vector2 size) : SpriteRenderer(path, size)
 {
+	currentAnimationName = "";
+	ticksOffset = 0;
 }
 
 void Animator::Init()

@@ -10,7 +10,7 @@ class Mushroom : public Component
 public:
 
 	void Spawn();
-	void FixedUpdate() override;
+	void Update() override;
 
 	void OnCollision(Hit* hit) override;
 

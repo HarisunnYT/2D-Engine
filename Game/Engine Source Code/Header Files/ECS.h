@@ -25,7 +25,6 @@ public:
 	void Draw();
 	void Physics();
 	void LateUpdate();
-	void FixedUpdate();
 	void DebugDraw();
 
 	void SubscribeEntityStateChange(Entity* entity, bool state);

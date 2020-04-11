@@ -10,7 +10,7 @@ class Coin : public Component
 
 public:
 
-	void FixedUpdate() override;
+	void Update() override;
 	void Bump();
 
 	std::string Parse() override;

@@ -1,40 +1,40 @@
 #include "EngineCore.h"
-#include <time.h>
 #include "InputSystem.h"
+
+#include <time.h>
 
 EngineCore* engineCore = nullptr;
 
-float accumulatedTime;
+double start = 0.0;
+double last = 0.0;
 
-void Tick(EngineCore* engineCore, float dTime)
-{
-	accumulatedTime += dTime;
-	while (accumulatedTime > EngineCore::fixedTimeStep)
-	{
-		engineCore->FixedUpdate();
-		accumulatedTime -= EngineCore::fixedTimeStep;
-	}
-}
+const int MAX_FRAME_DELTA = 3;
 
 int main(int agrc, char* argv[])
 {
 	engineCore = new EngineCore();
 	engineCore->Init("EngineCore", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, false);
 
-	int lastTime = clock();
-
 	while (engineCore->Running())
 	{
-		int currentTime = clock();
-		float dTime = (currentTime - lastTime) / (float)CLOCKS_PER_SEC;
+		start = clock();
+
+		double delta = start - last;
+
+		EngineCore::deltaTime = (float)delta / 1000;
+
+		delta = min(delta, MAX_FRAME_DELTA);
 
 		engineCore->HandleEvents();
-		engineCore->Update(dTime);
+
+		for (int i = 0; i < delta; i++)
+		{
+			engineCore->Update();
+		}
+
 		engineCore->Render();
 
-		Tick(engineCore, dTime);
-
-		lastTime = currentTime;
+		last = start;
 	}
 
 	engineCore->Clean();

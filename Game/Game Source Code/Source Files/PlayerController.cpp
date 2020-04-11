@@ -4,8 +4,6 @@
 
 std::string PlayerController::componentName = "playercontroller";
 
-
-
 PlayerController::PlayerController(float s)
 {
 	speed = s;
@@ -21,6 +19,35 @@ void PlayerController::Init()
 
 void PlayerController::Update()
 {
+	if (growing)
+	{
+		timer = timer + EngineCore::deltaTime;;
+		float normTime = timer / growDuration;
+
+		if (normTime >= 1.0f)
+		{
+			entity->GetComponent<Rigidbody>().useGravity = true;
+			growing = false;
+		}
+	}
+
+	if (invincible)
+	{
+		timer = timer + EngineCore::deltaTime;;
+		float normTime = timer / invincibleDuration;
+
+		if (normTime >= 1.0f)
+		{
+			invincible = false;
+			entity->GetComponent<Animator>().enabled = true;
+		}
+		else if (SDL_GetTicks() > enabledFlipFlopTime)
+		{
+			entity->GetComponent<Animator>().enabled = !entity->GetComponent<Animator>().enabled;
+			enabledFlipFlopTime = SDL_GetTicks() + 100;
+		}
+	}
+
 	if (growing || !hasInput)
 		return;
 
@@ -29,7 +56,7 @@ void PlayerController::Update()
 	if (InputSystem::KeyHeld(SDL_SCANCODE_A))
 	{
 		if (accel > -speed)
-			accel -= acceleration * EngineCore::fixedTimeStep;
+			accel -= acceleration * EngineCore::deltaTime;
 
 		if (inAir)
 			animator->PlayAnimation(isBig ? "JumpLeftBig" : "JumpLeft");
@@ -41,8 +68,8 @@ void PlayerController::Update()
 	else if (InputSystem::KeyHeld(SDL_SCANCODE_D))
 	{
 		if (accel < speed)
-			accel += acceleration * EngineCore::fixedTimeStep;
-		
+			accel += acceleration * EngineCore::deltaTime;
+
 		if (inAir)
 			animator->PlayAnimation(isBig ? "JumpRightBig" : "JumpRight");
 		else
@@ -52,7 +79,7 @@ void PlayerController::Update()
 	}
 	else
 	{
-		accel = (accel * (1.0f - EngineCore::fixedTimeStep)) + (0 * EngineCore::fixedTimeStep);
+		accel = (accel * (1.0f - EngineCore::deltaTime)) + (0 * EngineCore::deltaTime);
 		if (!inAir)
 		{
 			if (isBig)
@@ -77,7 +104,7 @@ void PlayerController::Update()
 
 	if (jumping && InputSystem::KeyHeld(SDL_SCANCODE_SPACE) && velocity.y < maxJumpVelocity)
 	{
-		velocity.y += jumpLerpSpeed;
+		velocity.y = velocity.y + (jumpLerpSpeed * EngineCore::deltaTime);
 	}
 
 	if (inAir)
@@ -91,38 +118,6 @@ void PlayerController::Update()
 	velocity.x = accel;
 
 	rigidbody->SetVelocity(velocity);
-}
-
-void PlayerController::FixedUpdate()
-{
-	if (growing)
-	{
-		timer = timer + (EngineCore::fixedTimeStep / 2.0f);
-		float normTime = timer / growDuration;
-
-		if (normTime >= 1.0f)
-		{
-			entity->GetComponent<Rigidbody>().useGravity = true;
-			growing = false;
-		}
-	}
-
-	if (invincible)
-	{
-		timer = timer + (EngineCore::fixedTimeStep / 2.0f);
-		float normTime = timer / invincibleDuration;
-
-		if (normTime >= 1.0f)
-		{
-			invincible = false;
-			entity->GetComponent<Animator>().enabled = true;
-		}
-		else if (SDL_GetTicks() > enabledFlipFlopTime)
-		{
-			entity->GetComponent<Animator>().enabled = !entity->GetComponent<Animator>().enabled;
-			enabledFlipFlopTime = SDL_GetTicks() + 100;
-		}
-	}
 }
 
 void PlayerController::OnCollision(Hit* hit)
